@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: rgba(10, 48, 94, 1);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
+   <children>
+      <ImageView fitHeight="462.0" fitWidth="1087.0" layoutX="-7.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Pictures/Quiz%20Generator/Homepage_Stamp.png" />
+         </image>
+      </ImageView>
+      <FlowPane hgap="50.0" layoutX="7.0" layoutY="50.0" prefHeight="85.0" prefWidth="1065.0" style="-fx-background-color: rgba(20, 95, 142, 1); -fx-border-color: FFD700; -fx-border-width: 3;">
+         <children>
+            <ImageView fitHeight="78.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Pictures/Quiz%20Generator/Logo.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeFn" style="-fx-background-color: rgba(255, 255, 255, 0);" text="HOME" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="quizBTn" mnemonicParsing="false" onAction="#quizFn" style="-fx-background-color: rgba(255, 255, 255, 0);" text="QUIZZES" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Label />
+            <Label />
+            <Label />
+            <Label prefHeight="17.0" prefWidth="0.0" />
+            <Label prefHeight="17.0" prefWidth="0.0" />
+            <Button fx:id="settingBtn" mnemonicParsing="false" onAction="#settingFn" style="-fx-background-color: rgba(255, 255, 255, 0);" text="USER PREFERENCES" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="3.0" top="3.0" />
+         </padding>
+      </FlowPane>
+      <Button fx:id="createBtn" layoutX="232.0" layoutY="594.0" mnemonicParsing="false" onAction="#createQuizFn" prefHeight="58.0" style="-fx-border-color: FFD700; -fx-border-width: 2; -fx-border-radius: 20; -fx-background-color: rgba(0, 63, 102, 1); -fx-background-radius: 21;" text="CREATE A QUIZ" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <VBox fx:id="practiceExerciseBtn" alignment="CENTER" layoutX="794.0" layoutY="585.0" onMouseClicked="#practiceExerciseFn" prefHeight="58.0" prefWidth="174.0" style="-fx-background-color: rgba(0, 63, 102, 1); -fx-background-radius: 20; -fx-border-color: FFD700; -fx-border-radius: 20; -fx-border-width: 3;">
+         <children>
+            <Label text="PRACTICE" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label text="EXERCISE" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
