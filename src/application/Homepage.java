@@ -8,9 +8,10 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-
+import Util.init;
 
 public class Homepage extends Application {
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
@@ -24,6 +25,10 @@ public class Homepage extends Application {
 	}
 	
 	public static void main(String[] args) {
+		
+		new init();
+		
 		launch(args);
 	}
+	
 }

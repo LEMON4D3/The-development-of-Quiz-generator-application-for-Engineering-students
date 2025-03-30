@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: rgba(10, 48, 94, 1);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: rgba(10, 48, 94, 1);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
    <children>
       <ImageView fitHeight="462.0" fitWidth="1087.0" layoutX="-7.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Pictures/Quiz%20Generator/Homepage_Stamp.png" />
          </image>
       </ImageView>
-      <FlowPane hgap="50.0" layoutX="7.0" layoutY="50.0" prefHeight="85.0" prefWidth="1065.0" style="-fx-background-color: rgba(20, 95, 142, 1); -fx-border-color: FFD700; -fx-border-width: 3;">
+      <FlowPane fx:id="header" hgap="50.0" layoutX="7.0" layoutY="50.0" prefHeight="85.0" prefWidth="1065.0" style="-fx-background-color: rgba(20, 95, 142, 1); -fx-border-color: FFD700; -fx-border-width: 3;">
          <children>
             <ImageView fitHeight="78.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true">
                <image>
