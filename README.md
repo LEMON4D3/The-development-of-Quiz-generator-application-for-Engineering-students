@@ -13,3 +13,14 @@ Simple quiz generator
 - Week 3: Finalization ng frontend
 
 
+
+## Dependencies
+
+JavaFx: https://download2.gluonhq.com/openjfx/24/openjfx-24_windows-x64_bin-sdk.zip
+
+JDBC SQL: https://github.com/xerial/sqlite-jdbc/releases/download/3.49.1.0/sqlite-jdbc-3.49.1.0.jar
+
+
+
+
+
