@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane hbarPolicy="NEVER" hmax="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Setting.settingController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1025.0" prefWidth="1080.0">
+         <children>
+            <Label layoutX="23.0" layoutY="38.0" text="PREVIEW">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview" arcHeight="10.0" arcWidth="10.0" fill="#492b51" height="255.0" layoutX="317.0" layoutY="62.0" stroke="#9b909e" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="502.0" />
+            <Rectangle fx:id="headerPreview" arcHeight="10.0" arcWidth="10.0" fill="#962efd" height="64.0" layoutX="317.0" layoutY="62.0" stroke="#9b909e" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="502.0" />
+            <Label layoutX="23.0" layoutY="312.0" text="BACKGROUND COLOR">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="339.0" style="-fx-opacity: 42%;" text="Choose the background color you want">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview1" arcHeight="10.0" arcWidth="10.0" fill="#1a1a1a" height="112.0" layoutX="63.0" layoutY="369.0" onMouseClicked="#mainBlack" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="120.0" layoutY="481.0" text="DARK MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview11" arcHeight="10.0" arcWidth="10.0" fill="DARKBLUE" height="112.0" layoutX="317.0" layoutY="369.0" onMouseClicked="#mainNormal" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="360.0" layoutY="481.0" text="NORMAL MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview111" arcHeight="10.0" arcWidth="10.0" fill="#f0f0f0" height="112.0" layoutX="568.0" layoutY="369.0" onMouseClicked="#mainLight" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="623.0" layoutY="481.0" text="LIGHT MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview1111" arcHeight="10.0" arcWidth="10.0" fill="#492b51" height="112.0" layoutX="819.0" layoutY="369.0" onMouseClicked="#mainPurple" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="865.0" layoutY="481.0" text="PURPLE MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="513.0" text="HEADER COLOR">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="540.0" style="-fx-opacity: 42%;" text="Choose the header color you want">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview12" arcHeight="10.0" arcWidth="10.0" fill="#1a1a1a" height="112.0" layoutX="63.0" layoutY="570.0" onMouseClicked="#headerBlack" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="120.0" layoutY="682.0" text="DARK MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview112" arcHeight="10.0" arcWidth="10.0" fill="DARKBLUE" height="112.0" layoutX="317.0" layoutY="570.0" onMouseClicked="#headerNormal" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="360.0" layoutY="682.0" text="NORMAL MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview1112" arcHeight="10.0" arcWidth="10.0" fill="#f0f0f0" height="112.0" layoutX="568.0" layoutY="570.0" onMouseClicked="#headerLight" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="623.0" layoutY="682.0" text="LIGHT MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview11111" arcHeight="10.0" arcWidth="10.0" fill="#492b51" height="112.0" layoutX="819.0" layoutY="570.0" onMouseClicked="#headerPurple" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="865.0" layoutY="682.0" text="PURPLE MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="headerPreview1" arcHeight="10.0" arcWidth="10.0" fill="#282828" height="28.0" layoutX="63.0" layoutY="570.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="0.0" width="223.0" />
+            <Rectangle fx:id="headerPreview11" arcHeight="10.0" arcWidth="10.0" fill="GOLD" height="28.0" layoutX="317.0" layoutY="570.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="0.0" width="223.0" />
+            <Rectangle fx:id="headerPreview111" arcHeight="10.0" arcWidth="10.0" fill="#f9f9f9" height="28.0" layoutX="568.0" layoutY="570.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="0.0" width="223.0" />
+            <Rectangle fx:id="headerPreview1111" arcHeight="10.0" arcWidth="10.0" fill="#962efd" height="28.0" layoutX="819.0" layoutY="570.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="0.0" width="223.0" />
+            <Label layoutX="23.0" layoutY="719.0" text="BORDER COLOR">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="746.0" style="-fx-opacity: 42%;" text="Choose the header color you want">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview121" arcHeight="10.0" arcWidth="10.0" fill="#1a1a1a" height="112.0" layoutX="63.0" layoutY="776.0" onMouseClicked="#borderBlack" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="120.0" layoutY="888.0" text="DARK MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview1121" arcHeight="10.0" arcWidth="10.0" fill="DARKBLUE" height="112.0" layoutX="317.0" layoutY="776.0" onMouseClicked="#borderNormal" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="360.0" layoutY="888.0" text="NORMAL MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview11121" arcHeight="10.0" arcWidth="10.0" fill="#f0f0f0" height="112.0" layoutX="568.0" layoutY="776.0" onMouseClicked="#borderLight" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="623.0" layoutY="888.0" text="LIGHT MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="mainPreview111111" arcHeight="10.0" arcWidth="10.0" fill="#492b51" height="112.0" layoutX="819.0" layoutY="776.0" onMouseClicked="#borderPurple" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Label layoutX="865.0" layoutY="888.0" text="PURPLE MODE">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="headerPreview12" arcHeight="10.0" arcWidth="10.0" fill="#282828" height="28.0" layoutX="63.0" layoutY="776.0" stroke="#363636" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Rectangle fx:id="headerPreview112" arcHeight="10.0" arcWidth="10.0" fill="GOLD" height="28.0" layoutX="317.0" layoutY="776.0" stroke="#002a45" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Rectangle fx:id="headerPreview1112" arcHeight="10.0" arcWidth="10.0" fill="#f9f9f9" height="28.0" layoutX="568.0" layoutY="776.0" stroke="#cecece" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" width="223.0" />
+            <Rectangle fx:id="headerPreview11111" arcHeight="10.0" arcWidth="10.0" fill="#962efd" height="28.0" layoutX="819.0" layoutY="776.0" stroke="#962efd" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="0.0" width="223.0" />
+            <Button fx:id="saveBtn" layoutX="337.0" layoutY="935.0" mnemonicParsing="false" onAction="#save" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: D9D9D9;" text="SAVE &amp; EXIT">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitBtn" layoutX="643.0" layoutY="935.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: D9D9D9;" text="EXIT">
+               <font>
+                  <Font name="AIGDT" size="20.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
