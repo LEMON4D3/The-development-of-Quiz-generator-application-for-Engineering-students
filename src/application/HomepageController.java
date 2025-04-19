@@ -69,16 +69,18 @@ public class HomepageController implements Initializable{
 		
 	}
 	
-	public void createQuizFn(ActionEvent e) {
-		
-		// Create Quiz Function
-		
+	public void createQuizFn(ActionEvent e) throws IOException{
+		try {
+	        Parent createQuizRoot = FXMLLoader.load(getClass().getResource("CreateQuiz.fxml"));
+	        
+	        // Get the current stage from the event
+	        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+	        
+	        // Replace the scene content with the new root
+	        stage.getScene().setRoot(createQuizRoot);
+
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
 	}
-	
-	/*
-	 * End Button Functions
-	 */
-	
-	
-	
 }
