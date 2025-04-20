@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 
 public class PracticeExerciseController implements Initializable{
 	
+	String tableName;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -29,4 +31,9 @@ public class PracticeExerciseController implements Initializable{
 		
 	}
 	
+	public void init(String title) {
+		
+		tableName = title;
+		
+	}
 }

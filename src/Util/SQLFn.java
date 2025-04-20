@@ -58,6 +58,7 @@ public class SQLFn {
 	
 	public static ResultSet get(String table) throws SQLException {
 		
+		
 		ResultSet result = statement.executeQuery("select * from `" + table + "`");
 		
 		return result;
