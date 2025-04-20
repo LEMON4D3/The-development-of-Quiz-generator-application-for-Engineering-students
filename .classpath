@@ -11,12 +11,18 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
+	<classpathentry kind="lib" path="C:/Users/pc/eclipse-workspace/Quiz Generator/dependencies/sqlite-jdbc-3.49.1.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/pc/Documents/BiglyBT Downloads/sqlite-jdbc-3.49.1.0.jar">
+	<classpathentry kind="lib" path="C:/Users/pc/eclipse-workspace/Quiz Generator/dependencies/pdfbox-app-3.0.4.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/pc/eclipse-workspace/Quiz Generator/dependencies/gson-2.10.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

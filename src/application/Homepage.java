@@ -15,7 +15,7 @@ public class Homepage extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("../PracticeExercise/PracticeExercise.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../application/Homepage.fxml"));
         
         primaryStage.setTitle("Quiz Generator");
         primaryStage.setScene(new Scene(root));

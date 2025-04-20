@@ -14,14 +14,14 @@
    <children>
       <ImageView fitHeight="462.0" fitWidth="1087.0" layoutX="-7.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Pictures/Quiz%20Generator/Homepage_Stamp.png" />
+            <Image url="@../../rsc/Homepage/Homepage_Stamp.png" />
          </image>
       </ImageView>
       <FlowPane fx:id="header" hgap="50.0" layoutX="7.0" layoutY="50.0" prefHeight="85.0" prefWidth="1065.0" style="-fx-background-color: rgba(20, 95, 142, 1); -fx-border-color: FFD700; -fx-border-width: 3;">
          <children>
             <ImageView fitHeight="78.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Pictures/Quiz%20Generator/Logo.png" />
+                  <Image url="@../../rsc/Homepage/Logo.png" />
                </image>
             </ImageView>
             <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#homeFn" style="-fx-background-color: rgba(255, 255, 255, 0);" text="HOME" textFill="WHITE">
