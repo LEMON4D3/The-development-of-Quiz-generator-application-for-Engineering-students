@@ -1,8 +1,8 @@
 package Util;
 
 import java.io.IOException;
+import java.util.EventObject;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,11 +18,13 @@ public class controller {
 	
 	public static controller ct;
 	
-	public void switchScene(ActionEvent e, String url) throws IOException  {
+	
+	public <T> void switchScene(T e, String url) throws IOException  {
+		
 		
 		
 		root = FXMLLoader.load(getClass().getResource(url));
-		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		stage = (Stage)((Node)((EventObject)e).getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();

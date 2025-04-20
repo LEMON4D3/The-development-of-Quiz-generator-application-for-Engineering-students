@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import Util.Preferences;
 import Util.controller;
 import javafx.event.ActionEvent;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -63,9 +64,9 @@ public class HomepageController implements Initializable{
 		
 	}
 	
-	public void practiceExerciseFn(MouseEvent e) {
+	public void practiceExerciseFn(MouseEvent e) throws IOException {
 		
-		// Practice Exercise Function
+		controller.ct.switchScene(e, "../ProblemSet/ProblemSet.fxml");
 		
 	}
 	

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PracticeExercise.PracticeExerciseController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="540.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#backFn" text="Back Button" />
+            <VBox prefHeight="200.0" spacing="10.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 20;">
+               <children>
+                  <Label fx:id="problemTitle" text="Problem Title">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="problemDesc" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus sem lacus, eget feugiat sapien feugiat nec. Sed ultrices semper nulla. Vivamus consequat tristique aliquet. Cras vel aliquet orci. Nunc venenatis purus risus, vel porttitor lectus sollicitudin ut. Suspendisse volutpat justo luctus ante pretium, at interdum diam laoreet. Sed vulputate eleifend gravida. Nulla posuere blandit lorem nec gravida. Ut a ornare augue, a fermentum tellus. Praesent tincidunt sem nec elementum sagittis. Vivamus a risus in arcu imperdiet tempor. Etiam eu lacinia nisi, nec posuere leo. Integer varius, justo vel dapibus iaculis, lectus ipsum lacinia mauris, eget gravida enim mauris id purus." wrapText="true" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox prefWidth="100.0" spacing="10.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 20;">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <children>
+                  <HBox spacing="15.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Testcase" />
+                        <Button mnemonicParsing="false" text="Result" />
+                     </children>
+                  </HBox>
+                  <Line endX="425.0" startX="-100.0" />
+                  <HBox prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Case 1" />
+                        <Button mnemonicParsing="false" text="Case 2" />
+                        <Button mnemonicParsing="false" text="Case 3" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="82.0" prefWidth="539.0" text="Label" />
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="368.0" minWidth="10.0" prefWidth="357.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="83.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="90.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button mnemonicParsing="false" text="Test" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" text="Run" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <BorderPane>
+         <center>
+            <TextArea BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>
