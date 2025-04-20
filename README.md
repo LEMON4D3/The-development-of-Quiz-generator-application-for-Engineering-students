@@ -20,6 +20,10 @@ JavaFx: https://download2.gluonhq.com/openjfx/24/openjfx-24_windows-x64_bin-sdk.
 
 JDBC SQL: https://github.com/xerial/sqlite-jdbc/releases/download/3.49.1.0/sqlite-jdbc-3.49.1.0.jar
 
+PDF Box: https://pdfbox.apache.org/download.html
+
+GSON .jar: https://mvnrepository.com/artifact/com.google.code.gson/gson/2.10.1
+
 
 
 
