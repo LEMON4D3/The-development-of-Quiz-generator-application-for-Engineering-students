@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="30.0" style="-fx-background-color: #0A305E;" stylesheets="@FITBStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitb.create.FITBCreateController">
+   <children>
+      <GridPane hgap="25.0" prefHeight="50.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="216.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="176.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" text="&lt;" />
+            <ComboBox fx:id="categoryCombo" prefHeight="44.0" promptText="Question Options" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" GridPane.columnIndex="1" />
+            <ComboBox fx:id="pointCombo" prefWidth="150.0" promptText="1 Point" style="-fx-background-color: #81CFFF; -fx-font-size: 20;" GridPane.columnIndex="2" />
+            <ComboBox fx:id="timeCombo" prefWidth="150.0" promptText="30 sec" style="-fx-background-color: #81CFFF; -fx-font-size: 20;" GridPane.columnIndex="3" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveBtnFn" style="-fx-background-color: #003F66; -fx-border-color: #FFD700; -fx-background-radius: 25; -fx-border-radius: 20; -fx-text-fill: white;" text="Save Question" GridPane.columnIndex="4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <TextArea fx:id="questionTA" maxWidth="1000.0" prefHeight="235.0" prefWidth="200.0" promptText="Enter your question here" style="-fx-control-inner-background: black; -fx-text-fill: black; -fx-background: #0A305E;" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <TextField fx:id="answerTF" alignment="CENTER" maxWidth="875.0" prefHeight="130.0" promptText="TYPE ANSWER " style="-fx-background-color: #00799A; -fx-border-color: #FFEA00; -fx-border-width: 5; -fx-background-radius: 25; -fx-border-radius: 20; -fx-prompt-text-fill: white; -fx-text-fill: white;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <VBox alignment="TOP_CENTER" maxWidth="875.0" prefHeight="130.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #00799A; -fx-border-color: #FFEA00; -fx-border-width: 5; -fx-background-radius: 25; -fx-border-radius: 20;">
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="HINT: " textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Student View" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <TextField fx:id="hintTF" alignment="CENTER" prefHeight="60.0" promptText="TYPE YOUR ANSWER " style="-fx-background-color: transparent; -fx-text-fill: white; -fx-prompt-text-fill: white; -fx-text-fill: white;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>

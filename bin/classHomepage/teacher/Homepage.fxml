@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHomepage.teacher.homepageController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="28.0" style="-fx-background-color: #1C80BE; -fx-background-radius: 2;">
+         <children>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/quizLogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="95.0" onMouseClicked="#createQuizBtnFn" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/addBtn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/library.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/classes.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets top="8.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="35.0" style="-fx-background-color: #0A305E;" GridPane.columnIndex="1">
+         <padding>
+            <Insets top="32.0" />
+         </padding>
+         <children>
+            <GridPane minHeight="75.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="91.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="452.0" minWidth="10.0" prefWidth="220.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="377.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="178.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button minHeight="55.0" mnemonicParsing="false" onAction="#backBtnFn" prefWidth="59.0" style="-fx-background-color: #FFA600;" text="&lt;">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Button>
+                  <Label alignment="CENTER" minHeight="69.0" prefWidth="218.0" style="-fx-background-color: #145F8E; -fx-border-color: #FFD700; -fx-border-width: 5;" text="My Classes" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" minHeight="75.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                     <children>
+                        <Label fx:id="classNameT" text="Class Name" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ssrT" text="Section/Subject/Room" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                     <image>
+                        <Image url="@../rsc/user.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+            <ImageView fitHeight="154.0" fitWidth="889.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/QWIZY.png" />
+               </image>
+            </ImageView>
+            <GridPane hgap="24.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="367.0" prefWidth="441.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <content>
+                        <VBox fx:id="announcementContainer" prefHeight="200.0" prefWidth="425.0">
+                           <children>
+                              <VBox fx:id="postedContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #5A95BA; -fx-background-radius: 20;">
+                                 <children>
+                                    <Label fx:id="announcementT" text="You haven’t posted anything yet!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="&quot;Share an update to keep your class informed.&quot;">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" GridPane.columnIndex="1">
+                     <content>
+                        <VBox minHeight="163.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #5A95BA; -fx-background-radius: 20;">
+                           <children>
+                              <Label text="Upcoming" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="20.0" />
+                                 </font>
+                              </Label>
+                              <VBox fx:id="deadlineContainer" alignment="CENTER" prefHeight="200.0" prefWidth="410.0">
+                                 <children>
+                                    <Label fx:id="deadlineT" text="&quot;No deadlines approaching.&quot;">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</GridPane>

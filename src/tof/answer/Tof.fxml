@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="30.0" style="-fx-background-color: #0A305E;" stylesheets="@Tof.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tof.answer.TofAnswerController">
+   <children>
+      <GridPane hgap="25.0" prefHeight="50.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="412.0" minWidth="10.0" prefWidth="112.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="661.0" minWidth="10.0" prefWidth="632.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="139.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" text="&lt;" />
+            <Label fx:id="questionNumberT" text="Question Number" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#nextBtnFn" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" text="&gt;" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <TextArea fx:id="questionTA" maxWidth="1000.0" prefHeight="235.0" prefWidth="200.0" promptText="Enter your question here" style="-fx-control-inner-background: black; -fx-text-fill: black; -fx-background: #0A305E;" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="trueBtn" minHeight="95.0" mnemonicParsing="false" onAction="#trueBtnFn" prefWidth="890.0" style="-fx-background-color: #009A5A; -fx-border-width: 5; -fx-background-radius: 20; -fx-border-radius: 20;" text="True" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="falseBtn" minHeight="95.0" mnemonicParsing="false" onAction="#falseBtnFn" prefWidth="890.0" style="-fx-background-color: #923E3E; -fx-background-radius: 20; -fx-border-radius: 20;" text="False" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>

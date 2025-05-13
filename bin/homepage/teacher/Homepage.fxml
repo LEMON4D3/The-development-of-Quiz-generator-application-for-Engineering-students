@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@HomepageStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="homepage.teacher.homepageController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.0" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" style="-fx-background-color: #1C80BE; -fx-border-color: #FFD700; -fx-border-width: 5;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/QUIZLOGO.png" />
+               </image>
+            </ImageView>
+            <Button mnemonicParsing="false" prefWidth="175.0" styleClass="leftButton" text="My Classes">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" styleClass="leftButton-noColor" text="ABOUT">
+               <VBox.margin>
+                  <Insets top="375.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" styleClass="leftButton-noColor" text="USER PREFERENCES">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="bodyPane" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: #0A305E;" GridPane.columnIndex="1">
+         <padding>
+            <Insets top="25.0" />
+         </padding>
+         <children>
+            <GridPane alignment="CENTER" minHeight="75.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="10.0" prefWidth="27.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="203.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="320.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="166.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="8.0" prefWidth="84.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="10.0" prefWidth="89.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" maxHeight="75.0" minHeight="75.0" prefHeight="75.0" prefWidth="225.0" style="-fx-background-color: #145F8E; -fx-border-color: #FFD700; -fx-border-width: 5; -fx-text-fill: white;" text="MY CLASSES" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="createClass" mnemonicParsing="false" onAction="#createClassBtnFn" style="-fx-background-color: #00799A; -fx-text-fill: white; -fx-background-radius: 20;" text="+ Create Class" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="67.0" fitWidth="67.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                     <image>
+                        <Image url="@../rsc/user.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+            <ImageView fx:id="imageBook" fitHeight="257.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../rsc/search2%201.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="descT" alignment="CENTER" maxWidth="300.0" text="You Haven’t Created Any Class Yet" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="createClassBottomBtn" mnemonicParsing="false" onAction="#createClassBtnFn" prefHeight="48.0" prefWidth="210.0" style="-fx-background-color: #00799A; -fx-background-radius: 20;" text="Create a Class" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</GridPane>

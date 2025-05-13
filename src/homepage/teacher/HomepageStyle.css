@@ -1,0 +1,41 @@
+.leftButton{
+	
+	-fx-background-color: #003F66;
+	-fx-background-radius: 20;
+	-fx-border-color: #FFD700;
+	-fx-border-width: 5;
+	-fx-border-radius: 20;
+	-fx-text-fill: white;
+	
+}
+
+.leftButton-noColor{
+	
+	-fx-background-color: rgba(0, 0, 0, 0);
+	-fx-text-fill: white;
+	
+}
+
+.newVBox {
+	
+	-fx-background-color:  #0A305E;
+	
+}
+
+.newVBox-label {
+	
+	-fx-background-color: #145F8E;
+	-fx-border-color: #FFD700;
+	-fx-border-width: 5;
+	-fx-text-fill: white;
+	-fx-font-size: 22;
+}
+
+.newVBox-btn {
+	
+	-fx-background-color:  #00799A;
+	-fx-text-fill: white;
+	-fx-background-radius: 20;
+	-fx-font-size: 20;
+	
+}

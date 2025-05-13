@@ -1,0 +1,13 @@
+.text-area .text {
+
+    -fx-text-alignment: center;
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+}
+
+.text-area .content {
+
+    -fx-background-color: #81CFFF;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}

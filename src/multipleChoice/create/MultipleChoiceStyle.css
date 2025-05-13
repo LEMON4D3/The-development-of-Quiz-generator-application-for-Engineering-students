@@ -1,0 +1,50 @@
+.text-area .text {
+
+    -fx-text-alignment: center;
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+}
+
+
+
+.text-area, .text-area .content {
+    -fx-background-color: #81CFFF ;
+    -fx-background-radius: 20;
+    -fx-border-radius: 35;
+}
+
+.centered-textArea .text{
+	
+	-fx-text-alignment: center;
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+
+}
+
+.centered-textArea, .centered-textArea .content {
+	
+	-fx-background-color: #00799A;
+	-fx-background: transparent;
+    -fx-prompt-text-fill: black;
+	-fx-border-color: royalblue;
+}
+
+.centered-textArea{
+
+    -fx-border-color: royalblue;
+}
+
+.choiceBox {
+	
+	-fx-background-color: #FFEA00;
+	-fx-font-size: 20;
+	
+}
+
+.choiceBox-activate {
+	
+	-fx-border-color: #009A5A;
+	-fx-border-width: 5;
+	-fx-font-size: 20;
+	
+}

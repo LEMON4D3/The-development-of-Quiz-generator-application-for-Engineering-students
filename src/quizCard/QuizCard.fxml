@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@QuizCardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizCard.quizCardController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="28.0" style="-fx-background-color: #1C80BE; -fx-background-radius: 2;">
+         <children>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@rsc/quizLogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@rsc/addBtn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@rsc/library.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="95.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@rsc/classes.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets top="8.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="62.0" style="-fx-background-color: #0A305E;" GridPane.columnIndex="1">
+         <padding>
+            <Insets left="15.0" right="15.0" top="32.0" />
+         </padding>
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="242.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #FFA600; -fx-background-radius: 20;" text="&lt;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="quizTitleT" alignment="CENTER" minHeight="69.0" prefWidth="218.0" style="-fx-background-color: #145F8E; -fx-border-color: #FFD700; -fx-border-width: 5;" text="Quiz Title" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#saveBtnFn" style="-fx-background-color: #003F66; -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 5; -fx-background-radius: 20; -fx-border-radius: 20;" text="Publish" GridPane.columnIndex="4">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <HBox alignment="CENTER" minHeight="50.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #00799A; -fx-background-radius: 20;" GridPane.columnIndex="3">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@rsc/preview.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Preview" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="373.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="278.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="189.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="___ Questions (____ Points)" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button minHeight="50.0" mnemonicParsing="false" onAction="#addQuiz" style="-fx-background-color: #00799A; -fx-background-radius: 20;" text="+ Add Question" textFill="WHITE" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <HBox alignment="CENTER" maxWidth="244.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #00799A; -fx-background-radius: 20;" GridPane.columnIndex="1">
+                     <children>
+                        <CheckBox mnemonicParsing="false" text="Shuffle Questions" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="75.0" right="15.0" />
+               </padding>
+            </GridPane>
+            <ScrollPane fitToWidth="true" prefHeight="494.0" prefWidth="935.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="quizContainer" prefHeight="200.0" prefWidth="933.0" spacing="15.0" />
+               </content>
+            </ScrollPane>
+         </children>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </VBox>
+   </children>
+</GridPane>

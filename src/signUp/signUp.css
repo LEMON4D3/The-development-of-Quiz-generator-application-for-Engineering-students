@@ -1,0 +1,50 @@
+.isTeacher {
+	
+	-fx-background-color: #FFD700;
+	-fx-background-radius: 20;
+	-fx-font-size: 16;
+	
+	
+}
+
+.textFieldStyle{
+	
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 20;
+	-fx-text-fill: #0A305E;
+	-fx-prompt-text-fill: #0A305E;
+	
+}
+
+.promptProblem{
+	
+	-fx-text-fill: red;
+	-fx-font-size: 16;
+}
+
+.fillMeUp{
+	-fx-prompt-text-fill: red;
+}
+
+.VBoxStyle {
+	
+	-fx-border-color:  #FFD700;
+	
+	-fx-background-color:  #0A305E;
+	-fx-background-image:  none, url("../../rsc/QWIZY2.png");
+	-fx-border-width:  5;
+	-fx-background-radius:  20;
+	-fx-border-radius:  20;
+	
+	
+}
+
+.isTeacherChoose {
+	
+	-fx-border-color: #009A93;
+	-fx-border-width: 3;
+	-fx-border-style: solid;
+	-fx-background-radius: 20;
+	-fx-border-radius: 20;
+	
+}

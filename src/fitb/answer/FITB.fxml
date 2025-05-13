@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="30.0" style="-fx-background-color: #0A305E;" stylesheets="@FITBStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitb.answer.FITBAnswerController">
+   <children>
+      <GridPane prefHeight="50.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="754.0" minWidth="10.0" prefWidth="725.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="468.0" minWidth="10.0" prefWidth="117.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" text="&lt;" />
+            <Label fx:id="questionT" text="Question #__ (___ Points)" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#nextBtnFn" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" text="&gt;" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <TextArea fx:id="questionTA" editable="false" maxWidth="1000.0" prefHeight="235.0" prefWidth="200.0" promptText="Question Area" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="hintT" text="HINT: " textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="answerTF" alignment="CENTER" maxWidth="875.0" prefHeight="130.0" promptText="TYPE YOUR ANSWER " style="-fx-background-color: #00799A; -fx-border-color: #FFEA00; -fx-border-width: 5; -fx-background-radius: 25; -fx-border-radius: 20;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+   </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>
