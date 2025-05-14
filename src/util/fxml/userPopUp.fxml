@@ -13,8 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="275.0" spacing="10.0" style="-fx-background-color: #253446;" stylesheets="@rsc/userPopUp.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="275.0" spacing="10.0" style="-fx-background-color: #253446;" stylesheets="@rsc/userPopUp.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="util.fxml.userPopUp">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="200.0">
          <children>
@@ -53,7 +52,7 @@
          <children>
             <Button mnemonicParsing="false" text="View Profile" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" text="Settings" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Logout" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onMouseClicked="#logoutBtnFn" text="Logout" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@rsc/user.png" />
@@ -64,7 +63,7 @@
                   <Image url="@rsc/settings%201.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#logoutBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
                   <Image url="@rsc/log%20out%201.png" />
                </image>

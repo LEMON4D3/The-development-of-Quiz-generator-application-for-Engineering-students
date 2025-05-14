@@ -83,7 +83,7 @@ public class loginController implements Initializable{
         		user.currentUser = (String) map.get("username");
         		user.isTeacher = ((Integer) map.get("isTeacher") == 1) ? true : false;
         		
-        		if((Integer) map.get("isTeacher") == 1)
+        		if(user.isTeacher)
         			new controller().changeScene(e, "/homepage/teacher/Homepage.fxml");
         		else
         			new controller().changeScene(e, "/homepage/student/Homepage.fxml");

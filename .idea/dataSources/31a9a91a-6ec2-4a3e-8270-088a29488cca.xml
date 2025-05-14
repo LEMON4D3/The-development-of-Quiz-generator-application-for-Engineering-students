@@ -499,7 +499,7 @@
     <routine id="190" parent="1" name="fts5"/>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-05-12.15:21:07</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-05-14.16:03:57</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1591,297 +1591,145 @@
       <Position>1</Position>
     </argument>
     <table id="555" parent="191" name="classes"/>
-    <table id="556" parent="191" name="dadadadad"/>
-    <table id="557" parent="191" name="dadadadadList"/>
-    <table id="558" parent="191" name="sqlite_master">
+    <table id="556" parent="191" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="559" parent="191" name="sqlite_sequence">
+    <table id="557" parent="191" name="sqlite_sequence">
       <System>1</System>
     </table>
-    <table id="560" parent="191" name="student"/>
-    <table id="561" parent="191" name="test2"/>
-    <table id="562" parent="191" name="test2List"/>
-    <table id="563" parent="191" name="x1"/>
-    <table id="564" parent="191" name="x1List"/>
-    <column id="565" parent="555" name="id">
+    <table id="558" parent="191" name="student"/>
+    <table id="559" parent="191" name="x1"/>
+    <table id="560" parent="191" name="x1List"/>
+    <column id="561" parent="555" name="id">
       <AutoIncrement>1</AutoIncrement>
       <Position>1</Position>
       <StoredType>integer|0s</StoredType>
     </column>
-    <column id="566" parent="555" name="announcement">
+    <column id="562" parent="555" name="announcement">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="567" parent="555" name="announcement description">
+    <column id="563" parent="555" name="announcement description">
       <Position>3</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="568" parent="555" name="isQuiz">
+    <column id="564" parent="555" name="isQuiz">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <key id="569" parent="555">
+    <key id="565" parent="555">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="570" parent="556" name="id">
-      <Position>1</Position>
-      <StoredType>integer primar key|0s</StoredType>
-    </column>
-    <column id="571" parent="556" name="quiz answer">
-      <Position>2</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="572" parent="556" name="quiz question">
-      <Position>3</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="573" parent="556" name="quiz option">
-      <Position>4</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="574" parent="556" name="quiz hint">
-      <Position>5</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="575" parent="556" name="category">
-      <Position>6</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="576" parent="556" name="point">
-      <Position>7</Position>
-      <StoredType>integer|0s</StoredType>
-    </column>
-    <column id="577" parent="556" name="time">
-      <Position>8</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="578" parent="557" name="id">
-      <AutoIncrement>1</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>integer|0s</StoredType>
-    </column>
-    <column id="579" parent="557" name="username">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="580" parent="557" name="quiz title">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="581" parent="557" name="quiz answer">
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="582" parent="557" name="quiz point">
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="583" parent="557" name="total point">
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="584" parent="557" name="quiz question">
-      <Position>7</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <key id="585" parent="557">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="586" parent="558" name="type">
+    <column id="566" parent="556" name="type">
       <Position>1</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="587" parent="558" name="name">
+    <column id="567" parent="556" name="name">
       <Position>2</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="588" parent="558" name="tbl_name">
+    <column id="568" parent="556" name="tbl_name">
       <Position>3</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="589" parent="558" name="rootpage">
+    <column id="569" parent="556" name="rootpage">
       <Position>4</Position>
       <StoredType>INT|0s</StoredType>
     </column>
-    <column id="590" parent="558" name="sql">
+    <column id="570" parent="556" name="sql">
       <Position>5</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="591" parent="559" name="name">
+    <column id="571" parent="557" name="name">
       <Position>1</Position>
     </column>
-    <column id="592" parent="559" name="seq">
+    <column id="572" parent="557" name="seq">
       <Position>2</Position>
     </column>
-    <column id="593" parent="560" name="id">
+    <column id="573" parent="558" name="id">
       <AutoIncrement>1</AutoIncrement>
       <Position>1</Position>
       <StoredType>integer|0s</StoredType>
     </column>
-    <column id="594" parent="560" name="student name">
+    <column id="574" parent="558" name="student name">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <key id="595" parent="560">
+    <key id="575" parent="558">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="596" parent="561" name="id">
+    <column id="576" parent="559" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <Position>1</Position>
-      <StoredType>integer primar key|0s</StoredType>
+      <StoredType>integer|0s</StoredType>
     </column>
-    <column id="597" parent="561" name="quiz answer">
+    <column id="577" parent="559" name="quiz answer">
       <Position>2</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="598" parent="561" name="quiz question">
+    <column id="578" parent="559" name="quiz question">
       <Position>3</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="599" parent="561" name="quiz option">
+    <column id="579" parent="559" name="quiz option">
       <Position>4</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="600" parent="561" name="quiz hint">
+    <column id="580" parent="559" name="quiz hint">
       <Position>5</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="601" parent="561" name="category">
+    <column id="581" parent="559" name="category">
       <Position>6</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="602" parent="561" name="point">
+    <column id="582" parent="559" name="point">
       <Position>7</Position>
       <StoredType>integer|0s</StoredType>
     </column>
-    <column id="603" parent="561" name="time">
+    <column id="583" parent="559" name="time">
       <Position>8</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="604" parent="562" name="id">
-      <AutoIncrement>1</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>integer|0s</StoredType>
-    </column>
-    <column id="605" parent="562" name="username">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="606" parent="562" name="quiz title">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="607" parent="562" name="quiz answer">
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="608" parent="562" name="quiz point">
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="609" parent="562" name="total point">
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-      <StoredType>integer|0s</StoredType>
-    </column>
-    <column id="610" parent="562" name="quiz question">
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <key id="611" parent="562">
+    <key id="584" parent="559">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="612" parent="563" name="id">
-      <Position>1</Position>
-      <StoredType>integer primar key|0s</StoredType>
-    </column>
-    <column id="613" parent="563" name="quiz answer">
-      <Position>2</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="614" parent="563" name="quiz option">
-      <Position>3</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="615" parent="563" name="quiz hint">
-      <Position>4</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="616" parent="563" name="category">
-      <Position>5</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="617" parent="563" name="point">
-      <Position>6</Position>
-      <StoredType>integer|0s</StoredType>
-    </column>
-    <column id="618" parent="563" name="time">
-      <Position>7</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="619" parent="563" name="quiz question">
-      <DefaultExpression>&quot;&quot;</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>8</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <column id="620" parent="564" name="id">
+    <column id="585" parent="560" name="id">
       <AutoIncrement>1</AutoIncrement>
-      <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>integer|0s</StoredType>
     </column>
-    <column id="621" parent="564" name="username">
-      <NotNull>1</NotNull>
+    <column id="586" parent="560" name="username">
       <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>text|0s</StoredType>
     </column>
-    <column id="622" parent="564" name="quiz title">
-      <NotNull>1</NotNull>
+    <column id="587" parent="560" name="quiz title">
       <Position>3</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>text|0s</StoredType>
     </column>
-    <column id="623" parent="564" name="quiz answer">
-      <NotNull>1</NotNull>
+    <column id="588" parent="560" name="quiz answer">
       <Position>4</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>text|0s</StoredType>
     </column>
-    <column id="624" parent="564" name="quiz point">
-      <NotNull>1</NotNull>
+    <column id="589" parent="560" name="quiz point">
       <Position>5</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>text|0s</StoredType>
     </column>
-    <column id="625" parent="564" name="total point">
-      <NotNull>1</NotNull>
+    <column id="590" parent="560" name="total point">
       <Position>6</Position>
-      <StoredType>int(11)|0s</StoredType>
+      <StoredType>integer|0s</StoredType>
     </column>
-    <column id="626" parent="564" name="quiz question">
-      <DefaultExpression>&apos;[]&apos;</DefaultExpression>
-      <NotNull>1</NotNull>
+    <column id="591" parent="560" name="quiz question">
       <Position>7</Position>
-      <StoredType>TEXT|0s</StoredType>
+      <StoredType>text|0s</StoredType>
     </column>
-    <key id="627" parent="564">
+    <key id="592" parent="560">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

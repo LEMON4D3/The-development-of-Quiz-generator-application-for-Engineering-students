@@ -69,7 +69,7 @@ public class quizController implements Initializable{
 				List<Map<String, Object>> quizList = new ArrayList<>();
 				
 				for(Map<String, Object> i: userList) 
-					if(((String) i.get("isQuiz")).equals("1")) quizList.add(i); 
+					if((Integer) i.get("isQuiz") == 1) quizList.add(i);
 				
 				list = quizList;
 				

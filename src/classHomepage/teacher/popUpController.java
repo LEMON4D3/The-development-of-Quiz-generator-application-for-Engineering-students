@@ -10,31 +10,81 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import util.controller;
 import util.user;
 
 public class popUpController implements Initializable{
 
 	@FXML
 	TextArea postTA;
-	
+
+	@FXML
+	ComboBox<String> categoryCombo;
+
 	public Map<String, Object> list;
-	
+	public Stage mainStage;
+
 	editType editStat = null;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
+		new initComboBox();
 		
 	}
-	
+
+	class initComboBox{
+
+		initComboBox() {
+
+			setComboBox();
+
+		}
+
+		public void setComboBox() {
+
+			ObservableList<String> categoryList = FXCollections.observableArrayList( "Announcement", "Create quiz" );
+			categoryCombo.setItems(categoryList);
+			categoryCombo.setValue("Announcement");
+
+			categoryCombo.setOnAction(event -> {
+				try {
+
+
+					if (categoryCombo.getValue().equals("Create quiz")) {
+
+						user.userQuizOption = user.quizOption.New;
+
+						Stage miniStage = new controller().getStage(event);
+						miniStage.close();
+
+						Parent root = FXMLLoader.load(getClass().getResource("/quiz/quiz.fxml"));
+						mainStage.setScene(new Scene(root));
+						mainStage.show();
+
+
+					}
+
+				} catch (Exception e) {e.printStackTrace();}
+
+			});
+
+		}
+
+	}
+
 	enum editType {
 		
 		edit,

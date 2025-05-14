@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import classHomepage.teacher.classList.classListController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,9 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -43,11 +42,17 @@ import util.user;
 public class homepageController implements Initializable{
 
 	@FXML
-	VBox announcementContainer, postedContainer, deadlineContainer;
-	
+	VBox listContainer, emptyContainer, studentContainerBtn;
+
 	@FXML
-	Label deadlineT, announcementT, classNameT, ssrT;
-	
+	HBox announcementContainer;
+
+	@FXML
+	Label announcementT, classNameT, ssrT;
+
+	@FXML
+	Button studentListBtn, classRecordBtn;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -56,7 +61,26 @@ public class homepageController implements Initializable{
 		getAnnouncementList();
 		
 	}
-	
+
+	public void studentListBtnFn(ActionEvent event) throws IOException {
+
+		Stage mainStage = new controller().getStage(event);
+
+		Stage miniStage = new Stage();
+		miniStage.initModality(Modality.APPLICATION_MODAL);
+		miniStage.initOwner(mainStage);
+
+		// temporary will be change this soon
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/classHomepage/teacher/classList/ClassList.fxml"));
+		classListController controller = loader.getController();
+		Parent root = loader.load();
+
+		miniStage.setScene(new Scene(root));
+		miniStage.showAndWait();
+
+
+	}
+
 	private void getClassInfo() {
 		
 		try {
@@ -90,34 +114,25 @@ public class homepageController implements Initializable{
 	}
 	
 	private void ifAnnouncement() {
-		
-		announcementContainer.getChildren().clear();
-		postedContainer.getChildren().clear();
-		
-		postedContainer.setOnMouseClicked(e -> {
+
+		listContainer.getChildren().clear();
+
+		announcementContainer.setOnMouseClicked(e -> {
 			
 			makeAnnouncement(e);
 			
 		});
-		
-		announcementT.setText("Make an Announcement");
-		
-		
-		postedContainer.setAlignment(Pos.CENTER_LEFT);
-		postedContainer.setPrefHeight(53);
-		postedContainer.getChildren().add(announcementT);
-		
-		announcementContainer.getChildren().add(postedContainer);
+
+
+		listContainer.getChildren().add(announcementContainer);
 		
 		for(Map<String, Object> i: announcementList) {
 			
-			if(((Integer)i.get("isQuiz")) == 1) announcementContainer.getChildren().add(new quizTemplate(i));
-			else announcementContainer.getChildren().add(new announcementTemplate(i));
+			if(((Integer)i.get("isQuiz")) == 1) listContainer.getChildren().add(new quizTemplate(i));
+			else listContainer.getChildren().add(new announcementTemplate(i));
 			
 		}
-		
-		announcementContainer.setSpacing(25);
-		announcementList.clear();
+
 	}
 	
 	private void getAnnouncementList() {
@@ -151,13 +166,14 @@ public class homepageController implements Initializable{
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/classHomepage/teacher/PopUp.fxml"));
 			Parent miniRoot = loader.load();
-			
+
+			popUpController controller = loader.getController();
+			controller.mainStage = mainStage;
+
 			Scene scene = new Scene(miniRoot);
 			miniStage.setScene(scene);
 			miniStage.setOnHidden(f -> {
-				
 				getAnnouncementList();
-				System.out.println("Checks it");
 			});
 			
 			miniStage.showAndWait();
@@ -213,35 +229,22 @@ public class homepageController implements Initializable{
 			topPane.add(imgView, 1, 0);
 			topPane.setPadding(new Insets(0, 25, 0, 0));
 			
-			GridPane bottomPane = new GridPane();
-			
-			bottomPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(40); }});
-			bottomPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(25); }});
-			bottomPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(45); }});
-			
-			String deadlineString ="Deadline: " + announcement.get("announcement description");
-			Label deadlineT = new Label(deadlineString);
-			deadlineT.setWrapText(true);
-			deadlineT.setFont(new Font("Inter", 20));
-			deadlineT.setStyle("-fx-text-fill: white;");
-			GridPane.setHalignment(deadlineT, HPos.LEFT);
-			
+			HBox bottomPane = new HBox();
+			bottomPane.setAlignment(Pos.CENTER_RIGHT);
+			bottomPane.setSpacing(25);
+
 			String buttonStyle = "-fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white;";
 			Button editBtn = new Button("Edit");
 			editBtn.setFont(new Font("Inter", 20));
 			editBtn.setStyle(buttonStyle);
 			editBtn.setOnAction(event -> editBtn(event));
-			GridPane.setHalignment(editBtn, HPos.CENTER);
-			bottomPane.add(editBtn, 1, 0);
 			
 			Button studentWorkBtn = new Button("Students Work");
 			studentWorkBtn.setFont(new Font("Inter", 20));
 			studentWorkBtn.setStyle(buttonStyle);
-			GridPane.setHalignment(studentWorkBtn, HPos.RIGHT);
-			
-			bottomPane.add(studentWorkBtn, 2, 0);
-		
-			bottomPane.add(deadlineT, 0, 0);
+
+
+			bottomPane.getChildren().addAll(editBtn, studentWorkBtn);
 			this.getChildren().addAll(topPane, bottomPane);
 			
 		}
@@ -252,7 +255,7 @@ public class homepageController implements Initializable{
 				
 
 				String tableName = (String) announcementGlobal.get("announcement");
-				
+
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/quizCard/QuizCard.fxml"));
 				Parent root = loader.load();
 				
@@ -279,9 +282,12 @@ public class homepageController implements Initializable{
 			
 				Statement dropTableStatement = classNameConnection.createStatement();
 				String dropTableString = "drop table if exists " + announcement;
-				
 				dropTableStatement.execute(dropTableString);
-				
+
+				String dropTableListString = "drop table if exists " + announcement + "List";
+				Statement dropTableListStatement = classNameConnection.createStatement();
+				dropTableListStatement.execute(dropTableListString);
+
 				String deleteAnnouncementNameString = "delete from classes where id = '" + id + "'";
 				Statement deleteAnnouncementNameStatement = classNameConnection.createStatement();
 				
@@ -294,7 +300,9 @@ public class homepageController implements Initializable{
 		}
 		
 	}
-	
+
+	// ANNOUNCEMENT TEMPLATE
+
 	private class announcementTemplate extends VBox {
 		
 		private String announcementStyle = "-fx-background-color: #5A95BA; -fx-background-radius: 20;";
@@ -306,47 +314,47 @@ public class homepageController implements Initializable{
 			this.setPrefWidth(654);
 			this.setStyle(announcementStyle);
 			this.setPadding(new Insets(25, 15, 25, 15));
-			
-			GridPane topPane = new GridPane();
-			topPane.setHgap(5);
-			
-			topPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(35); }});
-			Label accountNameT = new Label((String) list.get("announcement"));
-			accountNameT.setStyle("-fx-font-size: 16px");
-			topPane.add(accountNameT, 0, 0);
-			
-			topPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(45); }});
-			Label publishedT = new Label("When it is published");
-			publishedT.setStyle("-fx-font-size: 12px");
-			topPane.add(publishedT, 1, 0);
-			
-			topPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(15); }});
+			this.setSpacing(25);
+			this.setFillWidth(true);
+
+			HBox topPane = new HBox();
+			topPane.setSpacing(25);
+
+			Label accountNameT = new Label("ANNOUNCEMENT");
+			accountNameT.setStyle("-fx-font-size: 24px");
+
+			Region spacer = new Region();
+			spacer.setPrefWidth(250);
+			topPane.getChildren().addAll(accountNameT, spacer);
+
 			Button editBtn = new Button("Edit");
-			editBtn.setStyle("-fx-font-size: 16px; -fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white;");
+			editBtn.setStyle("-fx-font-size: 24px; -fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white;");
 			editBtn.setOnAction(f -> {
 				
 				editBtnFn(list);
 				
 			});
-			topPane.add(editBtn, 2, 0);
-			
-			topPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(20); }});
+
 			Button deleteBtn = new Button("Delete");
-			deleteBtn.setStyle("-fx-font-size: 16px; -fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white;");
+			deleteBtn.setStyle("-fx-font-size: 24px; -fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white;");
 			deleteBtn.setOnAction(f -> {
 				
 				deleteBtnFn((Integer) list.get("id"));
 				
 			});
-			topPane.add(deleteBtn, 3, 0);
-			
+
+			topPane.getChildren().addAll(editBtn, deleteBtn);
 			this.getChildren().add(topPane);
-			
-			String announcementTStyle = "-fx-background-color: white; -fx-background-radius: 20; -fx-text-fill: black;";
+
+			/*
+
+				Bottom Pane
+
+			 */
+
+			String announcementTStyle = "-fx-background-color: white; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 20px;";
 			Label announcementT = new Label((String) list.get("announcement description"));
 			announcementT.setWrapText(true);
-			announcementT.setPrefHeight(105);
-			announcementT.setPrefWidth(628);
 			announcementT.setStyle(announcementTStyle);
 			announcementT.setPadding(new Insets(15, 20, 15, 20));
 			

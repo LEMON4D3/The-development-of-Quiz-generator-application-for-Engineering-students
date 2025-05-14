@@ -116,18 +116,4 @@ public class tofCreateController extends quizCreateControllerExtend implements I
 		
 	}
     
-    public QuizClass.quizContainer getQuizComponents() {
-		
-		QuizClass.quizContainer prepareQuiz = new quizContainer();
-		
-		prepareQuiz.quizAnswer = quizAnswer;
-		prepareQuiz.quizQuestion = questionTA.getText();
-		prepareQuiz.quizCategory = categoryCombo.getValue().toString();
-		prepareQuiz.time = timeCombo.getValue().toString();
-		prepareQuiz.point = pointCombo.getValue().toString();
-		
-		return prepareQuiz;
-	
-	}
-    
 }

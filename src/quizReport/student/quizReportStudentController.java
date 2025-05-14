@@ -42,7 +42,12 @@ public class quizReportStudentController implements Initializable {
     }
 
     public void backBtnFn(ActionEvent event) throws IOException {
-        new controller().changeScene(event, "/classHomepage/student/Homepage.fxml");
+
+        user.currentQuiz = "";
+
+        if(user.currentClass != null) new controller().changeScene(event, "/classHomepage/student/Homepage.fxml");
+        else new controller().changeScene(event, "/homepage/student/Homepage.fxml");
+
     }
 
     public void initQuizReport(double average, String totalStudent, String totalQuiz) {
@@ -63,13 +68,7 @@ public class quizReportStudentController implements Initializable {
         List<Map<String, Object>> quizList =  Util.getStudentQuizListDB(true);
         containerStruct.totalStudent = quizList.size();
 
-        for(Map<String, Object> quiz : quizList) {
-            if(((String) quiz.get("username")).equals(user.currentUser)) {
-
-                userQuiz = quiz;
-                break;
-            }
-        }
+        userQuiz = quizList.get(quizList.size() - 1);
 
         containerStruct.initVariable(userQuiz);
         containerStruct.totalQuiz = containerStruct.quizQuestion.size();

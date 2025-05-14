@@ -254,7 +254,6 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 				try {
 					
 					user.userQuizOption = user.quizOption.Edit;
-					System.out.println("Hitting those backshots");
 					
 					Stage miniStage = new Stage();
 					miniStage.initModality(Modality.APPLICATION_MODAL);
@@ -275,9 +274,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 					miniStageFn(miniStage, loader);
 					
 					Scene miniScene = new Scene(root);
-					
-					
-					
+
 					miniStage.setScene(miniScene);
 					miniStage.showAndWait();
 				
@@ -324,16 +321,58 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  	
  	public void saveBtnFn(ActionEvent event) throws IOException {
  		
- 		String url = (user.isTeacher) ? teacherSaveFn(event) : studentSaveFn(event);
+  		String url = (user.isTeacher) ? teacherSaveFn(event) : studentSaveFn(event);
  		
  		new controller().changeScene(event, url);
  		
  	}
- 	
+
+	 private String teacherEditFn(ActionEvent event) {
+
+		 try {
+
+			 Connection classQuizConnection = Util.getClassConnectionDB();
+
+			 String deleteQuizString = "delete from `" + quizTitle + "`";
+			 Statement deleteQuizStmt = classQuizConnection.createStatement();
+			 deleteQuizStmt.execute(deleteQuizString);
+
+			 String prepareInsertQuizString = "insert into `" + quizTitle + "`("
+						+ "`quiz answer`, `quiz question`, `quiz option`, `quiz hint`,"
+						+ "category, point, time) values (?, ?, ?, ?, ?, ?, ?)";
+			 PreparedStatement insertQuizPrepare = classQuizConnection.prepareStatement(prepareInsertQuizString);
+
+			 for(int i = 0; i < cardContainerList.size(); i++) {
+
+				 QuizClass.quizContainer container = cardContainerList.get(i);
+
+				 insertQuizPrepare.setString(1, container.quizAnswer);
+				 insertQuizPrepare.setString(2, container.quizQuestion);
+				 insertQuizPrepare.setString(3, container.quizOptions);
+				 insertQuizPrepare.setString(4, container.hint);
+				 insertQuizPrepare.setString(5, container.quizCategory);
+				 insertQuizPrepare.setInt(6, Integer.parseInt(container.point.split(" ")[0]));
+				 insertQuizPrepare.setString(7, container.time);
+
+				 insertQuizPrepare.executeUpdate();
+			 }
+
+			 return "/classHomepage/teacher/Homepage.fxml";
+		 } catch (Exception exception) {
+			 exception.printStackTrace();
+		 }
+
+         return "";
+     }
+
  	private String teacherSaveFn(ActionEvent event) {
  		
  		try {
- 			
+
+			 quizTitle = quizTitleT.getText();
+			 if(status == quizStatus.Edit) return teacherEditFn(event);
+
+
  			String getClassConnectionString = "application/classes/" + user.currentClass + "/" + user.currentClass + ".db";
  			Connection classConnection = DriverManager.getConnection("jdbc:sqlite:" + getClassConnectionString);
  			
@@ -346,7 +385,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			prepareClassInsert.execute();
  			
  			String createNewTableString = "create table if not exists " + quizTitle + "("
- 					+ "id integer primar key,"
+ 					+ "id integer primary key autoincrement,"
  					+ "`quiz answer` text,"
  					+ "`quiz question` text,"
  					+ "`quiz option` text,"
@@ -379,7 +418,19 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  				prepareInsertQuiz.executeUpdate();
  				
  			}
- 			
+
+			 String createQuizListDBString = "create table if not exists `" + quizTitle + "List`(" +
+					 "id integer primary key autoincrement," +
+					 "username text," +
+					 "`quiz title` text," +
+					 "`quiz answer` text," +
+					 "`quiz point` text," +
+					 "`total point` integer," +
+					 "`quiz question` text" +
+					 ")";
+			 Statement createQuizListDBStatement = classConnection.createStatement();
+			 createQuizListDBStatement.execute(createQuizListDBString);
+
  		} catch(Exception exception) {
  			exception.printStackTrace();
  		}
@@ -402,20 +453,20 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 			
  			Connection quizConnection = DriverManager.getConnection("jdbc:sqlite:" + checkRequireDBString);
  			String createRequireTableString = "create table if not exists quiz("
- 					+ "id integer primary key autoincrement,"
+ 					+ "id integer not null primary key autoincrement,"
  					+ "`quiz name` text not null"
  					+ ")";
  			Statement createRequireTableStatement = quizConnection.createStatement();
  			createRequireTableStatement.execute(createRequireTableString);
  			
- 			String insertQuizString = "insert into quiz(announcement) values (?)";
+ 			String insertQuizString = "insert into quiz(`quiz name`) values (?)";
  			PreparedStatement prepareClassInsert = quizConnection.prepareStatement(insertQuizString);
  			
- 			prepareClassInsert.setString(1, quizTitle);
+ 			prepareClassInsert.setString(1, quizTitleT.getText());
  			prepareClassInsert.execute();
  			
- 			String createNewTableString = "create table if not exists " + quizTitle + "("
- 					+ "id integer primar key,"
+ 			String createNewTableString = "create table if not exists " + quizTitleT.getText() + "("
+ 					+ "id integer not null primary key autoincrement,"
  					+ "`quiz answer` text,"
  					+ "`quiz question` text,"
  					+ "`quiz option` text,"
@@ -454,7 +505,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			exception.printStackTrace();
  		}
  		
- 		return "homepage/teacher/Homepage.fxml";
+ 		return "/homepage/student/Homepage.fxml";
  		
  	}
  	
@@ -484,12 +535,11 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 	 		Statement tableInfoStatement = classNameConnection.createStatement();
 	 		
 	 		List<Map<String, Object>> tableList = Util.getList(tableInfoStatement, getTableString);
-	 		int previousID = 0;
-	 		
-	 		QuizClass.quizContainer container = new QuizClass.quizContainer();
-	 		
+	 		cardContainerList.clear();
+
 	 		for(int i = 0; i < tableList.size(); i++) {
-	 			
+
+				QuizClass.quizContainer container = new QuizClass.quizContainer();
 	 			Map<String, Object> tableInfo = tableList.get(i);
 	 			container.quizAnswer = (String) tableInfo.get("quiz answer");
 	 			container.quizQuestion = (String) tableInfo.get("quiz question");
@@ -503,19 +553,6 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 			 	cardContainerList.add(container);
 
 	 		}
-
-			String createTableList = "create table if not exists `" + user.currentQuiz + "List`("
-					+ "`id` integer primary key autoincrement NOT NULL,"
-					+ "`username` varchar(255) NOT NULL,"
-					+ "`quiz title` varchar(255) NOT NULL,"
-					+ "`quiz answer` varchar(255) NOT NULL,"
-					+ "`quiz question` varchar(255) NOT NULL,"
-					+ "`quiz point` varchar(255) NOT NULL,"
-					+ "`total point` int(11) NOT NULL"
-					+ ")";
-
-			Statement statement = classNameConnection.createStatement();
-			statement.executeUpdate(createTableList);
 
 	 		refreshList();
 	 		

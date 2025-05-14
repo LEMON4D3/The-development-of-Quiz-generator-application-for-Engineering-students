@@ -55,6 +55,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import util.Util;
 import util.controller;
+import util.fxml.userPopUp;
 import util.user;
 import homepage.lib.emptyContainer;
 import homepage.student.*;
@@ -66,7 +67,10 @@ public class homepageController implements Initializable{
 	
 	@FXML
 	Button joinClass;
-	
+
+	@FXML
+	VBox noClassT, noQuizT;
+
 	List<String> className = new ArrayList<>();
 	List<String> userDeckName = new ArrayList<>();
 	
@@ -116,9 +120,18 @@ public class homepageController implements Initializable{
 				classesHBox = new HBox();
 			
 			classesHBox.getChildren().clear();
-			
+			if(classesList.isEmpty()) {
+
+				classesHBox.setAlignment(Pos.CENTER);
+				classesHBox.getChildren().add(noClassT);
+				return;
+
+			}
+
+			classesHBox.setAlignment(Pos.CENTER_LEFT);
 			for(Map<String, Object> i : classesList)
 				classesHBox.getChildren().add(new classContainer((String) i.get("class name")));
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -149,12 +162,17 @@ public class homepageController implements Initializable{
 		
 		if(userDeckHBox == null)
 			userDeckHBox = new HBox();
-		
-		
+
 		userDeckHBox.getChildren().clear();
-		
-		
-		
+		if(quizList.isEmpty()) {
+
+			userDeckHBox.setAlignment(Pos.CENTER);
+			userDeckHBox.getChildren().add(noQuizT);
+			return;
+
+		}
+
+		userDeckHBox.setAlignment(Pos.CENTER_LEFT);
 		for(Map<String, Object> i: quizList)
 			userDeckHBox.getChildren().add(new quizContainer((String) i.get("quiz name")));
 			
@@ -240,12 +258,9 @@ public class homepageController implements Initializable{
 	}
 	
 	
-	public void goQuizFn(MouseEvent e) throws IOException {
-		
-		new controller().changeScene(e, "/quiz/Quiz.fxml");
-		
-	}
-	
+	public void goQuizFn(MouseEvent e) throws IOException { new controller().changeScene( e, "/quiz/Quiz.fxml"); }
+	public void goQuizActionFn(ActionEvent e) throws IOException { new controller().changeScene( e, "/quiz/Quiz.fxml"); }
+
  	private addUserStat addClassUser(String className) {
 		
 		try {
@@ -377,7 +392,12 @@ public class homepageController implements Initializable{
 		
 	}	
 
-	
+	public void userBtnFn(MouseEvent event) {
+
+		new Util().userPopUp(event);
+
+	}
+
 	class classContainer extends AnchorPane {
 
 		classContainer(String className) {
@@ -431,7 +451,11 @@ public class homepageController implements Initializable{
 
 	class quizContainer extends AnchorPane {
 
+		String quizName;
+
 		quizContainer(String quizName) {
+
+			this.quizName = quizName;
 
 			this.setOnMouseClicked(event -> {
 				try {
@@ -461,6 +485,22 @@ public class homepageController implements Initializable{
 			upper.setPrefWidth(235);
 			upper.setPrefHeight(133);
 
+			Image img = new Image("file:src/homepage/rsc/delete.png");
+			ImageView imgView = new ImageView(img);
+			imgView.setFitHeight(20);
+			imgView.setFitWidth(20);
+
+			Button deleteBtn = new Button("");
+			deleteBtn.setStyle("-fx-background-color: transparent;");
+			deleteBtn.setGraphic(imgView);
+			deleteBtn.setLayoutX(200);
+			deleteBtn.setLayoutY(10);
+			deleteBtn.setOnAction(event -> {
+				deleteBtnFn(event);
+			});
+
+			upper.getChildren().add(deleteBtn);
+
 			HBox titleContainer = new HBox();
 
 			titleContainer.setMinWidth(235);
@@ -475,6 +515,31 @@ public class homepageController implements Initializable{
 
 			this.getChildren().add(upper);
 			this.getChildren().add(titleContainer);
+
+		}
+
+		void deleteBtnFn(ActionEvent event) {
+
+			try {
+
+				Connection quizConnection = Util.getStudentQuizConnectionDB();
+
+				String deleteQuizString = "delete from quiz where `quiz name` = ?";
+				PreparedStatement deleteQuizStatement = quizConnection.prepareStatement(deleteQuizString);
+				deleteQuizStatement.setString(1, quizName);
+				deleteQuizStatement.executeUpdate();
+
+				String dropTableQuizString = "drop table if exists `" + quizName + "`";
+				Statement dropTableQuizStatement = quizConnection.createStatement();
+				dropTableQuizStatement.execute(dropTableQuizString);
+
+				String dropTableQuizListString = "drop table if exists `" +  quizName + "list`";
+				Statement dropTableQuizListStatement = quizConnection.createStatement();
+				dropTableQuizListStatement.execute(dropTableQuizListString);
+
+				refreshDeckList();
+
+			} catch (Exception e) { e.printStackTrace(); }
 
 		}
 

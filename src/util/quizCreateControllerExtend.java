@@ -30,7 +30,7 @@ import util.QuizClass.quizContainer;
 
 public class quizCreateControllerExtend {
 	
-	protected static quizContainer prepareQuiz = new quizContainer();
+	protected quizContainer prepareQuiz = new quizContainer();
 
 	@FXML
 	protected ComboBox categoryCombo, pointCombo, timeCombo;
@@ -89,8 +89,13 @@ public class quizCreateControllerExtend {
 	
 	public void backBtnFn(ActionEvent e) throws SQLException, IOException {
 		
-		user.userQuizOption = null;
-		new controller().changeScene(e, "/quiz/Quiz.fxml");
+		if(user.userQuizOption == user.quizOption.Edit) {
+
+			Stage mainStage = new controller().getStage(e);
+			mainStage.close();
+
+		}
+		else if (user.userQuizOption == user.quizOption.New) new controller().changeScene(e, "/quiz/Quiz.fxml");
 	
 	}
 	
@@ -147,7 +152,9 @@ public class quizCreateControllerExtend {
 				
 				if(user.userQuizOption == user.quizOption.Edit) controller.setContainerList(prepareQuiz, containerIndex);
 				else if(user.userQuizOption == user.quizOption.Add) controller.addContainerList(prepareQuiz);
-				
+
+
+
 				stageClose(event);
 				user.userQuizOption = null;
 				return;
@@ -163,6 +170,7 @@ public class quizCreateControllerExtend {
 				if(user.userQuizOption == user.quizOption.Add) controller.addContainerList(prepareQuiz);
 				else if(user.userQuizOption == user.quizOption.Edit) controller.setContainerList(prepareQuiz, containerIndex);
 
+				user.userQuizOption = null;
 				return;
 
 			}
@@ -187,9 +195,19 @@ public class quizCreateControllerExtend {
 
 		public List<quizContainer> cardContainerList = new ArrayList<>();
 
-		public void setContainerList(quizContainer setContainer, int index) { cardContainerList.set(index, setContainer); refreshList(); }
+		public void setContainerList(quizContainer setContainer, int index) {
 
-		public void addContainerList(quizContainer addContainer) { cardContainerList.add(addContainer); refreshList(); }
+			cardContainerList.set(index, setContainer);
+			refreshList();
+
+		}
+
+		public void addContainerList(quizContainer addContainer) {
+
+			cardContainerList.add(addContainer);
+			refreshList();
+
+		}
 
 		public void deleteContainerList(int containerIndex) { cardContainerList.remove(containerIndex); refreshList(); }
 

@@ -12,6 +12,10 @@ import java.io.IOException;
 
 public class userPopUp {
 
+    /*
+        * To call userPopUp use new Util().userPopUp(event);
+     */
+
     Stage mainStage = null;
 
     public void setMainStage(Stage mainStage) {

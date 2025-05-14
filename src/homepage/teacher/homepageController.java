@@ -623,13 +623,10 @@ public class homepageController implements Initializable{
 		
 		prepareClasses.executeUpdate();
 		
-		String insertUser = "insert into classes (`class name`, section, subject, room) values (?, ?, ?, ?)";
+		String insertUser = "insert into classes (`class name`) values (?)";
 		PreparedStatement prepareUser = userConnection.prepareStatement(insertUser);
 		
 		prepareUser.setString(1, info.className);
-		prepareUser.setString(2, info.section);
-		prepareUser.setString(3, info.subject);
-		prepareUser.setString(4, info.room);
 		
 		prepareUser.executeUpdate();
 		
@@ -654,7 +651,7 @@ public class homepageController implements Initializable{
 		String createRequiredClassTable = "create table if not exists classes("
 				+ "id integer primary key autoincrement,"
 				+ "announcement text not null,"
-				+ "announcementDescription text,"
+				+ "`announcement description` text,"
 				+ "isQuiz integer not null"
 				+ ")";
 		classNameStatement.execute(createRequiredClassTable);

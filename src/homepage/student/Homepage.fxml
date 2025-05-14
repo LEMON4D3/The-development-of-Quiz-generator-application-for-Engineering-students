@@ -111,7 +111,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                  <ImageView fitHeight="67.0" fitWidth="67.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                      <image>
                         <Image url="@../rsc/user.png" />
                      </image>
@@ -133,12 +133,28 @@
                   </Label>
                </children>
             </HBox>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="185.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="185.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
                <content>
-                  <HBox fx:id="classesHBox" prefHeight="179.0" prefWidth="175.0" spacing="10.0">
+                  <HBox fx:id="classesHBox" alignment="CENTER" prefHeight="179.0" prefWidth="175.0" spacing="10.0">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
+                     <children>
+                        <VBox fx:id="noClassT" alignment="CENTER" prefHeight="200.0" spacing="25.0">
+                           <children>
+                              <Label text="You have no class poor you :(">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <Button mnemonicParsing="false" onAction="#joinBtnFn" style="-fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white;" text="+ Join Class">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
                   </HBox>
                </content>
             </ScrollPane>
@@ -154,9 +170,25 @@
                   </Label>
                </children>
             </HBox>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="185.0" prefWidth="200.0" style="-fx-background: transparent; -fx-background-color: transparent;" vbarPolicy="NEVER">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="185.0" prefWidth="200.0" style="-fx-background: transparent; -fx-background-color: transparent;" vbarPolicy="NEVER">
                <content>
-                  <HBox fx:id="userDeckHBox" prefHeight="100.0" prefWidth="200.0" spacing="10.0" />
+                  <HBox fx:id="userDeckHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <VBox fx:id="noQuizT" alignment="CENTER" prefHeight="200.0" spacing="25.0">
+                           <children>
+                              <Label text="Repetition is the key bro">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <Button mnemonicParsing="false" onAction="#goQuizActionFn" style="-fx-background-color: #00799A; -fx-text-fill: white; -fx-background-radius: 20;" text="+ Create New Quiz">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children></HBox>
                </content>
                <padding>
                   <Insets left="10.0" />

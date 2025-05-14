@@ -33,14 +33,14 @@ public class Main extends Application {
 		// teacher: rein
 
 //		student
-		user.isTeacher = false;
-		user.currentUser = "xien";
+//		user.isTeacher = false;
+//		user.currentUser = "xien";
 
 //		teacher
-//		user.isTeacher = true;
-//		user.currentUser = "5";
-//		user.currentClass = "1";
-//		user.currentQuiz = "dadadadad";
+		user.isTeacher = true;
+		user.currentUser = "5";
+		user.currentClass = "1";
+		user.currentQuiz = "dadadadad";
 
 		testNormalDB(stage);
 
@@ -69,8 +69,8 @@ public class Main extends Application {
 		try {
 
 			//Parent root = FXMLLoader.load(getClass().getResource("/quizReport/QuizReport.fxml"));
-			Parent root = FXMLLoader.load(getClass().getResource("/homepage/student/Homepage.fxml"));
-			//Parent root = FXMLLoader.load(getClass().getResource("/homepage/teacher/Homepage.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/Homepage.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/classRecord/ClassRecord.fxml"));
 
 			stage.setScene(new Scene(root));
 			stage.show();

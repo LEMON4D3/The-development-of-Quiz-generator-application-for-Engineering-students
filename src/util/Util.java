@@ -118,6 +118,8 @@ public class Util {
 			String getTableString = "select * from `" + tableName + "`";
 			Statement tableStatement = connection.createStatement();
 
+			String appointment = null;
+
 			return getList(tableStatement, getTableString);
 
 		} catch (Exception exception) { exception.printStackTrace(); }
@@ -166,7 +168,10 @@ public class Util {
 	public static List<Map<String, Object>> getStudentQuizListDB(boolean isList) {
 		try {
 
-			String getQuizDBString = "application/user/student/" + user.currentUser + "/quiz/quiz.db";
+			String getQuizDBString = "";
+			if(isList) getQuizDBString = "application/classes/" + user.currentClass + "/" + user.currentClass + ".db";
+			else getQuizDBString = "application/user/student/" + user.currentUser + "/quiz/quiz.db";
+
 			Connection quizConnection = DriverManager.getConnection("jdbc:sqlite:" + getQuizDBString);
 
 			if(isList) {

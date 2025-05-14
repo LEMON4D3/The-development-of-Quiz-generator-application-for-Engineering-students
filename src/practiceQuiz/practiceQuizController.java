@@ -128,6 +128,8 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 	@Override
 	public void refreshList() {
 
+		quizTitleT.setText(user.currentQuiz);
+
 		quizContainer.getChildren().clear();
 		cardContainerList.clear();
 
@@ -162,6 +164,7 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 		try {
 
 			Stage mainStage = new controller().getStage(event);
+			user.userQuizOption = user.quizOption.Add;
 
 			Stage miniStage = new Stage();
 			miniStage.initModality(Modality.APPLICATION_MODAL);
