@@ -1,0 +1,15 @@
+.scroll-pane {
+
+    -fx-background-color:  #5A95BA;
+    -fx-background: transparent;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+
+}
+
+.grid-pane > .containerColumn {
+
+    -fx-background-color: white;
+    -fx-text-fill: black;
+
+}

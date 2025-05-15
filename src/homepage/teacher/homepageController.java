@@ -84,6 +84,12 @@ public class homepageController implements Initializable{
 		
 	}
 
+	public void reportBtnFn(ActionEvent event) {
+
+		new controller().changeScene(event, "/homepage/teacher/report/Report.fxml");
+
+	}
+
 	public void userBtnFn(MouseEvent event) { new Util().userPopUp(event); }
 
 	private void getClasses()  {

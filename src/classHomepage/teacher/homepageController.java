@@ -242,6 +242,10 @@ public class homepageController implements Initializable{
 			Button studentWorkBtn = new Button("Students Work");
 			studentWorkBtn.setFont(new Font("Inter", 20));
 			studentWorkBtn.setStyle(buttonStyle);
+			studentWorkBtn.setOnAction(event -> {
+				user.currentQuiz = (String) announcementGlobal.get("announcement");
+				new controller().changeScene(event, "/classHomepage/teacher/studentWork/StudentWork.fxml");
+			});
 
 
 			bottomPane.getChildren().addAll(editBtn, studentWorkBtn);

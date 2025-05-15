@@ -1,0 +1,17 @@
+/*.table-row-cell{*/
+
+/*    -fx-border-color: Gray;*/
+/*    -fx-background-color: mintcream;*/
+
+/*}*/
+
+.table-view:empty {
+    -fx-border-color: transparent; /* Remove the border */
+    -fx-background-color: transparent; /* Optional: Remove the background */
+}
+
+.table-row-cell:focused{
+    -fx-background-color: teal;
+    -fx-border-color: Gray;
+    -fx-table-cell-border-color: Gray;
+}

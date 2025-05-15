@@ -80,7 +80,15 @@ public class quizController implements Initializable{
 		} catch (Exception e) { System.out.println("User haven't created any quiz yet"); }
 		
 	}
-	
+
+	public void backBtnFn(ActionEvent event) {
+
+		if(user.isTeacher) new controller().changeScene(event, "/classHomepage/teacher/Homepage.fxml");
+		else if(!user.isTeacher && user.currentClass != null) new controller().changeScene(event, "/classHomepage/student/Homepage.fxml");
+		else if(!user.isTeacher) new controller().changeScene(event, "/homepage/student/Homepage.fxml");
+
+	}
+
 	public void fitbBtnFn(ActionEvent event) throws IOException { new categoryFn("/fitb/create/FITB.fxml", event, categoryType.fitb); }
 	
 	public void multipleChoiceBtnFn(ActionEvent event) throws IOException { new categoryFn("/multipleChoice/create/MultipleChoice.fxml", event, categoryType.multipleChoice); }

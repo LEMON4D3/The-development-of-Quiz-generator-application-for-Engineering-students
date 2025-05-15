@@ -40,7 +40,7 @@ public class Main extends Application {
 		user.isTeacher = true;
 		user.currentUser = "5";
 		user.currentClass = "1";
-		user.currentQuiz = "dadadadad";
+		user.currentQuiz = "x1";
 
 		testNormalDB(stage);
 
@@ -68,9 +68,9 @@ public class Main extends Application {
 
 		try {
 
-			//Parent root = FXMLLoader.load(getClass().getResource("/quizReport/QuizReport.fxml"));
-			Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/Homepage.fxml"));
-			//Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/classRecord/ClassRecord.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/homepage/teacher/report/Report.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/Homepage.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/studentWork/StudentWork.fxml"));
 
 			stage.setScene(new Scene(root));
 			stage.show();

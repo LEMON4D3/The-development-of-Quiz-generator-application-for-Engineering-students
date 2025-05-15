@@ -1,12 +1,16 @@
 package classHomepage.teacher.classRecord;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import util.Util;
+import util.controller;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -29,11 +33,13 @@ public class classRecordController implements Initializable {
     }
 
     @FXML
-    public void backBtnFn() {
+    public void backBtnFn(ActionEvent event) {
 
-
+        new controller().changeScene(event, "/classHomepage/teacher/Homepage.fxml");
 
     }
+
+
 
     class initTableView{
 
@@ -64,12 +70,36 @@ public class classRecordController implements Initializable {
                 }
 
                 TableColumn<tableViewStruct, String> studentNameColumn = new TableColumn<>("Student Name");
-                tableViewContainer.getColumns().add(studentNameColumn);
+                studentNameColumn.setCellValueFactory(cellData -> {
 
+                    return new SimpleObjectProperty<>(cellData.getValue().getStudentName());
+
+                });
+
+                tableViewContainer.getColumns().add(studentNameColumn);
+                int index = 0;
                 for(String quizName : columnNameList) {
+
+                    final int scoreIndex = index;
                     TableColumn<tableViewStruct, Integer> quizColumn = new TableColumn<>(quizName);
-                    tableViewContainer.getColumns().add(new TableColumn<>(quizName));
+                    quizColumn.setCellValueFactory(cellData -> {
+
+                        return new SimpleObjectProperty<>(cellData.getValue().getScoreByIndex(scoreIndex));
+
+                    });
+
+
+                    tableViewContainer.getColumns().add(quizColumn);
+
+                    index++;
                 }
+
+                TableColumn<tableViewStruct, Float> averageColumn = new TableColumn<>("Average");
+                averageColumn.setCellValueFactory(cellData -> {
+                    return new SimpleObjectProperty<>(cellData.getValue().getAverageValue());
+                });
+                tableViewContainer.getColumns().add(averageColumn);
+
 
             } catch (Exception e) { e.printStackTrace(); }
 
@@ -100,7 +130,14 @@ public class classRecordController implements Initializable {
 
                         for (Map<String, Object> quiz : quizList) {
                             if (quiz.get("username").toString().equals(studentName)) {
-                                scores.add((Integer) quiz.get("score"));
+
+                                String[] scoreString = quiz.get("quiz point").toString().replace("[", "").replace("]", "").split(",");
+                                List<Integer> scoreList = new ArrayList<>();
+                                for (String score : scoreString) {
+                                    scoreList.add(Integer.parseInt(score.trim()));
+                                }
+
+                                scores.addAll(scoreList);
                                 found = true;
                                 break;
                             }
@@ -114,7 +151,8 @@ public class classRecordController implements Initializable {
                     tableViewList.add(row);
                 }
 
-                System.out.println(studentQuizList);
+                System.out.println(tableViewList);
+                tableViewContainer.setItems(tableViewList);
 
             } catch (Exception exception) { exception.printStackTrace(); }
 
@@ -123,19 +161,39 @@ public class classRecordController implements Initializable {
 
     class tableViewStruct {
 
-        String studentName;
-        List<Integer> score;
+        private String studentName;
+        private List<Integer> score;
+
+        float averageValue = 0;
 
         tableViewStruct(String studentName, List<Integer> score) {
 
             this.studentName = studentName;
             this.score = score;
 
+            for(int Score : score)
+                averageValue += Score;
+
+            averageValue /= score.size();
         }
 
         tableViewStruct(String studentName) {
             this.studentName = studentName;
         }
+
+        public String getStudentName() { return studentName; }
+
+        public List<Integer> getScore() { return score; }
+
+        public Integer getScoreByIndex(int index) {
+
+            Integer independentScore = (index < score.size()) ? score.get(index) : 0;
+            System.out.println("Independent Score: " + independentScore);
+            return independentScore;
+
+        }
+
+        public float getAverageValue() {  return averageValue; }
 
     }
 

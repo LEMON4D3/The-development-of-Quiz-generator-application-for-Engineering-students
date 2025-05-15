@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #0A305E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHomepage.teacher.classRecord.classRecordController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #0A305E;" stylesheets="@ClassRecord.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHomepage.teacher.classRecord.classRecordController">
    <center>
       <TableView fx:id="tableViewContainer" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
@@ -18,7 +18,10 @@
             <Insets bottom="25.0" left="15.0" right="15.0" top="25.0" />
          </BorderPane.margin>
          <children>
-            <Button mnemonicParsing="false" text="Back" />
+            <Button mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #145F8E; -fx-background-radius: 20;" text="Back" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #145F8E; -fx-border-color: #FFD700; -fx-border-width: 5;" text="Class Record" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
