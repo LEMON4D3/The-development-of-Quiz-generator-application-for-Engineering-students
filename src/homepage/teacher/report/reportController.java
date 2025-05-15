@@ -1,18 +1,24 @@
 package homepage.teacher.report;
 
+import classHomepage.teacher.studentWork.studentWorkController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import util.Util;
+import util.controller;
 import util.user;
 
 import java.net.URL;
@@ -24,7 +30,7 @@ import java.util.*;
 public class reportController implements Initializable {
 
     @FXML
-    private ComboBox<String> classCombo, dateCombo;
+    private ComboBox<String> classCombo;
 
     @FXML
     private GridPane quizContainer;
@@ -104,13 +110,38 @@ public class reportController implements Initializable {
                     x = 0;
                 }
 
+                String reportLocation = "";
+
                 for(Node node : quizContainer.getChildren()) {
+
                     Integer rowIndex = GridPane.getRowIndex(node);
+                    Integer columnIndex = GridPane.getColumnIndex(node);
+
+                    boolean columnCheck = (columnIndex != null && columnIndex == 0);
+                    if(columnCheck) {
+                        reportLocation = ((Label) node).getText();
+                    }
+
+                    final String reportLocationFinal = reportLocation;
+
                     if(rowIndex != null && rowIndex > 0 && (node != quizNameT && node != participantsT)) {
                         node.setOnMouseClicked(event -> {
 
-                            System.out.println("Clicked: " + ((Label) node).getText());
+                            try {
 
+                                user.currentQuiz = reportLocationFinal;
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/classHomepage/teacher/studentWork/StudentWork.fxml"));
+                                Parent root = loader.load();
+
+                                studentWorkController controller = loader.getController();
+                                controller.setBackStatus();
+
+                                Stage stage = new controller().getStage(event);
+                                stage.setScene(new Scene(root));
+                                stage.show();
+
+
+                            } catch (Exception exception) { exception.printStackTrace(); }
                         });
                     }
                 }

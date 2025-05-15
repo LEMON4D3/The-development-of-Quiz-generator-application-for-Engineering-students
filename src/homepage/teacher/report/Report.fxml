@@ -27,7 +27,7 @@
           <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #145F8E; -fx-background-radius: 20;" text="Back" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #145F8E; -fx-background-radius: 20;" text="Back" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font></Button>
@@ -51,8 +51,7 @@
       </GridPane>
       <HBox prefWidth="200.0" spacing="25.0">
          <children>
-            <ComboBox fx:id="classCombo" prefWidth="150.0" />
-            <ComboBox fx:id="dateCombo" prefWidth="150.0" />
+            <ComboBox fx:id="classCombo" prefWidth="150.0" style="-fx-background-color: #FFA600;" />
          </children>
       </HBox>
       <ScrollPane fitToWidth="true" prefHeight="519.0" prefWidth="0.0">

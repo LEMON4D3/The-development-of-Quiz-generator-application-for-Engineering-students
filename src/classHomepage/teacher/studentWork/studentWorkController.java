@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import util.Util;
+import util.controller;
 import util.user;
 
 import java.net.URL;
@@ -46,7 +47,21 @@ public class studentWorkController implements Initializable {
 
     @FXML
     public void backBtnFn(ActionEvent event) {
-        new util.controller().changeScene(event, "/classHomepage/teacher/Homepage.fxml");
+
+        if(currentStatus == status.REPORT) new controller().changeScene(event, "/homepage/teacher/report/report.fxml");
+        else if(currentStatus == status.CLASS) new util.controller().changeScene(event, "/classHomepage/teacher/Homepage.fxml");
+
+    }
+
+    status currentStatus = status.CLASS;
+
+    enum status {
+        CLASS,
+        REPORT
+    }
+
+    public void setBackStatus() {
+        currentStatus = status.REPORT;
     }
 
     class initComponents {
