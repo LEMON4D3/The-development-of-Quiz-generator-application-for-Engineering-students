@@ -52,11 +52,6 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefWidth="175.0" styleClass="leftButton" text="Library">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
             <Button mnemonicParsing="false" prefWidth="175.0" styleClass="leftButton" text="My Classes">
                <font>
                   <Font size="24.0" />
@@ -64,7 +59,7 @@
             </Button>
             <Button mnemonicParsing="false" styleClass="leftButton-noColor" text="ABOUT">
                <VBox.margin>
-                  <Insets top="175.0" />
+                  <Insets top="275.0" />
                </VBox.margin>
                <font>
                   <Font size="20.0" />

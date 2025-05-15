@@ -54,6 +54,8 @@ public class reportController implements Initializable {
         initComboBox() {
 
             getClassList();
+            if(classNameList.isEmpty())
+                return;
             ObservableList<String> classList = FXCollections.observableArrayList(classNameList);
             classCombo.setItems(classList);
             classCombo.setValue(classNameList.get(0));

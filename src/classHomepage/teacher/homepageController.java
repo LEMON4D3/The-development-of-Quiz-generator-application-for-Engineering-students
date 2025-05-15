@@ -62,6 +62,12 @@ public class homepageController implements Initializable{
 		
 	}
 
+	public void classRecordBtnFn(ActionEvent event) throws IOException {
+
+		new controller().changeScene(event, "/classHomepage/teacher/classRecord/ClassRecord.fxml");
+
+	}
+
 	public void studentListBtnFn(ActionEvent event) throws IOException {
 
 		Stage mainStage = new controller().getStage(event);
@@ -114,6 +120,8 @@ public class homepageController implements Initializable{
 	}
 	
 	private void ifAnnouncement() {
+
+		if(announcementList.isEmpty()) return;
 
 		listContainer.getChildren().clear();
 

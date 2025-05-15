@@ -28,10 +28,10 @@ import util.user;
 public class homepageController implements Initializable{
 
 	@FXML
-	VBox announcementContainer, postedContainer, deadlineContainer;
+	VBox announcementContainer, postedContainer;
 	
 	@FXML
-	Label deadlineT, announcementT, classNameT, ssrT;
+	Label announcementT, classNameT, ssrT;
 
 
 

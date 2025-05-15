@@ -28,54 +28,14 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		
-		// student: xie
-		// teacher: rein
 
-//		student
-//		user.isTeacher = false;
-//		user.currentUser = "xien";
-
-//		teacher
-		user.isTeacher = true;
-		user.currentUser = "5";
-		user.currentClass = "1";
-		user.currentQuiz = "x1";
-
-		testNormalDB(stage);
-
-
-
-		
-	}
-
-	public void testQuestionDB(Stage stage) {
-
-		List<Map<String, Object>> quizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz, false);
-
-		Map<String, Object> quiz = quizList.get(0);
-		System.out.println("Current Quiz: " + quiz);
-
-		quizCreateControllerExtend quizController = new quizCreateControllerExtend();
-		quizController.prepareQuiz(quizList);
-
-		stage.setScene(quizController.quizListScene.getFirst());
+		Parent root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
+		stage.setScene(new Scene(root));
+		stage.setTitle("QWIZY");
+		stage.setResizable(false);
 		stage.show();
 
 	}
 
-	public void testNormalDB(Stage stage) {
-
-		try {
-
-			Parent root = FXMLLoader.load(getClass().getResource("/homepage/teacher/report/Report.fxml"));
-			//Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/Homepage.fxml"));
-			//Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/studentWork/StudentWork.fxml"));
-
-			stage.setScene(new Scene(root));
-			stage.show();
-
-		} catch (Exception exception) {exception.printStackTrace();}
-	}
 
 }
