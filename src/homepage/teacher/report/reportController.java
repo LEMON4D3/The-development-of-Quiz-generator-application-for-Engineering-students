@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import util.Util;
@@ -33,7 +34,11 @@ public class reportController implements Initializable {
     private ComboBox<String> classCombo;
 
     @FXML
+    private VBox container;
+
+    @FXML
     private GridPane quizContainer;
+    Label noClass = new Label("No Quiz Created Yet");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,8 +59,8 @@ public class reportController implements Initializable {
         initComboBox() {
 
             getClassList();
-            if(classNameList.isEmpty())
-                return;
+
+
             ObservableList<String> classList = FXCollections.observableArrayList(classNameList);
             classCombo.setItems(classList);
             classCombo.setValue(classNameList.get(0));
@@ -94,14 +99,27 @@ public class reportController implements Initializable {
 
             List<Map<String, Object>> containerList = new ArrayList<>();
 
+
             initGridComponents(String className) {
 
                 this.className = className;
+                container.getChildren().removeAll(noClass);
 
                 quizContainer.getChildren().clear();
                 initRequireComponent();
                 getQuizName();
                 getTotalParticipants();
+
+                if(containerList.isEmpty()) {
+
+                    noClass.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
+                    noClass.setTextAlignment(TextAlignment.CENTER);
+                    noClass.setAlignment(Pos.CENTER);
+                    noClass.setPrefWidth(Double.MAX_VALUE);
+                    container.getChildren().add(noClass);
+                    return;
+
+                }
 
                 for(int i = 0, x = 0, y = 1; i < containerList.size(); i++, y++) {
 

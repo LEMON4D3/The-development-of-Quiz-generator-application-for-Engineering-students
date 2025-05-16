@@ -1,0 +1,31 @@
+.tab-pane .tab-header-area .tab:selected {
+
+    -fx-background-color: #0D3F67;
+    -fx-text-base-color: white;
+    -fx-font-size: 15px;
+
+}
+
+.tab-pane .tab-header-area .tab {
+
+    -fx-background-color: #3b647c;
+    -fx-text-base-color: white;
+    -fx-font-size: 15px;
+
+}
+
+.tab-header-background {
+    -fx-background-color:  #5A95BA;
+}
+
+.tab-pane {
+
+    -fx-background-color: #0D3F67;
+
+}
+
+.tab-pane .tab {
+
+    -fx-font-size: 15px;
+
+}

@@ -27,10 +27,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
+import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -159,8 +156,10 @@ public class homepageController implements Initializable{
 			
 			String scollPaneStyle = "-fx-background-color: transparent; -fx-background: transparent;";
 			this.setStyle(scollPaneStyle);
+			this.setVbarPolicy(ScrollBarPolicy.NEVER);
 			
 			this.setContent(new normalGridPane());
+			this.setPadding(new Insets(15, 25, 15, 25));
 			this.setMinHeight(585);
 			
 		}
@@ -168,28 +167,73 @@ public class homepageController implements Initializable{
 		private class normalGridPane extends GridPane {
 			
 			normalGridPane() {
-				
-				
-				
+
 				this.setPadding(new Insets(0, 0, 0, 25));
-				
+
+				List<itemCard> itemCardList = new ArrayList<>();
+
 				for(int x = 0, y = 0, i = 0; i < className.size(); x++, i++) {
-					
+
+					final int yLocation = y;
+
 					itemCard label = new itemCard(className.get(i));
 					GridPane.setHalignment(label, HPos.CENTER); // Horizontal center
 					GridPane.setValignment(label, VPos.CENTER);
-					
-					if(x == 3) {
-						
+
+					System.out.println(label.getWidth());
+
+					if (x >= 3) {
+
 						x = 0;
 						y++;
-						
+
 						this.add(label, x, y);
-						
+
 					} else this.add(label, x, y);
-					
+
 				}
-				
+
+				Platform.runLater(() -> {
+
+					double widthFinal = 0;
+					double containerWidth = this.localToScene(this.getBoundsInLocal()).getWidth();
+
+					List<List<Node>> nodeList = new ArrayList<>();
+					List<Node> nodeListTemp = new ArrayList<>();
+
+					for(int i = 0; i < this.getChildren().size(); i++) {
+
+						Node node = this.getChildren().get(i);
+						Bounds bounds = node.localToScene(node.getBoundsInLocal());
+						widthFinal += bounds.getWidth();
+
+						if(900 < widthFinal) {
+
+							nodeList.add(nodeListTemp);
+
+							nodeListTemp = new ArrayList<>();
+							nodeListTemp.add(node);
+						} else nodeListTemp.add(node);
+
+					}
+
+					this.getChildren().clear();
+					for(int y = 0; y < nodeList.size(); y++) {
+
+						List<Node> nodeListTemp2 = nodeList.get(y);
+						for(int x = 0; x < nodeListTemp2.size(); x++) {
+
+							Node node = nodeListTemp2.get(x);
+							GridPane.setHalignment(node, HPos.CENTER);
+							GridPane.setValignment(node, VPos.CENTER);
+							this.add(node, x, y);
+
+						}
+
+					}
+
+				});
+
 				this.setHgap(25);
 				this.setVgap(25);
 				
@@ -197,7 +241,7 @@ public class homepageController implements Initializable{
 			
 		}
 		
-		private class itemCard extends AnchorPane {
+		private class itemCard extends VBox {
 			
 			itemCard(String title) {
 				
@@ -221,36 +265,30 @@ public class homepageController implements Initializable{
 					
 					
 				});
-				
-				
-				this.setMaxWidth(235);
+
+				this.setPrefWidth(VBox.USE_COMPUTED_SIZE);
 				this.setMaxHeight(185);
-				
+				this.setStyle(backgroundStyle);
+
 				String upperStyle = "-fx-background-color: #00799A;"
 						+ "-fx-background-radius: 20;";
-				
-				AnchorPane upper = new AnchorPane();
-				upper.setStyle(upperStyle);
-				upper.setLayoutX(0);
-				upper.setLayoutY(0);
-				
-				upper.setPrefWidth(235);
-				upper.setPrefHeight(133);
-				
+
+				AnchorPane upperContainer = new AnchorPane();
+				upperContainer.setStyle(upperStyle);
+				upperContainer.setPrefHeight(133);
+
 				HBox titleContainer = new HBox();
-				
-				titleContainer.setMinWidth(235);
 				titleContainer.setAlignment(Pos.CENTER);
-				titleContainer.setLayoutX(0);
-				titleContainer.setLayoutY(148);
-				
+				titleContainer.setPadding(new Insets(15, 25, 15, 25));
+
 				Label titleT = new Label(title);
 				titleT.setStyle("-fx-font-size: 20; -fx-text-fill: black;");
-				
+
 				titleContainer.getChildren().add(titleT);
-				
-				this.getChildren().add(upper);
+
+				this.getChildren().add(upperContainer);
 				this.getChildren().add(titleContainer);
+
 				
 			}
 		}

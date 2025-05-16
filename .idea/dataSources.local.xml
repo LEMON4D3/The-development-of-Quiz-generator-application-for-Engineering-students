@@ -92,5 +92,11 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="classes.db" uuid="924f6f0f-46b4-4d95-8d90-eb65f7cf01eb">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" />
+      <secret-storage>master_key</secret-storage>
+      <auth-provider>no-auth</auth-provider>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>

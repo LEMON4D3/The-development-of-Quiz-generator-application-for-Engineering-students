@@ -15,21 +15,21 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="275.0" spacing="10.0" style="-fx-background-color: #253446;" stylesheets="@rsc/userPopUp.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="util.fxml.userPopUp">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="200.0" spacing="15.0">
          <children>
             <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@rsc/user.png" />
                </image>
             </ImageView>
-            <VBox alignment="CENTER" prefHeight="200.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0">
                <children>
-                  <Label alignment="CENTER" text="Username" textFill="#5ba4d1">
+                  <Label fx:id="usernameT" alignment="CENTER" text="Username" textFill="#5ba4d1">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" text="Label" textFill="WHITE">
+                  <Label fx:id="isTeacherT" alignment="CENTER" text="Label" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -46,24 +46,10 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="View Profile" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" text="Settings" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onMouseClicked="#logoutBtnFn" text="Logout" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@rsc/user.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@rsc/settings%201.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#logoutBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onMouseClicked="#logoutBtnFn" text="Logout" GridPane.columnIndex="1" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#logoutBtnFn" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@rsc/log%20out%201.png" />
                </image>

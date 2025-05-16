@@ -121,9 +121,7 @@ public class homepageController implements Initializable{
 	
 	private void ifAnnouncement() {
 
-		if(announcementList.isEmpty()) return;
 
-		listContainer.getChildren().clear();
 
 		announcementContainer.setOnMouseClicked(e -> {
 			
@@ -131,6 +129,9 @@ public class homepageController implements Initializable{
 			
 		});
 
+		if(announcementList.isEmpty()) return;
+
+		listContainer.getChildren().clear();
 
 		listContainer.getChildren().add(announcementContainer);
 		

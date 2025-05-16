@@ -144,13 +144,13 @@ public class quizController implements Initializable{
 		}
 		
 	}
-	
-	public void backBtnFn(MouseEvent e) throws IOException {
-		
+
+	/*public void backBtnFn(MouseEvent e) throws IOException {
+
 		String goToPage = (user.isTeacher) ? "/classHomepage/teacher/Homepage.fxml" : "/homepage/student/Homepage.fxml";
 		new controller().changeScene(e, goToPage);
-		
-	}
+
+	}*/
 	
  	enum checkStat {
 		normal,

@@ -28,8 +28,23 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+/*
+
+		// Student
+		user.currentUser = "xie";
+		user.isTeacher = false;
+*/
+/*
+
+		// Teacher
+		user.currentUser = "xien";
+		user.isTeacher = true;
+*/
+
 
 		Parent root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
+//		Parent root = FXMLLoader.load(getClass().getResource("/compiler/create/Compiler.fxml"));
+
 		stage.setScene(new Scene(root));
 		stage.setTitle("QWIZY");
 		stage.setResizable(false);

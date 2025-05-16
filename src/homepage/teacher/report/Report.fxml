@@ -51,7 +51,7 @@
       </GridPane>
       <HBox prefWidth="200.0" spacing="25.0">
          <children>
-            <ComboBox fx:id="classCombo" prefWidth="150.0" style="-fx-background-color: #FFA600;" />
+            <ComboBox fx:id="classCombo" style="-fx-background-color: #FFA600;" />
          </children>
       </HBox>
       <ScrollPane fitToWidth="true" prefHeight="519.0" prefWidth="0.0">
@@ -62,27 +62,31 @@
             <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
          </padding>
          <content>
-            <GridPane fx:id="quizContainer" alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox fx:id="container" alignment="TOP_CENTER" spacing="25.0">
                <children>
-                  <Label text="Quiz Name">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label text="Total participants" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
+                  <GridPane fx:id="quizContainer" alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Quiz Name">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Total participants" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
+            </VBox>
          </content>
       </ScrollPane>
    </children>

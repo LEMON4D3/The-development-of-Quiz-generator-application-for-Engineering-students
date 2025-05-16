@@ -398,7 +398,7 @@ public class homepageController implements Initializable{
 
 	}
 
-	class classContainer extends AnchorPane {
+	class classContainer extends VBox {
 
 		classContainer(String className) {
 
@@ -413,36 +413,28 @@ public class homepageController implements Initializable{
 
 			String backgroundStyle = "-fx-background-color: white;"
 					+ "-fx-background-radius: 20;";
-			
-			this.setStyle(backgroundStyle);
-			
-			this.setMaxWidth(235);
+
+			this.setPrefWidth(VBox.USE_COMPUTED_SIZE);
 			this.setMaxHeight(185);
-			
+			this.setStyle(backgroundStyle);
+
 			String upperStyle = "-fx-background-color: #00799A;"
 					+ "-fx-background-radius: 20;";
 			
-			AnchorPane upper = new AnchorPane();
-			upper.setStyle(upperStyle);
-			upper.setLayoutX(0);
-			upper.setLayoutY(0);
-			
-			upper.setPrefWidth(235);
-			upper.setPrefHeight(133);
-			
+			AnchorPane upperContainer = new AnchorPane();
+			upperContainer.setStyle(upperStyle);
+			upperContainer.setPrefHeight(133);
+
 			HBox titleContainer = new HBox();
-			
-			titleContainer.setMinWidth(235);
 			titleContainer.setAlignment(Pos.CENTER);
-			titleContainer.setLayoutX(0);
-			titleContainer.setLayoutY(148);
-			
+			titleContainer.setPadding(new Insets(15, 25, 15, 25));
+
 			Label titleT = new Label(className);
 			titleT.setStyle("-fx-font-size: 20; -fx-text-fill: black;");
 			
 			titleContainer.getChildren().add(titleT);
 			
-			this.getChildren().add(upper);
+			this.getChildren().add(upperContainer);
 			this.getChildren().add(titleContainer);
 			
 		}

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="25.0" style="-fx-background-color: #0A305E;" stylesheets="@Compiler.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compiler.create.compilerCreateController">
+   <padding>
+      <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+   </padding>
+   <children>
+      <Button fx:id="backBtn" mnemonicParsing="false" style="-fx-background-color: #5A95BA;" text="Back" />
+      <TextArea fx:id="questionTA" prefHeight="200.0" prefWidth="200.0" promptText="Question Area">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <TabPane prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="printTab" text="Print">
+               <content>
+                  <VBox prefWidth="1030.0" spacing="25.0">
+                     <padding>
+                        <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+                     </padding>
+                     <children>
+                        <Label text="Expected Result" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="printTA" prefHeight="307.0" prefWidth="980.0" />
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab fx:id="scannerTab" text="Scanner">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <padding>
+                        <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+                     </padding>
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="330.0" prefWidth="980.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
+                           <content>
+                              <VBox alignment="TOP_CENTER" spacing="25.0">
+                                 <children>
+                                    <GridPane fx:id="scannerContainer" hgap="25.0" vgap="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <HBox alignment="CENTER" spacing="25.0">
+                                             <children>
+                                                <Label text="Input" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="inputCombo" prefWidth="150.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" spacing="25.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label text="User Expected Result" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="outputCombo" prefWidth="150.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="25.0" right="25.0" />
+                                       </VBox.margin>
+                                    </GridPane>
+                                    <Button fx:id="scannerAddBtn" mnemonicParsing="false" style="-fx-background-color: #5A95BA;" text="+" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="saveExerciseBtn" mnemonicParsing="false" style="-fx-background-color: #5A95BA;" text="SAVE EXERCISE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
