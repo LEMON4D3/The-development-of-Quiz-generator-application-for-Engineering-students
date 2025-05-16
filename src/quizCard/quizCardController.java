@@ -441,7 +441,9 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  	private String studentSaveFn(ActionEvent event) {
  		
 		try {
- 			
+
+			quizTitle = quizTitleT.getText();
+
 			String checkRequireDirString = "application/user/student/" + user.currentUser + "/quiz/";
 			File checkRequireDirFile = new File(checkRequireDirString);
 			if(!checkRequireDirFile.exists() && !checkRequireDirFile.isDirectory())
@@ -479,7 +481,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			Statement createNewTableStatement = quizConnection.createStatement();
  			createNewTableStatement.execute(createNewTableString);
  			
- 			String insertQuizString2 = "insert into " + quizTitle + "("
+ 			String insertQuizString2 = "insert into `" + quizTitle + "` ("
  					+ "id, `quiz answer`, `quiz question`, `quiz option`, `quiz hint`,"
  					+ "category, point, time) values (?, ?, ?, ?, ?, ?, ?, ?)";
  			PreparedStatement prepareInsertQuiz = quizConnection.prepareStatement(insertQuizString2);
@@ -487,7 +489,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			for(int i = 0; i < cardContainerList.size(); i++) {
  				
  				QuizClass.quizContainer container = cardContainerList.get(i);
- 				
+
  				prepareInsertQuiz.setInt(1, i);
  				prepareInsertQuiz.setString(2, container.quizAnswer);
  				prepareInsertQuiz.setString(3, container.quizQuestion);

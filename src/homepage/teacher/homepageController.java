@@ -267,6 +267,7 @@ public class homepageController implements Initializable{
 				});
 
 				this.setPrefWidth(VBox.USE_COMPUTED_SIZE);
+				this.setMinWidth(235);
 				this.setMaxHeight(185);
 				this.setStyle(backgroundStyle);
 

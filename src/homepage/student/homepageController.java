@@ -41,6 +41,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -197,33 +198,35 @@ public class homepageController implements Initializable{
 		pane.setAlignment(Pos.CENTER);
 		pane.setStyle("-fx-background-color: white;");
 		
-		pane.setPrefWidth(500);
-		pane.setMinHeight(500);
-		
+		pane.setPrefWidth(412);
+		pane.setMinHeight(155);
 		pane.setSpacing(10);
 		
-		Label temp = new Label("Class Code");
+		Label temp = new Label("Enter Code");
+		temp.setStyle("-fx-font-size: 30;");
 		pane.getChildren().add(temp);
 		
 		TextField classCodeTF = new TextField();
-		classCodeTF.setMaxWidth(500 / 2);
+		classCodeTF.setPromptText("Class Code");
+		classCodeTF.setStyle("-fx-font-size: 30px; -fx-text-fill: white; -fx-background-color: #1C80BE;");
+		classCodeTF.setMaxWidth(412 / 2);
 		pane.getChildren().add(classCodeTF);
 		
 		Label errorTF = new Label();
 		pane.getChildren().add(errorTF);
-		
+
 		Button doneBtn = new Button("Done");
 		doneBtn.setOnAction(f -> {
 			
 			addUserStat stat = getClassCode(classCodeTF.getText());
-			
+
 			switch(stat) {
 			case normal:
 				popupStage.close();
 				getList();
 				break;
 			case notFound:
-				errorTF.setText("There are no such thing lil bro");
+				errorTF.setText("There is no such thing lil bro");
 				break;
 			case duplicate:
 				errorTF.setText("You've already added it bro");
@@ -238,7 +241,7 @@ public class homepageController implements Initializable{
 			}
 				
 		});
-		
+
 		pane.getChildren().add(doneBtn);
 		
 		Scene scene = new Scene(pane);
@@ -366,30 +369,29 @@ public class homepageController implements Initializable{
 					
 					if(stat == addUserStat.duplicate)
 						return addUserStat.duplicate;
-					else if (stat != addUserStat.normal){
+					else if (stat != addUserStat.normal) {
 					
 						System.out.println("Naaaahhh bro wtf are you doing?");
 						return addUserStat.error;
 						
 					}
+
+					return addUserStat.normal;
 					
 				}
 				
 			}
 			
-			return addUserStat.normal;
-			
-			
-			
-			
-			
+
+
 		} catch(Exception e) {
 			
 			e.printStackTrace();
 			return addUserStat.error;
 			
 		}
-		
+
+		return addUserStat.notFound;
 	}	
 
 	public void userBtnFn(MouseEvent event) {
@@ -415,6 +417,7 @@ public class homepageController implements Initializable{
 					+ "-fx-background-radius: 20;";
 
 			this.setPrefWidth(VBox.USE_COMPUTED_SIZE);
+			this.setMinWidth(235);
 			this.setMaxHeight(185);
 			this.setStyle(backgroundStyle);
 
@@ -441,7 +444,7 @@ public class homepageController implements Initializable{
 		
 	}
 
-	class quizContainer extends AnchorPane {
+	class quizContainer extends VBox {
 
 		String quizName;
 
@@ -461,26 +464,24 @@ public class homepageController implements Initializable{
 			String backgroundStyle = "-fx-background-color: white;"
 					+ "-fx-background-radius: 20;";
 
+			this.setPrefWidth(VBox.USE_COMPUTED_SIZE);
+			this.setMinWidth(235);
+			this.setMaxHeight(185);
 			this.setStyle(backgroundStyle);
 
-			this.setMaxWidth(235);
-			this.setMaxHeight(185);
-
-			String upperStyle = "-fx-background-color: #00799A;"
+			String upperStringStyle = "-fx-background-color: #00799A;"
 					+ "-fx-background-radius: 20;";
 
-			AnchorPane upper = new AnchorPane();
-			upper.setStyle(upperStyle);
-			upper.setLayoutX(0);
-			upper.setLayoutY(0);
-
-			upper.setPrefWidth(235);
+			VBox upper = new VBox();
+			upper.setPadding(new Insets(5, 0, 5, 5));
+			upper.setStyle(upperStringStyle);
 			upper.setPrefHeight(133);
+			upper.setAlignment(Pos.TOP_RIGHT);
 
 			Image img = new Image("file:src/homepage/rsc/delete.png");
 			ImageView imgView = new ImageView(img);
-			imgView.setFitHeight(20);
-			imgView.setFitWidth(20);
+			imgView.setFitHeight(25);
+			imgView.setFitWidth(25);
 
 			Button deleteBtn = new Button("");
 			deleteBtn.setStyle("-fx-background-color: transparent;");
@@ -494,11 +495,8 @@ public class homepageController implements Initializable{
 			upper.getChildren().add(deleteBtn);
 
 			HBox titleContainer = new HBox();
-
-			titleContainer.setMinWidth(235);
 			titleContainer.setAlignment(Pos.CENTER);
-			titleContainer.setLayoutX(0);
-			titleContainer.setLayoutY(148);
+			titleContainer.setPadding(new Insets(15, 25, 15, 25));
 
 			Label titleT = new Label(quizName);
 			titleT.setStyle("-fx-font-size: 20; -fx-text-fill: black;");

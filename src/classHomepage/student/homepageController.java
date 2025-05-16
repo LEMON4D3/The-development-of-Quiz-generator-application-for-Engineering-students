@@ -200,32 +200,23 @@ public class homepageController implements Initializable{
 
 		announcementTemplate(Map<String, Object> list) {
 
-			this.setAlignment(Pos.TOP_CENTER);
-			this.setMinHeight(167);
+			this.setAlignment(Pos.TOP_LEFT);
+			this.setFillWidth(true);
+			this.setPrefHeight(VBox.USE_COMPUTED_SIZE);
 			this.setPrefWidth(654);
+			this.setSpacing(15);
 			this.setStyle(announcementStyle);
 			this.setPadding(new Insets(25, 15, 25, 15));
 
-			GridPane topPane = new GridPane();
-			topPane.setHgap(5);
-
-			topPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(35); }});
 			Label accountNameT = new Label((String) list.get("announcement"));
-			accountNameT.setStyle("-fx-font-size: 16px");
-			topPane.add(accountNameT, 0, 0);
+			accountNameT.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+			this.getChildren().add(accountNameT);
 
-			topPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(45); }});
-			Label publishedT = new Label("When it is published");
-			publishedT.setStyle("-fx-font-size: 12px");
-			topPane.add(publishedT, 1, 0);
-
-			this.getChildren().add(topPane);
-
-			String announcementTStyle = "-fx-background-color: white; -fx-background-radius: 20; -fx-text-fill: black;";
+			String announcementTStyle = "-fx-background-color: white; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 18px;";
 			Label announcementT = new Label((String) list.get("announcement description"));
 			announcementT.setWrapText(true);
-			announcementT.setPrefHeight(105);
-			announcementT.setPrefWidth(628);
+			announcementT.setPrefHeight(Label.USE_COMPUTED_SIZE);
+			announcementT.setPrefWidth(Double.MAX_VALUE);
 			announcementT.setStyle(announcementTStyle);
 			announcementT.setPadding(new Insets(15, 20, 15, 20));
 

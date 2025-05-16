@@ -134,6 +134,8 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 		cardContainerList.clear();
 
 		List<Map<String, Object>> quizList = Util.getStudentQuizListDB(false);
+		if(quizList == null)  return;
+
 		for(Map<String, Object> tableInfo : quizList) {
 
 			QuizClass.quizContainer container = new QuizClass.quizContainer();
