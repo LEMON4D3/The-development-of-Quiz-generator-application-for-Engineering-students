@@ -237,6 +237,7 @@ public class quizCreateControllerExtend {
 
 	public void prepareQuiz(List<Map<String, Object>> quizList) {
 
+		quizListScene.clear();
 		this.quizList = quizList;
 		for(Map<String, Object> quiz : quizList) {
 

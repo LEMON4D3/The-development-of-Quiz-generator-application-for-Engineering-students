@@ -199,7 +199,7 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 		List<Map<String, Object>> quizList = Util.getStudentQuizListDB(false);
 
 		Map<String, Object> quiz = quizList.get(0);
-		System.out.println("Current Quiz: " + quiz);
+		System.out.println("Quiz List: " + quizList);
 
 		quizCreateControllerExtend quizController = new quizCreateControllerExtend();
 		quizController.prepareQuiz(quizList);

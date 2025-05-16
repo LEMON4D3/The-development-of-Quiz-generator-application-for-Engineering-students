@@ -169,8 +169,7 @@ public class Util {
 		try {
 
 			String getQuizDBString = "";
-			if(isList) getQuizDBString = "application/classes/" + user.currentClass + "/" + user.currentClass + ".db";
-			else getQuizDBString = "application/user/student/" + user.currentUser + "/quiz/quiz.db";
+			getQuizDBString = "application/user/student/" + user.currentUser + "/quiz/quiz.db";
 
 			Connection quizConnection = DriverManager.getConnection("jdbc:sqlite:" + getQuizDBString);
 
