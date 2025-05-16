@@ -163,7 +163,7 @@ public class compilerCreateController implements Initializable {
             insertQuestionStatement.setString(5, dataTypeFinal);
             insertQuestionStatement.setString(6, inputFinal);
 
-            insertClassQuestionStatement.executeUpdate();
+            insertQuestionStatement.executeUpdate();
 
         } catch (Exception exception) { exception.printStackTrace(); }
 
