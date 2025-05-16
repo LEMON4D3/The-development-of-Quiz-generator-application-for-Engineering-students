@@ -11,8 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import util.Util;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.*;
 
 public class compilerCreateController implements Initializable {
@@ -44,7 +48,137 @@ public class compilerCreateController implements Initializable {
 
     }
 
+    @FXML
+    private TextField quizTitleTF;
 
+    public void saveExerciseBtnFn(ActionEvent event) {
+
+        Map<String, Object> scannerFinal = new HashMap<>();
+
+        scannerFinal.put("quiz title", quizTitleTF.getText());
+
+        String practiceType = (currentTab == currentTabStatus.PRINT) ? "print" : "scanner";
+        scannerFinal.put("practice type", practiceType);
+
+        if(currentTab == currentTabStatus.SCANNER) {
+            List<Map<String, Object>> getScannerList = new ArrayList<>();
+
+            int lastRowIndex = scannerContainer.getRowCount() - 1;
+            for (int i = lastRowIndex; i > 0; i--) {
+
+                Map<String, Object> tempScanner = new HashMap<>();
+                Node node1 = scannerContainer.getChildren().get(i * 2);
+                Node node2 = scannerContainer.getChildren().get(i * 2 + 1);
+
+                tempScanner.put("input", ((TextField) node1).getText());
+                tempScanner.put("output", ((TextField) node2).getText());
+
+                getScannerList.addFirst(tempScanner);
+            }
+
+            List<String> inputList = new ArrayList<>();
+            List<String> outputList = new ArrayList<>();
+
+            for (Map<String, Object> scanner : getScannerList) {
+
+                inputList.add((String) scanner.get("input"));
+                outputList.add((String) scanner.get("output"));
+
+            }
+
+            scannerFinal.put("input", inputList);
+            scannerFinal.put("output", outputList);
+            scannerFinal.put("data type", inputCombo.getValue());
+            scannerFinal.put("quiz question", questionTA.getText());
+
+            System.out.println("quiz question: " + scannerFinal.get("quiz question"));
+            System.out.println("practice type: " + scannerFinal.get("practice type"));
+            System.out.println("data type: " + scannerFinal.get("data type"));
+            System.out.println("input: " + scannerFinal.get("input"));
+            System.out.println("output: " + scannerFinal.get("output"));
+
+        } else if(currentTab == currentTabStatus.PRINT) {
+
+            scannerFinal.put("quiz question", questionTA.getText());
+            scannerFinal.put("output", printTA.getText());
+
+            System.out.println("quiz question: " + scannerFinal.get("quiz question"));
+            System.out.println("practice type: " + scannerFinal.get("practice type"));
+            System.out.println("output: " + scannerFinal.get("output"));
+
+        }
+
+        try {
+
+            /*
+                TODO:
+                1. Insert the question into the class database
+                2. Create New table for the coding exercise
+                3. Insert the value of scannerFinal into the table
+
+                table layout:
+                - quiz title text
+                - quiz question text
+                - practice type text
+                - data type text
+                - input text
+                - output text
+
+             */
+
+            Connection classConnectionDB = Util.getClassConnectionDB();
+
+            // Insert the question into the class database
+            String insertClassQuestionString = "insert into classes (announcement, isQuiz) values (?, ?)";
+            PreparedStatement insertClassQuestionStatement = classConnectionDB.prepareStatement(insertClassQuestionString);
+
+            insertClassQuestionStatement.setString(1, scannerFinal.get("quiz title").toString());
+            insertClassQuestionStatement.setInt(2, 2);
+
+            // Create New table for the coding exercise
+            String createTableString = "create table if not exists `" + scannerFinal.get("quiz title").toString() + "` (" +
+                    "`quiz title` text primary key, " +
+                    "`quiz question` text, " +
+                    "`practice type` text, " +
+                    "`data type` text, " +
+                    "input text, " +
+                    "output text)";
+            Statement createTableStatement = classConnectionDB.createStatement();
+            createTableStatement.execute(createTableString);
+
+            // Insert the value of scannerFinal into the table
+            String insertQuestionString = "insert into `" + scannerFinal.get("quiz title").toString() + "` " +
+                    "(`quiz title`, `quiz question`, `practice type`, output , `data type`, input)" +
+                    "values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement insertQuestionStatement = classConnectionDB.prepareStatement(insertQuestionString);
+
+            insertQuestionStatement.setString(1, scannerFinal.get("quiz title").toString());
+            insertQuestionStatement.setString(2, scannerFinal.get("quiz question").toString());
+            insertQuestionStatement.setString(3, scannerFinal.get("practice type").toString());
+            insertQuestionStatement.setString(4, scannerFinal.get("output").toString());
+
+            String dataTypeFinal = (scannerFinal.get("data type") == null) ? "" : scannerFinal.get("data type").toString();
+            String inputFinal = (scannerFinal.get("input") == null) ? "" : scannerFinal.get("input").toString();
+
+            insertQuestionStatement.setString(5, dataTypeFinal);
+            insertQuestionStatement.setString(6, inputFinal);
+
+            insertClassQuestionStatement.executeUpdate();
+
+        } catch (Exception exception) { exception.printStackTrace(); }
+
+
+    }
+
+    class dataLayout{
+
+        enum practiceType{
+            PRINT,
+            SCANNER
+        }
+
+
+    }
 
     /*
     tab initialization function
@@ -77,7 +211,7 @@ public class compilerCreateController implements Initializable {
     @FXML Button scannerAddBtn;
 
     @FXML
-    ComboBox<String> inputCombo, outputCombo;
+    ComboBox<String> inputCombo;
 
     List<Map<String, Object>> scannerList = new ArrayList<>();
 
@@ -93,13 +227,10 @@ public class compilerCreateController implements Initializable {
         private void initComboBox() {
 
             ObservableList<String> inputList = FXCollections.observableArrayList("int", "float", "double", "char", "String");
-            ObservableList<String> outputList = FXCollections.observableArrayList("int", "float", "double", "char", "String");
 
             inputCombo.setItems(inputList);
-            outputCombo.setItems(outputList);
 
             inputCombo.setValue("int");
-            outputCombo.setValue("int");
         }
 
 
