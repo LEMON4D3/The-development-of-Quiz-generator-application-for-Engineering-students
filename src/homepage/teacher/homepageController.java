@@ -157,9 +157,10 @@ public class homepageController implements Initializable{
 			String scollPaneStyle = "-fx-background-color: transparent; -fx-background: transparent;";
 			this.setStyle(scollPaneStyle);
 			this.setVbarPolicy(ScrollBarPolicy.NEVER);
+			this.setHbarPolicy(ScrollBarPolicy.NEVER);
 			
 			this.setContent(new normalGridPane());
-			this.setPadding(new Insets(15, 25, 15, 25));
+			this.setPadding(new Insets(15, 15, 15, 15));
 			this.setMinHeight(585);
 			
 		}
@@ -168,19 +169,13 @@ public class homepageController implements Initializable{
 			
 			normalGridPane() {
 
-				this.setPadding(new Insets(0, 0, 0, 25));
-
-				List<itemCard> itemCardList = new ArrayList<>();
 
 				for(int x = 0, y = 0, i = 0; i < className.size(); x++, i++) {
-
-					final int yLocation = y;
 
 					itemCard label = new itemCard(className.get(i));
 					GridPane.setHalignment(label, HPos.CENTER); // Horizontal center
 					GridPane.setValignment(label, VPos.CENTER);
-
-					System.out.println(label.getWidth());
+					GridPane.setFillWidth(label, false);
 
 					if (x >= 3) {
 
@@ -195,43 +190,74 @@ public class homepageController implements Initializable{
 
 				Platform.runLater(() -> {
 
-					double widthFinal = 0;
-					double containerWidth = this.localToScene(this.getBoundsInLocal()).getWidth();
+					int lastIndex = 0;
 
 					List<List<Node>> nodeList = new ArrayList<>();
-					List<Node> nodeListTemp = new ArrayList<>();
+					Node pushNode = null;
 
-					for(int i = 0; i < this.getChildren().size(); i++) {
 
-						Node node = this.getChildren().get(i);
-						Bounds bounds = node.localToScene(node.getBoundsInLocal());
-						widthFinal += bounds.getWidth();
+					while(true) {
 
-						if(900 < widthFinal) {
+						int width = 0;
+						List<Node> nodeListTemp = new ArrayList<>();
 
-							nodeList.add(nodeListTemp);
+						if(pushNode != null) {
 
-							nodeListTemp = new ArrayList<>();
-							nodeListTemp.add(node);
-						} else nodeListTemp.add(node);
+							Bounds bounds = pushNode.localToScene(pushNode.getBoundsInLocal());
+							width += bounds.getWidth();
 
-					}
-
-					this.getChildren().clear();
-					for(int y = 0; y < nodeList.size(); y++) {
-
-						List<Node> nodeListTemp2 = nodeList.get(y);
-						for(int x = 0; x < nodeListTemp2.size(); x++) {
-
-							Node node = nodeListTemp2.get(x);
-							GridPane.setHalignment(node, HPos.CENTER);
-							GridPane.setValignment(node, VPos.CENTER);
-							this.add(node, x, y);
+							nodeListTemp.add(pushNode);
+							pushNode = null;
 
 						}
 
+						boolean isPush = false;
+
+						for(int i = lastIndex; i < this.getChildren().size(); i++) {
+
+							Node node = this.getChildren().get(i);
+							Bounds bounds = node.localToScene(node.getBoundsInLocal());
+
+							width += bounds.getWidth();
+
+							if(width >= 750) {
+								isPush = true;
+								pushNode = node;
+								lastIndex = i + 1;
+								break;
+							} else {
+								nodeListTemp.add(node);
+							}
+
+							lastIndex = i + 1;
+
+						}
+
+						nodeList.add(nodeListTemp);
+						if(!isPush) break;
+
 					}
 
+					int y = 0;
+					this.getChildren().clear();
+
+					for(List<Node> nodes : nodeList){
+
+						for(int i = 0; i < nodes.size(); i++) {
+
+							Bounds bounds = nodes.get(i).localToScene(nodes.get(i).getBoundsInLocal());
+							System.out.println(bounds.getWidth());
+
+							Node node = nodes.get(i);
+							GridPane.setHalignment(node, HPos.CENTER);
+							GridPane.setValignment(node, VPos.CENTER);
+							this.add(node, i, y);
+
+						}
+
+						y++;
+
+					}
 				});
 
 				this.setHgap(25);
@@ -262,8 +288,7 @@ public class homepageController implements Initializable{
 					} catch(Exception exception) {
 						exception.printStackTrace();
 					}
-					
-					
+
 				});
 
 				this.setPrefWidth(VBox.USE_COMPUTED_SIZE);
@@ -274,7 +299,7 @@ public class homepageController implements Initializable{
 				String upperStyle = "-fx-background-color: #00799A;"
 						+ "-fx-background-radius: 20;";
 
-				AnchorPane upperContainer = new AnchorPane();
+				HBox upperContainer = new HBox();
 				upperContainer.setStyle(upperStyle);
 				upperContainer.setPrefHeight(133);
 
@@ -454,8 +479,7 @@ public class homepageController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	private String generateCode() {
 		
 		String classCode = "";

@@ -19,32 +19,23 @@ import multipleChoice.answer.multipleChoiceAnswerController;
 
 public class Main extends Application {
 
-	public static void main(String[] args) throws SQLException  { 
+	public static void main(String[] args)  {
 		
-		
-		new Init();
-		launch(args);
+		 try {
+
+			 new Init();
+			 launch(args);
+
+		 } catch (Exception exception) { exception.printStackTrace(); }
 	}
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 
-/*
-
-		// Student
-		user.currentUser = "xie";
-		user.isTeacher = false;
-*/
-
-
-		// Teacher
-		user.currentUser = "xien";
-		user.isTeacher = true;
-		user.currentClass = "Assembly Language";
-
 
 //		Parent root = FXMLLoader.load(getClass().getResource("/homepage/student/Homepage.fxml"));
-		Parent root = FXMLLoader.load(getClass().getResource("/compiler/create/Compiler.fxml"));
+//		Parent root = FXMLLoader.load(getClass().getResource("/compiler/answer/Compiler.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
 
 		stage.setScene(new Scene(root));
 		stage.setTitle("QWIZY");

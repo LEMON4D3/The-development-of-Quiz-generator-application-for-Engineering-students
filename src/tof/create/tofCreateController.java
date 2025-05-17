@@ -57,7 +57,8 @@ public class tofCreateController extends quizCreateControllerExtend implements I
 	
     @FXML
     void saveBtnFn(ActionEvent event) {
-    	
+
+
     	prepareQuiz.quizCategory = categoryCombo.getValue().toString();
     	prepareQuiz.point = pointCombo.getValue().toString();
     	prepareQuiz.time = timeCombo.getValue().toString();

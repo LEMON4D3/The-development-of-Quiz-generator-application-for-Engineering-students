@@ -57,19 +57,6 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" styleClass="leftButton-noColor" text="ABOUT">
-               <VBox.margin>
-                  <Insets top="275.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" styleClass="leftButton-noColor" text="USER PREFERENCES">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
          </children>
          <GridPane.margin>
             <Insets />

@@ -20,7 +20,7 @@ public class controller {
 		
 	}
 	
-	public <T> void categoryChangeScene(categoryList category, T event) {
+	public <T> void categoryChangeScene(QuizClass.quizContainer prepareQuiz, categoryList category, T event) {
 		
 		try {
 		
@@ -40,8 +40,18 @@ public class controller {
 				throw new Error("We haven't implemented this yet lil bro");
 				
 			}
-			
-			changeScene(event, categoryLocation);
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(categoryLocation));
+			Parent root = loader.load();
+
+			quizCreateControllerExtend controller = loader.getController();
+			controller.setTitle(prepareQuiz.quizTitle);
+			controller.userChangeCategory(prepareQuiz);
+
+			Stage stage = (Stage)((Node)((EventObject)event).getSource()).getScene().getWindow();
+			stage.setScene(new Scene(root));
+			stage.show();
+
 		} 
 		catch(Error categoryError) { System.out.println(categoryError.getMessage()); }
 		catch (Exception e) { e.printStackTrace(); }

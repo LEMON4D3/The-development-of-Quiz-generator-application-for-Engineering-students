@@ -19,8 +19,6 @@ public class QuizClass {
 
 	// public quizContainerVariable(String category, String point, String hint, String time, String question, String answer, List<String> questionOptions) {
 
-
-
 	public static class quizContainer{
 
 		public int id;
@@ -29,25 +27,7 @@ public class QuizClass {
 		public String quizOptions;
 		
 	}
-	
-	public <T> void categoryChangeBtnFn(T event, ComboBox<String> categoryCombo, ObservableList<String> categoryList) {
-		
-		System.out.println("changing it lil bro");
-		
-		String categoryComboString = categoryCombo.getValue().toString();
-		int categoryLocationNumber = 0;
-		
-		for(int i = 0; i < categoryList.size(); i++)
-			if(categoryList.get(i).equals(categoryComboString)) {
-				categoryLocationNumber = i;
-				break;
-			}
-		
-		new controller().categoryChangeScene(controller.categoryList.values()[categoryLocationNumber], event);
-		
-	}
-	
-	
+
 	public static String checkRequirementTF(TextArea textArea, TextField... textfield) {
 		
 		String output = null;

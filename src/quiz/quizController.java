@@ -133,7 +133,8 @@ public class quizController implements Initializable{
 //				
 //				FITB controller = loader.getController();
 //				controller.setTitle(titleTF.getText());
-				
+
+				user.userQuizOption = user.quizOption.New;
 				Stage stage = (Stage)((Node)((EventObject)event).getSource()).getScene().getWindow();
 				Scene scene = new Scene(root);
 				stage.setScene(scene);

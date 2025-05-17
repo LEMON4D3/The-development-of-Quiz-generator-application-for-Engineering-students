@@ -119,12 +119,6 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 
 	}
 
-	public void backBtnFn(ActionEvent e) {
-
-
-
-	}
-
 	public void addBtnFn(ActionEvent e) {
 
 		addContainer(new questionContainer(questionContainerList.size()));

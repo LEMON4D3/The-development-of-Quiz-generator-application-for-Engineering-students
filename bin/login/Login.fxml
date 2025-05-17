@@ -25,14 +25,14 @@
    <children>
       <ImageView fitHeight="724.0" fitWidth="1497.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2">
          <image>
-            <Image url="@../../rsc/QWIZY2.png" />
+            <Image url="@rsc/QWIZY2.png" />
          </image>
       </ImageView>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #0A305E; -fx-border-color: #FFD700; -fx-border-width: 5; -fx-background-radius: 20; -fx-border-radius: 20;" GridPane.columnIndex="1">
          <children>
             <ImageView fitHeight="101.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../rsc/QUIZLOGO.png" />
+                  <Image url="@rsc/QUIZLOGO.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="125.0" />

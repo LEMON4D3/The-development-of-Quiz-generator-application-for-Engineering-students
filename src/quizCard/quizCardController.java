@@ -237,7 +237,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(8); }});
 				this.add(editBtn, 3, 0);
 				
-				Image img = new Image("file:src/quizCard/rsc/delete.png");
+				Image img = new Image(getClass().getResource("/quizCard/rsc/delete.png").toExternalForm());
 				ImageView imgView = new ImageView(img);
 				imgView.setOnMouseClicked(f -> { deleteContainerList(containerIndex); System.out.println("Deleted!"); });
 				
@@ -428,6 +428,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 					 "`total point` integer," +
 					 "`quiz question` text" +
 					 ")";
+
 			 Statement createQuizListDBStatement = classConnection.createStatement();
 			 createQuizListDBStatement.execute(createQuizListDBString);
 

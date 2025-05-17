@@ -157,7 +157,7 @@ public class homepageController implements Initializable{
 					startBtn.setOnAction(event -> {
 
 						user.currentQuiz = (String) announcementGlobal.get("announcement");
-						new controller().changeScene(event, "/quizReport/student/QuizReport.fxml");
+						new controller().changeScene(event, "/quizReport/studentClass/QuizReport.fxml");
 
 					});
 					GridPane.setHalignment(startBtn, HPos.RIGHT);

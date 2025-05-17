@@ -66,12 +66,22 @@ public class quizReportStudentController implements Initializable {
     private void getQuizReport() {
 
         List<Map<String, Object>> quizList =  Util.getStudentQuizListDB(true);
+        List<Map<String, Object>> baseQuizList = Util.getStudentQuizListDB(false);
+        for(Map<String, Object> baseQuiz : baseQuizList) {
+
+            containerStruct.totalPoint += (Integer) baseQuiz.get("point");
+
+        }
+
+
+
         containerStruct.totalStudent = quizList.size();
 
         userQuiz = quizList.get(quizList.size() - 1);
 
         containerStruct.initVariable(userQuiz);
         containerStruct.totalQuiz = containerStruct.quizQuestion.size();
+
 
         initQuizReport();
 
@@ -88,7 +98,9 @@ public class quizReportStudentController implements Initializable {
 
         quizTitleT.setText(containerStruct.quizTitle);
         totalQuizT.setText(containerStruct.totalQuiz + "");
-        studentGradeT.setText(containerStruct.totalPoint + "/" + containerStruct.totalQuiz);
+        //studentGradeT.setText(containerStruct.totalPoint + "/" + containerStruct.totalQuiz);
+        studentGradeT.setText(containerStruct.studentTotalQuiz + "/" + containerStruct.totalPoint);
+
         studentT.setText(containerStruct.username);
 
     }
@@ -97,8 +109,9 @@ public class quizReportStudentController implements Initializable {
 
          String username, quizTitle;
         List<String> quizQuestion, quizAnswer, quizPoint;
-        int totalPoint, totalStudent, totalQuiz;
 
+        int totalStudent, totalQuiz, studentTotalQuiz;
+        Integer  totalPoint = 0;
 
         public void initVariable(Map<String, Object> quizList) {
 
@@ -113,7 +126,7 @@ public class quizReportStudentController implements Initializable {
             String quizQuestionS = (String) quizList.get("quiz question");
             quizQuestion = Arrays.asList(quizQuestionS.replace("[", "").replace("]", "").split(", "));
 
-            totalPoint = (Integer) quizList.get("total point");
+            studentTotalQuiz = (Integer) quizList.get("total point");
 
             List<Map<String, Object>> studentList = Util.getClassOrUserListDB(Util.dataClass.User);
             for(Map<String, Object> student : studentList) {

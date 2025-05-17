@@ -1,0 +1,81 @@
+/*
+    This part is for the TabPane
+*/
+
+.tab-pane .tab-header-area .tab:selected {
+
+    -fx-background-color: #0D3F67;
+    -fx-text-base-color: white;
+    -fx-font-size: 15px;
+
+}
+
+.tab-pane .tab-header-area .tab {
+
+    -fx-background-color: #3b647c;
+    -fx-text-base-color: white;
+    -fx-font-size: 15px;
+
+}
+
+.tab-header-background {
+    -fx-background-color:  #5A95BA;
+}
+
+.tab-pane {
+
+    -fx-background-color: transparent;
+
+}
+
+.tab-pane .tab {
+
+    -fx-font-size: 15px;
+
+}
+
+
+/*
+    This part is for the TextArea
+*/
+
+.text-area {
+
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+
+}
+
+.text-area .viewport {
+    -fx-background-color: transparent;
+}
+
+/*
+    customTextArea is for the answer text area
+*/
+
+.customTextArea {
+    -fx-background-color: transparent;
+}
+
+.customTextArea .content {
+    -fx-background-radius: 0 0 20 20;
+    -fx-background-color: #0D3F67;
+}
+
+/*
+    customTextArea-Answer is for the answer text area
+ */
+
+.customTextArea-Answer{
+
+    -fx-background-color: transparent;
+
+}
+
+.customTextArea-Answer .content{
+
+    -fx-background-radius: 20 20 20 20;
+    -fx-background-color: #0D3F67;
+
+}

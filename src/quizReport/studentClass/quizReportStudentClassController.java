@@ -65,9 +65,10 @@ public class quizReportStudentClassController implements Initializable {
     quizListContainerStruct containerStruct = new quizListContainerStruct();
 
     private void getQuizReport() {
+
         List<Map<String, Object>> quizList = new ArrayList<>();
-        if(user.isTeacher) quizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz + "List", false);
-        else quizList = Util.getStudentQuizListDB(true);
+        quizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz + "List", false);
+
 
         containerStruct.totalStudent = quizList.size();
 

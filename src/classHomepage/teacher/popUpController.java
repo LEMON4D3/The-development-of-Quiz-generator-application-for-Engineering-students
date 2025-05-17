@@ -2,6 +2,7 @@ package classHomepage.teacher;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.cert.PolicyNode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,11 +22,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import util.controller;
 import util.user;
 
-public class popUpController implements Initializable{
+public class popUpController {
 
 	@FXML
 	TextArea postTA;
@@ -37,12 +39,15 @@ public class popUpController implements Initializable{
 	public Stage mainStage;
 
 	editType editStat = null;
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
 
+	/*
+
+	*/
+	public void initController(Stage mainStage) {
+
+		this.mainStage = mainStage;
 		new initComboBox();
-		
+
 	}
 
 	class initComboBox{
@@ -70,7 +75,7 @@ public class popUpController implements Initializable{
 						Stage miniStage = new controller().getStage(event);
 						miniStage.close();
 
-						Parent root = FXMLLoader.load(getClass().getResource("/quiz/quiz.fxml"));
+						Parent root = FXMLLoader.load(getClass().getResource("/quiz/Quiz.fxml"));
 						mainStage.setScene(new Scene(root));
 						mainStage.show();
 
@@ -91,9 +96,15 @@ public class popUpController implements Initializable{
 		write
 		
 	}
-	
+
+	@FXML
+	GridPane topPane;
+
+
 	public void setEditPane(Map<String, Object> list, editType editEnum) {
-		
+
+
+		topPane.getChildren().remove(categoryCombo);
 		this.list = list;
 		postTA.setText((String) list.get("announcement description"));
 		editStat = editEnum;

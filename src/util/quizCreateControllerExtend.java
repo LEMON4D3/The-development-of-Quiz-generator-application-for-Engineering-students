@@ -30,7 +30,7 @@ import util.QuizClass.quizContainer;
 
 public class quizCreateControllerExtend {
 	
-	protected quizContainer prepareQuiz = new quizContainer();
+	protected static quizContainer  prepareQuiz = new quizContainer();
 
 	@FXML
 	protected ComboBox categoryCombo, pointCombo, timeCombo;
@@ -42,14 +42,14 @@ public class quizCreateControllerExtend {
 		categoryCombo.setOnAction(f -> { 
 		
 			
-			new QuizClass().categoryChangeBtnFn(f, categoryCombo, categoryList);
+			categoryChangeBtnFn(f, categoryCombo, categoryList);
 		
 		});
 		
 		categoryCombo.setItems(categoryList);
 		
 		ObservableList<String> pointList = FXCollections.observableArrayList();
-		for(int i = 0; i <= 100; i++)
+		for(int i = 1; i <= 100; i++)
 			pointList.add(i + " points");
 		
 		pointCombo.setValue(pointList.get(0));
@@ -72,11 +72,33 @@ public class quizCreateControllerExtend {
 		timeCombo.setItems(timeList);
 		
 	}
-	
+
+	<T> void categoryChangeBtnFn(T event, ComboBox<String> categoryCombo, ObservableList<String> categoryList) {
+
+		System.out.println("changing it lil bro");
+
+		String categoryComboString = categoryCombo.getValue().toString();
+		int categoryLocationNumber = 0;
+
+		for(int i = 0; i < categoryList.size(); i++)
+			if(categoryList.get(i).equals(categoryComboString)) {
+				categoryLocationNumber = i;
+				break;
+			}
+
+		new controller().categoryChangeScene( prepareQuiz, util.controller.categoryList.values()[categoryLocationNumber], event);
+
+	}
+
+	public void userChangeCategory(QuizClass.quizContainer quizContainer) {
+
+		prepareQuiz = quizContainer;
+
+	}
+
 	public void setTitle(String title) { 
 		
 		prepareQuiz.quizTitle = title;
-		user.userQuizOption = user.quizOption.New;
 		
 	}
 	
@@ -98,8 +120,8 @@ public class quizCreateControllerExtend {
 		else if (user.userQuizOption == user.quizOption.New) new controller().changeScene(e, "/quiz/Quiz.fxml");
 	
 	}
-	
-	
+
+
 	// errorPopUp
 	protected enum textFieldErr{
 		

@@ -91,20 +91,10 @@ public class compilerCreateController implements Initializable {
             scannerFinal.put("data type", inputCombo.getValue());
             scannerFinal.put("quiz question", questionTA.getText());
 
-            System.out.println("quiz question: " + scannerFinal.get("quiz question"));
-            System.out.println("practice type: " + scannerFinal.get("practice type"));
-            System.out.println("data type: " + scannerFinal.get("data type"));
-            System.out.println("input: " + scannerFinal.get("input"));
-            System.out.println("output: " + scannerFinal.get("output"));
-
         } else if(currentTab == currentTabStatus.PRINT) {
 
             scannerFinal.put("quiz question", questionTA.getText());
             scannerFinal.put("output", printTA.getText());
-
-            System.out.println("quiz question: " + scannerFinal.get("quiz question"));
-            System.out.println("practice type: " + scannerFinal.get("practice type"));
-            System.out.println("output: " + scannerFinal.get("output"));
 
         }
 
@@ -134,6 +124,8 @@ public class compilerCreateController implements Initializable {
 
             insertClassQuestionStatement.setString(1, scannerFinal.get("quiz title").toString());
             insertClassQuestionStatement.setInt(2, 2);
+
+            insertClassQuestionStatement.executeUpdate();
 
             // Create New table for the coding exercise
             String createTableString = "create table if not exists `" + scannerFinal.get("quiz title").toString() + "` (" +
@@ -165,17 +157,23 @@ public class compilerCreateController implements Initializable {
 
             insertQuestionStatement.executeUpdate();
 
+            // Create New Table will serve as a list
+            String createListTableString = "create table if not exists `" + scannerFinal.get("quiz title").toString() + "List` (" +
+                    "username text primary key, " +
+                    "code text, " +
+                    "output text)";
+            Statement createListTableStatement = classConnectionDB.createStatement();
+            createListTableStatement.execute(createListTableString);
+
+            System.out.println("\n\nQuiz Created Successfully!");
+            System.out.println("Quiz Title: " + scannerFinal.get("quiz title").toString());
+            System.out.println("Quiz Question: " + scannerFinal.get("quiz question").toString());
+            System.out.println("Practice Type: " + scannerFinal.get("practice type").toString());
+            System.out.println("Data Type: " + dataTypeFinal);
+            System.out.println("Input: " + inputFinal);
+            System.out.println("Output: " + scannerFinal.get("output").toString());
+
         } catch (Exception exception) { exception.printStackTrace(); }
-
-
-    }
-
-    class dataLayout{
-
-        enum practiceType{
-            PRINT,
-            SCANNER
-        }
 
 
     }

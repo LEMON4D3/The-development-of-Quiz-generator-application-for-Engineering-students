@@ -129,11 +129,18 @@ public class homepageController implements Initializable{
 			
 		});
 
-		if(announcementList.isEmpty()) return;
-
 		listContainer.getChildren().clear();
-
 		listContainer.getChildren().add(announcementContainer);
+		if(announcementList.isEmpty()) {
+
+			listContainer.getChildren().add(emptyContainer);
+			return;
+
+		}
+
+
+
+
 		
 		for(Map<String, Object> i: announcementList) {
 			
@@ -167,7 +174,7 @@ public class homepageController implements Initializable{
 		
 		try {
 			
-			Stage mainStage = (Stage)((Node)((EventObject)e).getSource()).getScene().getWindow();
+			Stage mainStage = new controller().getStage(e);
 			
 			Stage miniStage = new Stage();
 			miniStage.initModality(Modality.APPLICATION_MODAL);
@@ -177,7 +184,7 @@ public class homepageController implements Initializable{
 			Parent miniRoot = loader.load();
 
 			popUpController controller = loader.getController();
-			controller.mainStage = mainStage;
+			controller.initController(mainStage);
 
 			Scene scene = new Scene(miniRoot);
 			miniStage.setScene(scene);
@@ -227,9 +234,14 @@ public class homepageController implements Initializable{
 			topPane.add(quizTitleT, 0, 0);
 			
 			// Image img = new Image("file:src/quizCard/rsc/delete.png");
-			Image img = new Image("file:src/classHomepage/rsc/delete.png");
+			Image img = new Image(getClass().getResourceAsStream("/quizCard/rsc/delete.png"));
 			ImageView imgView = new ImageView(img);
-			imgView.setOnMouseClicked(event -> deleteBtn(event));
+			imgView.setOnMouseClicked(event -> {
+
+				deleteBtn(event);
+				System.out.println("Delete button clicked");
+
+			});
 			
 			imgView.setFitWidth(24);
 			imgView.setFitHeight(24);
@@ -294,10 +306,10 @@ public class homepageController implements Initializable{
 				Connection classNameConnection = DriverManager.getConnection("jdbc:sqlite:" + classNameString);
 			
 				Statement dropTableStatement = classNameConnection.createStatement();
-				String dropTableString = "drop table if exists " + announcement;
+				String dropTableString = "drop table if exists `" + announcement + "`";
 				dropTableStatement.execute(dropTableString);
 
-				String dropTableListString = "drop table if exists " + announcement + "List";
+				String dropTableListString = "drop table if exists `" + announcement + "List`";
 				Statement dropTableListStatement = classNameConnection.createStatement();
 				dropTableListStatement.execute(dropTableListString);
 

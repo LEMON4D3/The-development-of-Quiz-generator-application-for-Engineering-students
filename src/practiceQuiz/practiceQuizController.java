@@ -1,12 +1,14 @@
 package practiceQuiz;
 
 import fitb.create.FITBCreateController;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -214,14 +216,19 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 		QuizClass.quizContainer container;
 		int containerIndex;
 
+		VBox superContainer;
+
 
 		cardContainer(QuizClass.quizContainer Container, int index) {
+
+			this.superContainer = quizContainer;
 
 			container = Container;
 			containerIndex = index;
 
 			this.getStyleClass().add("quizContainer");
 			this.setPrefHeight(165);
+			this.setFillWidth(true);
 
 			this.setPadding(new Insets(15, 25, 15, 25));
 
@@ -256,12 +263,18 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 
 		}
 
-		class topPane extends GridPane {
+		class topPane extends HBox {
 
 			topPane() {
 
+
+
+
 				this.setPadding(new Insets(0, 15, 0, 15));
-				this.setHgap(25);
+
+				HBox leftContainer = new HBox();
+				leftContainer.setAlignment(Pos.CENTER_LEFT);
+				leftContainer.setSpacing(25);
 
 				Label typeQuestionT = new Label(container.quizCategory);
 				typeQuestionT.getStyleClass().add("whiteBlackContainer");
@@ -269,11 +282,8 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 				typeQuestionT.setPrefWidth(163);
 				typeQuestionT.setAlignment(Pos.CENTER);
 
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(25); }});
-				this.add(typeQuestionT, 0, 0);
-
 				ObservableList<String> pointList = FXCollections.observableArrayList();
-				for(int i = 0; i <= 100; i++)
+				for(int i = 1; i <= 100; i++)
 					pointList.add(i + " points");
 
 				ComboBox pointCombo = new ComboBox(pointList);
@@ -281,31 +291,13 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 				pointCombo.setValue(container.point);
 				pointCombo.getStyleClass().add("whiteBlackContainer");
 				pointCombo.setPrefWidth(100);
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(15); }});
-				this.add(pointCombo, 1, 0);
 
-				ObservableList<String> timeList = FXCollections.observableArrayList();
-				for (int hour = 0; hour < 24; hour++) {
-					for (int minute = 0; minute < 60; minute++) {
-
-						String time1 = String.format("%02d:%02d:00", hour, minute);
-						String time2 = String.format("%02d:%02d:30", hour, minute);
-
-						timeList.add(time1);
-						timeList.add(time2);
-					}
-				}
-
-				ComboBox timeCombo = new ComboBox(timeList);
-				timeCombo.setOnAction(f -> { container.time = timeCombo.getValue().toString(); });
-				timeCombo.setValue(container.time);
-				timeCombo.getStyleClass().add("whiteBlackContainer");
-				timeCombo.setPrefWidth(100);
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(55); }});
-				this.add(timeCombo, 2, 0);
+				leftContainer.getChildren().addAll(typeQuestionT, pointCombo);
 
 
-
+				HBox rightContainer = new HBox();
+				rightContainer.setAlignment(Pos.CENTER_RIGHT);
+				rightContainer.setSpacing(25);
 
 				Button editBtn = new Button("Edit");
 				editBtn.getStyleClass().add("whiteBlackContainer");
@@ -316,14 +308,11 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 					editQuiz(event);
 
 				});
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(10); }});
-				this.add(editBtn, 3, 0);
 
-				Image img = new Image("file:src/quizCard/rsc/delete.png");
+				Image img = new Image(getClass().getResource("/quizCard/rsc/delete.png").toExternalForm());
 				ImageView imgView = new ImageView(img);
 				imgView.setFitWidth(25);
 				imgView.setFitHeight(25);
-
 
 				Button deleteBtn = new Button("Delete", imgView);
 				deleteBtn.setOnAction(event -> {
@@ -334,9 +323,18 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 
 				});
 
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(15); }});
-				this.add(deleteBtn, 4, 0);
 
+				rightContainer.getChildren().addAll(editBtn, deleteBtn);
+				this.getChildren().addAll(leftContainer, rightContainer);
+
+				Platform.runLater(() -> {
+
+					Bounds bounds = superContainer.localToScene(superContainer.getBoundsInLocal());
+
+					leftContainer.setPrefWidth(bounds.getWidth() / 2);
+					rightContainer.setPrefWidth(bounds.getWidth() / 2);
+
+				});
 			}
 
 			private <T> void editQuiz(T event) {
