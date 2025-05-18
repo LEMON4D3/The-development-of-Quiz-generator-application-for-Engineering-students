@@ -49,6 +49,7 @@
                               <Font size="20.0" />
                            </font>
                         </Button>
+                        <Label fx:id="copyT" />
                      </children>
                   </VBox>
                </children>

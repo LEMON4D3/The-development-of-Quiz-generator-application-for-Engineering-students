@@ -41,13 +41,9 @@ import util.user;
 
 public class FITBCreateController extends quizCreateControllerExtend implements Initializable {
 
-
-
 	@FXML
 	Button backBtn, saveBtn;
-	
-	
-	
+
 	@FXML
 	TextField answerTF, hintTF;
 	
@@ -56,9 +52,20 @@ public class FITBCreateController extends quizCreateControllerExtend implements 
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		initComboBox(0);
-		
+
+	}
+
+	@Override
+	public void initComponents() {
+
+		answerTF.setText(prepareQuiz.quizAnswer);
+		questionTA.setText(prepareQuiz.quizQuestion);
+		hintTF.setText(prepareQuiz.hint);
+		categoryCombo.setValue(prepareQuiz.quizCategory);
+		pointCombo.setValue(prepareQuiz.point);
+
 	}
 
 
@@ -68,7 +75,6 @@ public class FITBCreateController extends quizCreateControllerExtend implements 
 		questionTA.setText(container.quizQuestion);
 		hintTF.setText(container.hint);
 		categoryCombo.setValue(container.quizCategory);
-		timeCombo.setValue(container.time);
 		pointCombo.setValue(container.point);
 
 		this.prepareQuiz.id = container.id;
@@ -90,33 +96,21 @@ public class FITBCreateController extends quizCreateControllerExtend implements 
 		prepareQuiz.quizQuestion = questionTA.getText();
 		prepareQuiz.hint = hintTF.getText();
 		prepareQuiz.quizCategory = categoryCombo.getValue().toString();
-		prepareQuiz.time = timeCombo.getValue().toString();
 		prepareQuiz.point = pointCombo.getValue().toString();
 		
 		finalSave(event);
 		
 	}
-	
-	
-	
-	public QuizClass.quizContainer getQuizComponents() {
-		
-		QuizClass.quizContainer prepareQuiz = new quizContainer();
-		
+
+	@Override
+	public void setPrepareQuiz() {
+
 		prepareQuiz.quizAnswer = answerTF.getText();
 		prepareQuiz.quizQuestion = questionTA.getText();
 		prepareQuiz.hint = hintTF.getText();
 		prepareQuiz.quizCategory = categoryCombo.getValue().toString();
-		prepareQuiz.time = timeCombo.getValue().toString();
 		prepareQuiz.point = pointCombo.getValue().toString();
-		
-		return prepareQuiz;
-	
+
 	}
-	
-	
-	
-	
-	
-	
+
 }

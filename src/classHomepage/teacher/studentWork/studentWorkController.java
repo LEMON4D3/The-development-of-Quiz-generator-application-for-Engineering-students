@@ -48,7 +48,7 @@ public class studentWorkController implements Initializable {
     @FXML
     public void backBtnFn(ActionEvent event) {
 
-        if(currentStatus == status.REPORT) new controller().changeScene(event, "/homepage/teacher/report/report.fxml");
+        if(currentStatus == status.REPORT) new controller().changeScene(event, "/homepage/teacher/report/Report.fxml");
         else if(currentStatus == status.CLASS) new util.controller().changeScene(event, "/classHomepage/teacher/Homepage.fxml");
 
     }

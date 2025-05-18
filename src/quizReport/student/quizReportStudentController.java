@@ -65,14 +65,13 @@ public class quizReportStudentController implements Initializable {
 
     private void getQuizReport() {
 
-        List<Map<String, Object>> quizList =  Util.getStudentQuizListDB(true);
+        List<Map<String, Object>> quizList = Util.getStudentQuizListDB(true);
         List<Map<String, Object>> baseQuizList = Util.getStudentQuizListDB(false);
-        for(Map<String, Object> baseQuiz : baseQuizList) {
+        for (Map<String, Object> baseQuiz : baseQuizList) {
 
             containerStruct.totalPoint += (Integer) baseQuiz.get("point");
 
         }
-
 
 
         containerStruct.totalStudent = quizList.size();
@@ -107,7 +106,7 @@ public class quizReportStudentController implements Initializable {
 
     class quizListContainerStruct {
 
-         String username, quizTitle;
+        String username, quizTitle;
         List<String> quizQuestion, quizAnswer, quizPoint;
 
         int totalStudent, totalQuiz, studentTotalQuiz;

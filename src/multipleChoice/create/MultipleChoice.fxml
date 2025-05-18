@@ -29,7 +29,6 @@
             <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" text="&lt;" />
             <ComboBox fx:id="categoryCombo" prefHeight="44.0" promptText="Question Options" style="-fx-background-color: #FFEA00; -fx-font-size: 20;" GridPane.columnIndex="1" />
             <ComboBox fx:id="pointCombo" prefWidth="150.0" promptText="1 Point" style="-fx-background-color: #81CFFF; -fx-font-size: 20;" GridPane.columnIndex="2" />
-            <ComboBox fx:id="timeCombo" prefWidth="150.0" promptText="30 sec" style="-fx-background-color: #81CFFF; -fx-font-size: 20;" GridPane.columnIndex="3" />
             <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveBtnFn" style="-fx-background-color: #003F66; -fx-border-color: #FFD700; -fx-background-radius: 25; -fx-border-radius: 20; -fx-text-fill: white;" text="Save Question" GridPane.columnIndex="4">
                <font>
                   <Font size="20.0" />

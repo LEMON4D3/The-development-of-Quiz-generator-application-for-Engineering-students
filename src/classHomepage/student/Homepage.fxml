@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="1080.0" spacing="35.0" style="-fx-background-color: #0A305E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHomepage.student.homepageController">
    <padding>
       <Insets top="32.0" />
@@ -53,7 +52,7 @@
                   </Label>
                </children>
             </VBox>
-            <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fitHeight="67.0" fitWidth="67.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@../rsc/user.png" />
                </image>

@@ -13,6 +13,8 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -37,9 +39,6 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 
 	@FXML
 	ScrollPane scrollContainer;
-
-	@FXML
-    private ComboBox<String> categoryCombo, pointCombo, timeCombo;
 
 	List<questionContainer> questionContainerList = new ArrayList<>();
 
@@ -83,13 +82,15 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 			}
 		});
 
-		initComboBox(2);
+		initComboBox(1);
+
 		
 		refreshQuestionList();
 		
 	}
 
-	public void saveBtnFn(ActionEvent event) {
+	@Override
+	public void setPrepareQuiz() {
 
 		List<String> questionAnswer = new ArrayList<>();
 		List<String> questionOptions = new ArrayList<>();
@@ -111,10 +112,14 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 		prepareQuiz.quizAnswer = answer;
 		prepareQuiz.quizOptions = options;
 		prepareQuiz.quizQuestion = questionTA.getText();
-		prepareQuiz.quizCategory = categoryCombo.getValue();
-		prepareQuiz.point = pointCombo.getValue();
-		prepareQuiz.time = timeCombo.getValue();
+		prepareQuiz.quizCategory = categoryCombo.getValue().toString();
+		prepareQuiz.point = pointCombo.getValue().toString();
 
+	}
+
+	public void saveBtnFn(ActionEvent event) {
+
+		setPrepareQuiz();
 		finalSave(event);
 
 	}
@@ -127,10 +132,18 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 
 	// backend function section
 
+	@Override
+	public void initComponents() {
+
+		categoryCombo.setValue(prepareQuiz.quizCategory);
+		pointCombo.setValue(prepareQuiz.point);
+		questionTA.setText(prepareQuiz.quizQuestion);
+
+	}
+
 	public void setQuizCardController(classController controller, int containerIndex, QuizClass.quizContainer container) {
 		
 		categoryCombo.setValue(container.quizCategory);
-		timeCombo.setValue(container.time);
 		pointCombo.setValue(container.point);
 		questionTA.setText(container.quizQuestion);
 
@@ -154,7 +167,6 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 		QuizClass.quizContainer prepareQuiz = new quizContainer();
 		
 		prepareQuiz.quizCategory = categoryCombo.getValue().toString();
-		prepareQuiz.time = timeCombo.getValue().toString();
 		prepareQuiz.point = pointCombo.getValue().toString();
 		
 		return prepareQuiz;
@@ -191,8 +203,14 @@ public class multipleChoiceCreateController extends quizCreateControllerExtend i
 			
 			topPane() {
 				
-				
-				Button deleteBtn = new Button();
+
+				Image img = new Image(getClass().getResource("/multipleChoice/rsc/delete.png").toExternalForm());
+				ImageView deleteImg = new ImageView(img);
+
+				deleteImg.setFitHeight(25);
+				deleteImg.setFitWidth(25);
+
+				Button deleteBtn = new Button("Delete", deleteImg);
 				deleteBtn.setOnAction(event -> deleteContainer(containerIndex));
 				GridPane.setHalignment(deleteBtn, HPos.LEFT);
 				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(50); }});

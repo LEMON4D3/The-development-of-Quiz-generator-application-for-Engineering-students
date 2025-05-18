@@ -35,6 +35,9 @@ public class classListController implements Initializable {
     @FXML
     Button classCodeT, exitBtn;
 
+    @FXML
+    Label copyT;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -57,6 +60,8 @@ public class classListController implements Initializable {
         ClipboardContent content = new ClipboardContent();
         content.putString(classCodeT.getText());
         clipboard.setContent(content);
+
+        copyT.setText("Class code copied to clipboard");
 
     }
 

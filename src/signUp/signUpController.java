@@ -236,7 +236,7 @@ public class signUpController implements Initializable{
 	
 	private void duplicatedUsername() {
 		
-		Label label = new Label("Duplicated Username");
+		Label label = new Label("Account Already Existing");
 		label.getStyleClass().add("promptProblem");
 		problemPromptBox.getChildren().add(label);
 		
@@ -245,7 +245,7 @@ public class signUpController implements Initializable{
 	
 	private void duplicatedName() {
 		
-		Label label = new Label("Duplicated Name");
+		Label label = new Label("Account Already Existing");
 		label.getStyleClass().add("promptProblem");
 		problemPromptBox.getChildren().add(label);
 		

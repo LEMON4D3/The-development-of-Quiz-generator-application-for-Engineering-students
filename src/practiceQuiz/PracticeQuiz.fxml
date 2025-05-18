@@ -58,7 +58,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="___ Questions (____ Points)" textFill="WHITE" GridPane.rowIndex="1">
+            <Label fx:id="questionPointT" text="___ Questions (____ Points)" textFill="WHITE" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>

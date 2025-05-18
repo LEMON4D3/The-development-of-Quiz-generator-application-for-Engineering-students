@@ -43,7 +43,7 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 	private VBox quizContainer;
 
 	@FXML
-	private Label quizTitleT;
+	private Label quizTitleT, questionPointT;
 
 	practiceQuizController mainController;
 
@@ -155,11 +155,16 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 
 		}
 
+		int totalPoints = 0;
 		for(int i = 0; i < cardContainerList.size(); i++) {
 
 			quizContainer.getChildren().add(new cardContainer(cardContainerList.get(i), i));
+			totalPoints += Integer.parseInt(cardContainerList.get(i).point.split(" ")[0]);
 
 		}
+
+		int totalQuestion = cardContainerList.size();
+		questionPointT.setText(totalQuestion + " Questions ( " + totalPoints + " Points )");
 
 	}
 

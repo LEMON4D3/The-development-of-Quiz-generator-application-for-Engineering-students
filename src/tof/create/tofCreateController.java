@@ -49,22 +49,27 @@ public class tofCreateController extends quizCreateControllerExtend implements I
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		initComboBox(3);
+
+		initComboBox(2);
 		trueBtn.getStyleClass().add("choiceBox-activate");
+
 		
 	}
-	
+
+	@Override
+	public void setPrepareQuiz() {
+
+		prepareQuiz.quizCategory = categoryCombo.getValue().toString();
+		prepareQuiz.point = pointCombo.getValue().toString();
+		prepareQuiz.quizQuestion = questionTA.getText();
+		prepareQuiz.quizAnswer = quizAnswer;
+
+	}
+
     @FXML
     void saveBtnFn(ActionEvent event) {
 
-
-    	prepareQuiz.quizCategory = categoryCombo.getValue().toString();
-    	prepareQuiz.point = pointCombo.getValue().toString();
-    	prepareQuiz.time = timeCombo.getValue().toString();
-    	prepareQuiz.quizQuestion = questionTA.getText();
-    	prepareQuiz.quizAnswer = quizAnswer;
-    	
+		setPrepareQuiz();
     	finalSave(event);
     	
     }
@@ -94,7 +99,16 @@ public class tofCreateController extends quizCreateControllerExtend implements I
     	quizAnswer = "False";
     	
     }
-    
+
+	@Override
+	public void initComponents() {
+
+		questionTA.setText(prepareQuiz.quizQuestion);
+		categoryCombo.setValue(prepareQuiz.quizCategory);
+		pointCombo.setValue(prepareQuiz.point);
+
+	}
+
     public void setQuizCardController(classController controller, int containerIndex, QuizClass.quizContainer container) {
     	
     	if(container.quizAnswer.equals("False")) {
@@ -108,7 +122,6 @@ public class tofCreateController extends quizCreateControllerExtend implements I
     	
 		questionTA.setText(container.quizQuestion);
 		categoryCombo.setValue(container.quizCategory);
-		timeCombo.setValue(container.time);
 		pointCombo.setValue(container.point);
 
 		this.prepareQuiz.id = container.id;

@@ -15,8 +15,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -66,6 +68,12 @@ public class homepageController implements Initializable{
 
 		user.currentClass = null;
 		new controller().changeScene(event, "/homepage/student/Homepage.fxml");
+
+	}
+
+	public void userBtnFn(MouseEvent event) throws IOException {
+
+		new Util().userPopUp(event);
 
 	}
 
@@ -123,23 +131,13 @@ public class homepageController implements Initializable{
 			GridPane.setHalignment(quizTitleT, HPos.LEFT);
 			topPane.add(quizTitleT, 0, 0);
 
-			GridPane bottomPane = new GridPane();
-
-			bottomPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(50); }});
-			bottomPane.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(50); }});
-
-			String deadlineString ="Deadline: " + announcement.get("announcement description");
-			Label deadlineT = new Label(deadlineString);
-			deadlineT.setWrapText(true);
-			deadlineT.setFont(new Font("Inter", 20));
-			deadlineT.setStyle("-fx-text-fill: white;");
-			GridPane.setHalignment(deadlineT, HPos.LEFT);
+			HBox bottomPane = new HBox();
+			bottomPane.setAlignment(Pos.CENTER_RIGHT);
 
 			// Start button setup
 			getStartBtn();
-			bottomPane.add(startBtn, 1, 0);
 
-			bottomPane.add(deadlineT, 0, 0);
+			bottomPane.getChildren().add(startBtn);
 			this.getChildren().addAll(topPane, bottomPane);
 
 

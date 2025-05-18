@@ -52,7 +52,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 	VBox quizContainer;
 	
 	@FXML
-	Label quizTitleT;
+	Label quizTitleT, questionPointT;
 
 	quizCardController mainController = null;
 	
@@ -90,10 +90,25 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 
 		if(!cardContainerList.isEmpty() && quizTitle == null)
 			quizTitleT.setText(cardContainerList.get(0).quizTitle);
-		
+
+		int totalPoints = 0;
+
 		quizContainer.getChildren().clear();
-		for(int i = 0; i < cardContainerList.size(); i++) quizContainer.getChildren().add(new cardContainer(cardContainerList.get(i), i));
-		
+		for(int i = 0; i < cardContainerList.size(); i++) {
+
+			quizContainer.getChildren().add(new cardContainer(cardContainerList.get(i), i));
+			totalPoints += Integer.parseInt(cardContainerList.get(i).point.split(" ")[0]);
+
+		}
+
+		for(QuizClass.quizContainer i: cardContainerList) {
+			System.out.println("Quiz Container: " + i.quizQuestion);
+		}
+
+		int totalQuestion = cardContainerList.size();
+		questionPointT.setText(totalQuestion + " Questions ( " + totalPoints + " Points )");
+
+
 	}
 	
 	public void addQuiz(ActionEvent e) {
@@ -141,7 +156,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 			container = Container;
 			containerIndex = index;
 			
-			this.getStyleClass().add("quizContainer");
+			this.setStyle("-fx-background-color: #5A95BA; -fx-background-radius: 20;");
 			this.setPrefHeight(165);
 			
 			this.setPadding(new Insets(15, 25, 15, 25));
@@ -185,7 +200,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 				
 				
 				Label typeQuestionT = new Label(container.quizCategory);
-				typeQuestionT.getStyleClass().add("whiteBlackContainer");
+				typeQuestionT.setStyle("-fx-text-fill: black; -fx-background-color: white; -fx-background-radius: 20;");
 				typeQuestionT.setStyle("-fx-font-size: 16;");
 				typeQuestionT.setPrefWidth(163);
 				typeQuestionT.setAlignment(Pos.CENTER);
@@ -202,28 +217,8 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 				pointCombo.setValue(container.point);
 				pointCombo.getStyleClass().add("whiteBlackContainer");
 				pointCombo.setPrefWidth(100);
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(13); }});
+				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(70); }});
 				this.add(pointCombo, 1, 0);
-				
-				ObservableList<String> timeList = FXCollections.observableArrayList();
-				for (int hour = 0; hour < 24; hour++) {
-		            for (int minute = 0; minute < 60; minute++) {
-		            	
-		                String time1 = String.format("%02d:%02d:00", hour, minute);
-		                String time2 = String.format("%02d:%02d:30", hour, minute);
-		                
-		                timeList.add(time1);
-		                timeList.add(time2);
-		            }
-		        }
-				
-				ComboBox timeCombo = new ComboBox(timeList);
-				timeCombo.setOnAction(f -> { container.time = timeCombo.getValue().toString(); });
-				timeCombo.setValue(container.time);
-				timeCombo.getStyleClass().add("whiteBlackContainer");
-				timeCombo.setPrefWidth(100);
-				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(55); }});
-				this.add(timeCombo, 2, 0);
 				
 				Button editBtn = new Button("Edit");
 				editBtn.getStyleClass().add("whiteBlackContainer");
@@ -235,7 +230,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 					
 				});
 				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(8); }});
-				this.add(editBtn, 3, 0);
+				this.add(editBtn, 2, 0);
 				
 				Image img = new Image(getClass().getResource("/quizCard/rsc/delete.png").toExternalForm());
 				ImageView imgView = new ImageView(img);
@@ -245,7 +240,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 				imgView.setFitHeight(24);
 				
 				this.getColumnConstraints().add(new ColumnConstraints() {{ setPercentWidth(0); }});
-				this.add(imgView, 4, 0);
+				this.add(imgView, 3, 0);
 				
 			}
 			
@@ -270,9 +265,16 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
 					Parent root = loader.load();
-					
-					miniStageFn(miniStage, loader);
-					
+
+					quizCreateControllerExtend controller = loader.getController();
+					controller.setQuizCardController(mainController, containerIndex);
+
+					System.out.println("Container: " + cardContainerList);
+					controller.prepareQuiz = container;
+					controller.containerIndex = containerIndex;
+					controller.initComponents();
+
+					//miniStageFn(miniStage, loader);
 					Scene miniScene = new Scene(root);
 
 					miniStage.setScene(miniScene);
@@ -339,7 +341,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 
 			 String prepareInsertQuizString = "insert into `" + quizTitle + "`("
 						+ "`quiz answer`, `quiz question`, `quiz option`, `quiz hint`,"
-						+ "category, point, time) values (?, ?, ?, ?, ?, ?, ?)";
+						+ "category, point) values (?, ?, ?, ?, ?, ?)";
 			 PreparedStatement insertQuizPrepare = classQuizConnection.prepareStatement(prepareInsertQuizString);
 
 			 for(int i = 0; i < cardContainerList.size(); i++) {
@@ -352,7 +354,6 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 				 insertQuizPrepare.setString(4, container.hint);
 				 insertQuizPrepare.setString(5, container.quizCategory);
 				 insertQuizPrepare.setInt(6, Integer.parseInt(container.point.split(" ")[0]));
-				 insertQuizPrepare.setString(7, container.time);
 
 				 insertQuizPrepare.executeUpdate();
 			 }
@@ -391,15 +392,14 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  					+ "`quiz option` text,"
  					+ "`quiz hint` text,"
  					+ "category text,"
- 					+ "point integer,"
- 					+ "time text"
+ 					+ "point integer"
  					+ ")";
  			Statement createNewTableStatement = classConnection.createStatement();
  			createNewTableStatement.execute(createNewTableString);
  			
  			String insertQuizString = "insert into " + quizTitle + "("
  					+ "id, `quiz answer`, `quiz question`, `quiz option`, `quiz hint`,"
- 					+ "category, point, time) values (?, ?, ?, ?, ?, ?, ?, ?)";
+ 					+ "category, point) values (?, ?, ?, ?, ?, ?, ?)";
  			PreparedStatement prepareInsertQuiz = classConnection.prepareStatement(insertQuizString);
  			
  			for(int i = 0; i < cardContainerList.size(); i++) {
@@ -413,7 +413,6 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  				prepareInsertQuiz.setString(5, container.hint);
  				prepareInsertQuiz.setString(6, container.quizCategory);
  				prepareInsertQuiz.setInt(7, Integer.parseInt(container.point.split(" ")[0]));
- 				prepareInsertQuiz.setString(8, container.time);
  				
  				prepareInsertQuiz.executeUpdate();
  				
@@ -475,8 +474,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  					+ "`quiz option` text,"
  					+ "`quiz hint` text,"
  					+ "category text,"
- 					+ "point integer,"
- 					+ "time text"
+ 					+ "point integer"
  					+ ")";
  			
  			Statement createNewTableStatement = quizConnection.createStatement();
@@ -484,7 +482,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			
  			String insertQuizString2 = "insert into `" + quizTitle + "` ("
  					+ "id, `quiz answer`, `quiz question`, `quiz option`, `quiz hint`,"
- 					+ "category, point, time) values (?, ?, ?, ?, ?, ?, ?, ?)";
+ 					+ "category, point) values (?, ?, ?, ?, ?, ?, ?)";
  			PreparedStatement prepareInsertQuiz = quizConnection.prepareStatement(insertQuizString2);
  			
  			for(int i = 0; i < cardContainerList.size(); i++) {
@@ -498,7 +496,6 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  				prepareInsertQuiz.setString(5, container.hint);
  				prepareInsertQuiz.setString(6, container.quizCategory);
  				prepareInsertQuiz.setInt(7, Integer.parseInt(container.point.split(" ")[0]));
- 				prepareInsertQuiz.setString(8, container.time);
  				
  				prepareInsertQuiz.executeUpdate();
  				
@@ -551,7 +548,6 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 	 			container.hint = (String) tableInfo.get("quiz hint");
 	 			container.quizCategory = (String) tableInfo.get("category");
 	 			container.point = (Integer) tableInfo.get("point") + " Points";
-	 			container.time = (String) tableInfo.get("time");
 
 			 	cardContainerList.add(container);
 

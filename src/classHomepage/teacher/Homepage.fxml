@@ -53,7 +53,7 @@
                   </Label>
                </children>
             </VBox>
-            <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fitHeight="67.0" fitWidth="67.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@../rsc/user.png" />
                </image>

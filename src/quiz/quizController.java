@@ -27,9 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import multipleChoice.create.multipleChoiceCreateController;
 import tof.create.tofCreateController;
-import util.Util;
-import util.controller;
-import util.user;
+import util.*;
 
 public class quizController implements Initializable{
 	
@@ -112,27 +110,27 @@ public class quizController implements Initializable{
 				
 //				FITBCreateController controller = loader.getController();
 //				controller.setTitle(titleTF.getText());
-				
+
+				quizCreateControllerExtend controller = loader.getController();
+				controller.prepareQuiz = new QuizClass.quizContainer();
+				controller.prepareQuiz.quizTitle = titleTF.getText();
+
 				switch(category) {
 				case fitb:
-					FITBCreateController controller = loader.getController();
-					controller.setTitle(titleTF.getText());
+					controller.prepareQuiz.quizCategory = "Fill in the Blank";
 					break;
 				case multipleChoice:
-					multipleChoiceCreateController controller1 = loader.getController();
-					controller1.setTitle(titleTF.getText());
+					controller.prepareQuiz.quizCategory = "Multiple Choice";
 					break;
 				case tof:
-					tofCreateController controller2 = loader.getController();
-					controller2.setTitle(titleTF.getText());
+					controller.prepareQuiz.quizCategory = "True or false";
 					break;
 				default:
 					break;
 				
 				}
-//				
-//				FITB controller = loader.getController();
-//				controller.setTitle(titleTF.getText());
+
+				controller.initComponents();
 
 				user.userQuizOption = user.quizOption.New;
 				Stage stage = (Stage)((Node)((EventObject)event).getSource()).getScene().getWindow();

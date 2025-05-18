@@ -62,6 +62,12 @@ public class homepageController implements Initializable{
 		
 	}
 
+	public void userBtnFn(MouseEvent event) throws IOException {
+
+		new Util().userPopUp(event);
+
+	}
+
 	public void classRecordBtnFn(ActionEvent event) throws IOException {
 
 		new controller().changeScene(event, "/classHomepage/teacher/classRecord/ClassRecord.fxml");

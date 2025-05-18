@@ -30,23 +30,35 @@ import util.QuizClass.quizContainer;
 
 public class quizCreateControllerExtend {
 	
-	protected static quizContainer  prepareQuiz = new quizContainer();
+	public static quizContainer prepareQuiz = new quizContainer();
 
 	@FXML
-	protected ComboBox categoryCombo, pointCombo, timeCombo;
-	
+	protected ComboBox categoryCombo, pointCombo;
+
+
+	// meant to be Override
+	public void initComponents() { }
+
+	// meant to be Override
+	public void setPrepareQuiz() {}
+
 	protected void initComboBox(int categoryNumber) {
-		
-		ObservableList<String> categoryList = FXCollections.observableArrayList("Fill in the blank", "match", "Multiple Choice", "True or False");
-		categoryCombo.setValue(categoryList.get(categoryNumber));
-		categoryCombo.setOnAction(f -> { 
-		
-			
+
+		ObservableList<String> categoryList = FXCollections.observableArrayList("Fill in the blank", "Multiple Choice", "True or False");
+
+		categoryCombo.setOnAction(f -> {
+
+
+			setPrepareQuiz();
+
 			categoryChangeBtnFn(f, categoryCombo, categoryList);
-		
+			prepareQuiz.quizCategory = categoryCombo.getValue().toString();
+			initComponents();
+
 		});
 		
 		categoryCombo.setItems(categoryList);
+		categoryCombo.setValue(categoryList.get(categoryNumber));
 		
 		ObservableList<String> pointList = FXCollections.observableArrayList();
 		for(int i = 1; i <= 100; i++)
@@ -55,25 +67,9 @@ public class quizCreateControllerExtend {
 		pointCombo.setValue(pointList.get(0));
 		pointCombo.setItems(pointList);
 		
-		ObservableList<String> timeList = FXCollections.observableArrayList();
-		for (int hour = 0; hour < 24; hour++) {
-            for (int minute = 0; minute < 60; minute++) {
-                // Add "00", "30" for seconds
-                String time1 = String.format("%02d:%02d:00", hour, minute);
-                String time2 = String.format("%02d:%02d:30", hour, minute);
-
-                // Add both times to the list
-                timeList.add(time1);
-                timeList.add(time2);
-            }
-        }
-		
-		timeCombo.setValue(timeList.get(0));
-		timeCombo.setItems(timeList);
-		
 	}
 
-	<T> void categoryChangeBtnFn(T event, ComboBox<String> categoryCombo, ObservableList<String> categoryList) {
+	protected <T> void categoryChangeBtnFn(T event, ComboBox<String> categoryCombo, ObservableList<String> categoryList) {
 
 		System.out.println("changing it lil bro");
 
@@ -90,11 +86,7 @@ public class quizCreateControllerExtend {
 
 	}
 
-	public void userChangeCategory(QuizClass.quizContainer quizContainer) {
 
-		prepareQuiz = quizContainer;
-
-	}
 
 	public void setTitle(String title) { 
 		
@@ -169,7 +161,11 @@ public class quizCreateControllerExtend {
 	protected void finalSave(ActionEvent event) {
 		
 		try {
-		
+
+			if(!prepareQuiz.quizCategory.equals("Multiple Choice")) {
+				prepareQuiz.quizOptions = null;
+			}
+
 			if(controller != null && user.userQuizOption != user.quizOption.New && user.isTeacher) {
 				
 				if(user.userQuizOption == user.quizOption.Edit) controller.setContainerList(prepareQuiz, containerIndex);
@@ -183,8 +179,8 @@ public class quizCreateControllerExtend {
 				
 			} else if(controller != null && user.userQuizOption != user.quizOption.New && !user.isTeacher) {
 
-				System.out.println("This is a practice quiz");
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/practiceQuiz/practiceQuiz.fxml"));
+				//System.out.println("This is a practice quiz");
+				//FXMLLoader loader = new FXMLLoader(getClass().getResource("/practiceQuiz/practiceQuiz.fxml"));
 
 				Stage stage = new controller().getStage(event);
 				stage.close();
@@ -237,10 +233,12 @@ public class quizCreateControllerExtend {
 	}
 
 	protected static classController controller;
-	protected static int containerIndex;
+	public static int containerIndex;
 	
 	public void setQuizCardController(classController controller, int containerIndex ) {
-		
+
+		prepareQuiz = new quizContainer();
+
 		this.controller = controller;
 		this.containerIndex = containerIndex; 
 		
@@ -456,7 +454,7 @@ public class quizCreateControllerExtend {
 
 			Parent root = null;
 
-			if ("Fill in the blank".equals((String) quizRoot.get("category"))) {
+			if ("Fill in the Blank".equals((String) quizRoot.get("category"))) {
 
 				FXMLLoader loader = getLoader(questionType.FillInTheBlank);
 				root = loader.load();

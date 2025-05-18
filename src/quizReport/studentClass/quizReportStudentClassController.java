@@ -66,12 +66,7 @@ public class quizReportStudentClassController implements Initializable {
 
     private void getQuizReport() {
 
-        List<Map<String, Object>> quizList = new ArrayList<>();
-        quizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz + "List", false);
-
-
-        containerStruct.totalStudent = quizList.size();
-
+        List<Map<String, Object>> quizList =  quizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz + "List", false);
         for(Map<String, Object> quiz : quizList) {
             if(((String) quiz.get("username")).equals(user.currentUser)) {
 
@@ -80,10 +75,23 @@ public class quizReportStudentClassController implements Initializable {
             }
         }
 
+        List<Map<String, Object>> baseQuizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz, false);
+        for (Map<String, Object> baseQuiz : baseQuizList) {
+
+            containerStruct.totalPoint += (Integer) baseQuiz.get("point");
+
+        }
+
+        containerStruct.totalStudent = quizList.size();
+        containerStruct.studentTotalQuiz = (Integer) userQuiz.get("total point");
+
         containerStruct.initVariable(userQuiz);
         containerStruct.totalQuiz = containerStruct.quizQuestion.size();
 
+
         initQuizReport();
+
+
 
     }
 
@@ -99,16 +107,18 @@ public class quizReportStudentClassController implements Initializable {
         quizTitleT.setText(containerStruct.quizTitle);
         totalStudentT.setText(containerStruct.totalStudent + "");
         totalQuizT.setText(containerStruct.totalQuiz + "");
-        studentGradeT.setText(containerStruct.totalPoint + "/" + containerStruct.totalQuiz);
+        studentGradeT.setText(containerStruct.studentTotalQuiz + "/" + containerStruct.totalPoint);
         studentT.setText(containerStruct.username);
 
     }
 
     class quizListContainerStruct {
 
-         String username, quizTitle;
+        String username, quizTitle;
         List<String> quizQuestion, quizAnswer, quizPoint;
-        int totalPoint, totalStudent, totalQuiz;
+
+        int totalStudent, totalQuiz, studentTotalQuiz;
+        Integer  totalPoint = 0;
 
 
         public void initVariable(Map<String, Object> quizList) {

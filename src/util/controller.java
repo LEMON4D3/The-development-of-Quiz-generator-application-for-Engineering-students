@@ -14,7 +14,6 @@ public class controller {
 	public enum categoryList{
 		
 		fitb,
-		match,
 		multipleChoice,
 		tof
 		
@@ -45,8 +44,7 @@ public class controller {
 			Parent root = loader.load();
 
 			quizCreateControllerExtend controller = loader.getController();
-			controller.setTitle(prepareQuiz.quizTitle);
-			controller.userChangeCategory(prepareQuiz);
+			controller.initComponents();
 
 			Stage stage = (Stage)((Node)((EventObject)event).getSource()).getScene().getWindow();
 			stage.setScene(new Scene(root));
