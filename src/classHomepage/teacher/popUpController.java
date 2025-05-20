@@ -60,25 +60,34 @@ public class popUpController {
 
 		public void setComboBox() {
 
-			ObservableList<String> categoryList = FXCollections.observableArrayList( "Announcement", "Create quiz" );
+			ObservableList<String> categoryList = FXCollections.observableArrayList( "Announcement", "Create quiz", "Coding Exercise" );
 			categoryCombo.setItems(categoryList);
 			categoryCombo.setValue("Announcement");
 
 			categoryCombo.setOnAction(event -> {
 				try {
 
+					Stage miniStage = new controller().getStage(event);
 
 					if (categoryCombo.getValue().equals("Create quiz")) {
 
 						user.userQuizOption = user.quizOption.New;
 
-						Stage miniStage = new controller().getStage(event);
+
 						miniStage.close();
 
 						Parent root = FXMLLoader.load(getClass().getResource("/quiz/Quiz.fxml"));
 						mainStage.setScene(new Scene(root));
 						mainStage.show();
 
+
+					} else if(categoryCombo.getValue().equals("Coding Exercise")) {
+
+						miniStage.close();
+
+						Parent root = FXMLLoader.load(getClass().getResource("/compiler/create/Compiler.fxml"));
+						mainStage.setScene(new Scene(root));
+						mainStage.show();
 
 					}
 

@@ -2,6 +2,9 @@ package classHomepage.student;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -92,7 +96,9 @@ public class homepageController implements Initializable{
 
 			for(Map<String, Object> container : announcementList) {
 
-				if((Integer) container.get("isQuiz") == 1)
+				if((Integer) container.get("isQuiz") == 2)
+					announcementContainer.getChildren().add(new codeExerciseTemplate(container));
+				else if((Integer) container.get("isQuiz") == 1)
 					announcementContainer.getChildren().add(new quizTemplate(container));
 				else if((Integer) container.get("isQuiz") == 0)
 					announcementContainer.getChildren().add(new announcementTemplate(container));
@@ -155,7 +161,7 @@ public class homepageController implements Initializable{
 					startBtn.setOnAction(event -> {
 
 						user.currentQuiz = (String) announcementGlobal.get("announcement");
-						new controller().changeScene(event, "/quizReport/studentClass/QuizReport.fxml");
+						new controller().changeScene(event, "/quizReport/student/QuizReport.fxml");
 
 					});
 					GridPane.setHalignment(startBtn, HPos.RIGHT);
@@ -219,6 +225,99 @@ public class homepageController implements Initializable{
 			announcementT.setPadding(new Insets(15, 20, 15, 20));
 
 			this.getChildren().add(announcementT);
+		}
+
+	}
+
+	private class codeExerciseTemplate extends VBox {
+
+		private String announcementStyle = "-fx-background-color: #5A95BA; -fx-background-radius: 20;";
+
+		Map<String, Object> announcementGlobal;
+
+		codeExerciseTemplate(Map<String, Object> container) {
+
+			announcementGlobal = container;
+
+			this.setFillWidth(true);
+			this.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+			this.setPadding(new Insets(25, 15, 25, 15));
+			this.setSpacing(10);
+
+			this.setStyle(announcementStyle);
+
+			this.getChildren().addAll(topPane(), middlePane(), bottomPane());
+
+		}
+
+		VBox topPane() {
+
+			VBox pane = new VBox();
+			pane.setSpacing(5);
+
+			Label typeT = new Label("Code Exercise");
+			typeT.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+
+			Label titleT = new Label("Code Exercise Title: " + announcementGlobal.get("announcement").toString());
+			titleT.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+
+			pane.getChildren().addAll(typeT, titleT);
+
+			return pane;
+
+		}
+
+		TextArea middlePane() {
+
+			List<Map<String, Object>> codeList = Util.getQuizOrAnnouncementClassListDB(announcementGlobal.get("announcement").toString(), false);
+			Map<String, Object> problem = codeList.get(0);
+
+			TextArea problemArea = new TextArea();
+			problemArea.setText(problem.get("quiz question").toString());
+			problemArea.setEditable(false);
+
+			return problemArea;
+
+		}
+
+		HBox bottomPane() {
+
+			HBox pane = new HBox();
+			pane.setSpacing(25);
+			pane.setAlignment(Pos.CENTER);
+
+			try {
+
+				List<Map<String, Object>> userList = Util.getQuizOrAnnouncementClassListDB(announcementGlobal.get("announcement").toString() + "List", false);
+				for(Map<String, Object> var : userList) {
+
+					if(var.get("username").equals(user.currentUser)) {
+
+						Button passedBtn = new Button("Passed");
+						passedBtn.setStyle("-fx-background-color: #044456; -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 20px;");
+						passedBtn.setDisable(true);
+
+						pane.getChildren().add(passedBtn);
+						return pane;
+
+					}
+
+				}
+
+				Button codeBtn = new Button("Code");
+				codeBtn.setStyle("-fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 20px;");
+				codeBtn.setOnAction(e -> {
+
+					user.currentQuiz = (String) announcementGlobal.get("announcement");
+					new controller().changeScene(e, "/compiler/answer/Compiler.fxml");
+
+				});
+				pane.getChildren().addAll(codeBtn);
+
+			} catch (Exception exception) { exception.printStackTrace(); }
+
+			return pane;
+
 		}
 
 	}

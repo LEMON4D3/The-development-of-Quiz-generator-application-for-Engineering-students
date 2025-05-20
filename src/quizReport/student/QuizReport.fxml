@@ -33,7 +33,7 @@
                   <Font size="32.0" />
                </font>
             </Button>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@../rsc/user.png" />
                </image>
@@ -59,9 +59,9 @@
                               <Image url="@../rsc/quizzes.png" />
                            </image>
                         </ImageView>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox alignment="CENTER" prefHeight="200.0">
                            <children>
-                              <Label text="Quizzes" textFill="WHITE">
+                              <Label text="QUIZ SCORE" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

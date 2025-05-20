@@ -213,7 +213,12 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 					pointList.add(i + " points");
 				
 				ComboBox pointCombo = new ComboBox(pointList);
-				pointCombo.setOnAction(f -> { container.point = pointCombo.getValue().toString(); });
+				pointCombo.setOnAction(f -> {
+
+					container.point = pointCombo.getValue().toString();
+					setContainerList(container, containerIndex);
+
+				});
 				pointCombo.setValue(container.point);
 				pointCombo.getStyleClass().add("whiteBlackContainer");
 				pointCombo.setPrefWidth(100);
@@ -385,7 +390,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			
  			prepareClassInsert.execute();
  			
- 			String createNewTableString = "create table if not exists " + quizTitle + "("
+ 			String createNewTableString = "create table if not exists `" + quizTitle + "` ("
  					+ "id integer primary key autoincrement,"
  					+ "`quiz answer` text,"
  					+ "`quiz question` text,"
@@ -397,7 +402,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			Statement createNewTableStatement = classConnection.createStatement();
  			createNewTableStatement.execute(createNewTableString);
  			
- 			String insertQuizString = "insert into " + quizTitle + "("
+ 			String insertQuizString = "insert into `" + quizTitle + "` ("
  					+ "id, `quiz answer`, `quiz question`, `quiz option`, `quiz hint`,"
  					+ "category, point) values (?, ?, ?, ?, ?, ?, ?)";
  			PreparedStatement prepareInsertQuiz = classConnection.prepareStatement(insertQuizString);
@@ -418,7 +423,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  				
  			}
 
-			 String createQuizListDBString = "create table if not exists `" + quizTitle + "List`(" +
+			 String createQuizListDBString = "create table if not exists `" + quizTitle + "List` (" +
 					 "id integer primary key autoincrement," +
 					 "username text," +
 					 "`quiz title` text," +
@@ -430,6 +435,8 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 
 			 Statement createQuizListDBStatement = classConnection.createStatement();
 			 createQuizListDBStatement.execute(createQuizListDBString);
+
+			 System.out.println("Successfully created table: " + quizTitle);
 
  		} catch(Exception exception) {
  			exception.printStackTrace();
@@ -467,7 +474,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
  			prepareClassInsert.setString(1, quizTitleT.getText());
  			prepareClassInsert.execute();
  			
- 			String createNewTableString = "create table if not exists " + quizTitleT.getText() + "("
+ 			String createNewTableString = "create table if not exists `" + quizTitleT.getText() + "`("
  					+ "id integer not null primary key autoincrement,"
  					+ "`quiz answer` text,"
  					+ "`quiz question` text,"
@@ -531,7 +538,7 @@ public class quizCardController extends quizCreateControllerExtend.classControll
 	 		String getClassNameString = "application/classes/" + user.currentClass + "/" + user.currentClass + ".db";
 	 		Connection classNameConnection = DriverManager.getConnection("jdbc:sqlite:" + getClassNameString);
 	 		
-	 		String getTableString = "select * from " + tableName;
+	 		String getTableString = "select * from `" + tableName + "`";
 	 		Statement tableInfoStatement = classNameConnection.createStatement();
 	 		
 	 		List<Map<String, Object>> tableList = Util.getList(tableInfoStatement, getTableString);

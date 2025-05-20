@@ -44,7 +44,7 @@ public class quizCreateControllerExtend {
 
 	protected void initComboBox(int categoryNumber) {
 
-		ObservableList<String> categoryList = FXCollections.observableArrayList("Fill in the blank", "Multiple Choice", "True or False");
+		ObservableList<String> categoryList = FXCollections.observableArrayList("Fill in the Blank", "Multiple Choice", "True or False");
 
 		categoryCombo.setOnAction(f -> {
 
@@ -165,6 +165,8 @@ public class quizCreateControllerExtend {
 			if(!prepareQuiz.quizCategory.equals("Multiple Choice")) {
 				prepareQuiz.quizOptions = null;
 			}
+
+			System.out.println("Prepare Quiz Category: " + prepareQuiz.quizCategory + "\nPrepare Quiz Point: " + prepareQuiz.point + "\nPrepare Quiz Question: " + prepareQuiz.quizQuestion + "\nPrepare Quiz Answer: " + prepareQuiz.quizAnswer + "\nPrepare Quiz Options: " + prepareQuiz.quizOptions);
 
 			if(controller != null && user.userQuizOption != user.quizOption.New && user.isTeacher) {
 				
@@ -340,9 +342,7 @@ public class quizCreateControllerExtend {
 				getUserTotalPoints();
 				miniStage.close();
 
-				Parent root = null;
-				if(user.currentClass != null) root = FXMLLoader.load(getClass().getResource("/quizReport/studentClass/QuizReport.fxml"));
-				else root = FXMLLoader.load(getClass().getResource("/quizReport/student/QuizReport.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/quizReport/student/QuizReport.fxml"));
 
 
 				mainStage.setScene(new Scene(root));
@@ -388,7 +388,7 @@ public class quizCreateControllerExtend {
 				correctAnswer += quizPoint;
 				pointList.add(quizPoint);
 
-			} else pointList.add(quizPoint);
+			} else pointList.add(0);
 
 			totalPoints += quizPoint;
 
@@ -432,7 +432,7 @@ public class quizCreateControllerExtend {
 			userInputPrepare.setString(2, user.currentQuiz);
 			userInputPrepare.setString(3, userAnswerFinal);
 			userInputPrepare.setString(4, pointList.toString());
-			userInputPrepare.setInt(5, correctAnswer);
+			userInputPrepare.setInt(5, totalPoints);
 			userInputPrepare.setString(6, question);
 
 			userInputPrepare.executeUpdate();
@@ -454,7 +454,9 @@ public class quizCreateControllerExtend {
 
 			Parent root = null;
 
-			if ("Fill in the Blank".equals((String) quizRoot.get("category"))) {
+			String category = (String) quizRoot.get("category");
+
+			if (category.contains("Fill")) {
 
 				FXMLLoader loader = getLoader(questionType.FillInTheBlank);
 				root = loader.load();
@@ -462,7 +464,7 @@ public class quizCreateControllerExtend {
 				FITBAnswerController controller = loader.getController();
 				controller.initQuiz(quizRoot);
 
-			} else if("Multiple Choice".equals((String) quizRoot.get("category"))) {
+			} else if(category.contains("Multiple")) {
 
 				FXMLLoader loader = getLoader(questionType.MultipleChoice);
 				root = loader.load();
@@ -470,7 +472,7 @@ public class quizCreateControllerExtend {
 				multipleChoiceAnswerController controller = loader.getController();
 				controller.initQuiz(quizRoot);
 
-			} else if(quizRoot.get("category").toString().contains("True")) {
+			} else if(category.contains("True")) {
 
 				FXMLLoader loader = getLoader(questionType.TrueOrFalse);
 				root = loader.load();

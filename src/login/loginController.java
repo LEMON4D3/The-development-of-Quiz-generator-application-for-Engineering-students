@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,6 +34,9 @@ public class loginController implements Initializable{
 
 	@FXML
 	TextField username;
+
+	@FXML
+	Label errorT;
 	
 	@FXML
 	PasswordField password;
@@ -92,9 +96,11 @@ public class loginController implements Initializable{
         		
         	}
         }
-        
-        if (!isData)
-        	System.out.println("NO ENTRY FOR YOU BITCH");
+
+		if(usernameT.isEmpty() || passwordT.isEmpty())
+			errorT.setText("Please fill in all fields");
+		else if (!isData)
+        	errorT.setText("Invalid Username or Password");
         
 	}
 	

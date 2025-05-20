@@ -35,11 +35,7 @@
                <font>
                   <Font name="System Bold" size="32.0" />
                </font></Label>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@rsc/notification.png" />
-               </image></ImageView>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@rsc/user.png" />
                </image>

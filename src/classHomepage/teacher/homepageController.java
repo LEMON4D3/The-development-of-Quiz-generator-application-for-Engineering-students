@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import classHomepage.teacher.classList.classListController;
+import compiler.create.compilerCreateController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -144,13 +146,10 @@ public class homepageController implements Initializable{
 
 		}
 
-
-
-
-		
 		for(Map<String, Object> i: announcementList) {
 			
 			if(((Integer)i.get("isQuiz")) == 1) listContainer.getChildren().add(new quizTemplate(i));
+			else if(((Integer) i.get("isQuiz")) == 2) listContainer.getChildren().add(new codeExerciseTemplate(i));
 			else listContainer.getChildren().add(new announcementTemplate(i));
 			
 		}
@@ -270,8 +269,20 @@ public class homepageController implements Initializable{
 			studentWorkBtn.setFont(new Font("Inter", 20));
 			studentWorkBtn.setStyle(buttonStyle);
 			studentWorkBtn.setOnAction(event -> {
+
 				user.currentQuiz = (String) announcementGlobal.get("announcement");
-				new controller().changeScene(event, "/classHomepage/teacher/studentWork/StudentWork.fxml");
+				System.out.println("USER CURRENT QUIZ: " + user.currentQuiz);
+
+				try {
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/classHomepage/teacher/studentWork/StudentWork.fxml"));
+					Parent root = loader.load();
+
+					Stage stage = new controller().getStage(event);
+					stage.setScene(new Scene(root));
+					stage.show();
+				} catch (Exception e) {e.printStackTrace();}
+
 			});
 
 
@@ -385,6 +396,7 @@ public class homepageController implements Initializable{
 
 			String announcementTStyle = "-fx-background-color: white; -fx-background-radius: 20; -fx-text-fill: black; -fx-font-size: 20px;";
 			Label announcementT = new Label((String) list.get("announcement description"));
+			announcementT.setPrefWidth(Double.MAX_VALUE);
 			announcementT.setWrapText(true);
 			announcementT.setStyle(announcementTStyle);
 			announcementT.setPadding(new Insets(15, 20, 15, 20));
@@ -451,6 +463,132 @@ public class homepageController implements Initializable{
 		
 	}
 	
-	
+	private class codeExerciseTemplate extends VBox {
+
+		private String announcementStyle = "-fx-background-color: #5A95BA; -fx-background-radius: 20;";
+
+		Map<String, Object> announcementGlobal;
+
+		codeExerciseTemplate(Map<String, Object> container) {
+
+			announcementGlobal = container;
+
+			this.setFillWidth(true);
+			this.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+			this.setPadding(new Insets(25, 15, 25, 15));
+			this.setSpacing(10);
+
+			this.setStyle(announcementStyle);
+
+			this.getChildren().addAll(topPane(), middlePane(), bottomPane());
+
+		}
+
+		VBox topPane() {
+
+			VBox pane = new VBox();
+			pane.setSpacing(5);
+
+			Label typeT = new Label("Code Exercise");
+			typeT.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+
+			Label titleT = new Label("Code Exercise Title: " + announcementGlobal.get("announcement").toString());
+			titleT.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+
+			pane.getChildren().addAll(typeT, titleT);
+
+			return pane;
+
+		}
+
+		TextArea middlePane() {
+
+			List<Map<String, Object>> codeList = Util.getQuizOrAnnouncementClassListDB(announcementGlobal.get("announcement").toString(), false);
+			Map<String, Object> problem = codeList.get(0);
+
+			TextArea problemArea = new TextArea();
+			problemArea.setText(problem.get("quiz question").toString());
+			problemArea.setEditable(false);
+
+			return problemArea;
+
+		}
+
+		HBox bottomPane() {
+
+			HBox pane = new HBox();
+			pane.setSpacing(25);
+			pane.setAlignment(Pos.CENTER);
+
+			Button codeBtn = new Button("Edit");
+			codeBtn.setStyle("-fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 20px;");
+			codeBtn.setOnAction(e -> {
+
+				try {
+
+					List<Map<String, Object>> codeList = Util.getQuizOrAnnouncementClassListDB(announcementGlobal.get("announcement").toString(), false);
+
+
+					user.currentQuiz = (String) announcementGlobal.get("announcement");
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/compiler/create/Compiler.fxml"));
+					Parent root = loader.load();
+
+					compilerCreateController controller = loader.getController();
+					controller.setEditContainer(codeList.getFirst());
+
+					Stage stage = new controller().getStage(e);
+					stage.setScene(new Scene(root));
+					stage.show();
+
+				} catch (Exception exception) { exception.printStackTrace(); }
+
+			});
+
+			Button deleteBtn = new Button("Delete");
+			deleteBtn.setStyle("-fx-background-color: #00799A; -fx-background-radius: 20; -fx-text-fill: white; -fx-font-size: 20px;");
+			deleteBtn.setOnAction(e -> {
+
+				deleteBtnFn((Integer) announcementGlobal.get("id"));
+
+			});
+
+			pane.getChildren().addAll(codeBtn, deleteBtn);
+
+			return pane;
+
+		}
+
+		void deleteBtnFn(Integer id) {
+
+			try {
+
+				String getClassString = "application/classes/" + user.currentClass + "/" + user.currentClass + ".db";
+				Connection userConnection = DriverManager.getConnection("jdbc:sqlite:" + getClassString);
+				Statement userStatement = userConnection.createStatement();
+
+				String deleteString = "delete from classes where id = " + id;
+				int rowDeleted = userStatement.executeUpdate(deleteString);
+
+				if (rowDeleted > 0) {
+
+					System.out.println("Succesfully deleted!");
+					getAnnouncementList();
+
+				}
+
+				String dropTable = "drop table if exists `" + announcementGlobal.get("announcement") + "`";
+				Statement dropTableStatement = userConnection.createStatement();
+				dropTableStatement.execute(dropTable);
+
+				String dropTableList = "drop table if exists `" + announcementGlobal.get("announcement") + "List`";
+				Statement dropTableListStatement = userConnection.createStatement();
+				dropTableListStatement.execute(dropTableList);
+
+
+			} catch (Exception e) { e.printStackTrace(); }
+
+		}
+
+	}
 	
 }

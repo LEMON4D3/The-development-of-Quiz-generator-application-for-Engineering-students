@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -41,6 +42,8 @@ public class quizReportStudentController implements Initializable {
 
     }
 
+    public void userBtnFn(MouseEvent event) { new Util().userPopUp(event); }
+
     public void backBtnFn(ActionEvent event) throws IOException {
 
         user.currentQuiz = "";
@@ -65,8 +68,23 @@ public class quizReportStudentController implements Initializable {
 
     private void getQuizReport() {
 
-        List<Map<String, Object>> quizList = Util.getStudentQuizListDB(true);
-        List<Map<String, Object>> baseQuizList = Util.getStudentQuizListDB(false);
+        List<Map<String, Object>> quizList = null;
+        List<Map<String, Object>> baseQuizList = null;
+
+        if(user.currentClass == null) {
+
+            quizList = Util.getStudentQuizListDB(true);
+            baseQuizList = Util.getStudentQuizListDB(false);
+
+        }
+        else {
+
+            quizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz + "List", false);
+            baseQuizList = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz, false);
+
+        }
+
+
         for (Map<String, Object> baseQuiz : baseQuizList) {
 
             containerStruct.totalPoint += (Integer) baseQuiz.get("point");
@@ -96,9 +114,8 @@ public class quizReportStudentController implements Initializable {
         }
 
         quizTitleT.setText(containerStruct.quizTitle);
-        totalQuizT.setText(containerStruct.totalQuiz + "");
-        //studentGradeT.setText(containerStruct.totalPoint + "/" + containerStruct.totalQuiz);
-        studentGradeT.setText(containerStruct.studentTotalQuiz + "/" + containerStruct.totalPoint);
+        totalQuizT.setText(containerStruct.studentTotalQuiz + "/" + containerStruct.totalPoint);
+        studentGradeT.setText(((containerStruct.studentTotalQuiz / containerStruct.totalPoint) * 100) + "%");
 
         studentT.setText(containerStruct.username);
 
@@ -109,7 +126,8 @@ public class quizReportStudentController implements Initializable {
         String username, quizTitle;
         List<String> quizQuestion, quizAnswer, quizPoint;
 
-        int totalStudent, totalQuiz, studentTotalQuiz;
+        int totalStudent;
+        float totalQuiz, studentTotalQuiz;
         Integer  totalPoint = 0;
 
         public void initVariable(Map<String, Object> quizList) {
@@ -125,7 +143,13 @@ public class quizReportStudentController implements Initializable {
             String quizQuestionS = (String) quizList.get("quiz question");
             quizQuestion = Arrays.asList(quizQuestionS.replace("[", "").replace("]", "").split(", "));
 
-            studentTotalQuiz = (Integer) quizList.get("total point");
+            String quizListS = (String) quizList.get("quiz point");
+            List<String> quizListList = Arrays.asList(quizListS.substring(1, quizListS.length() - 1).split(", "));
+            for(String quizS : quizListList) {
+                studentTotalQuiz += Integer.parseInt(quizS.trim());
+            }
+
+            System.out.println("Student Total Quiz: " + studentTotalQuiz);
 
             List<Map<String, Object>> studentList = Util.getClassOrUserListDB(Util.dataClass.User);
             for(Map<String, Object> student : studentList) {

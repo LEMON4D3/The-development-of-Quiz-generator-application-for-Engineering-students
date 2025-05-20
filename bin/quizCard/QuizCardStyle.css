@@ -4,18 +4,8 @@
 
 }
 
-.quizContainer{
-	
-	-fx-background-color: #5A95BA;
-	-fx-background-radius: 20;
-	
-	
-}
-
 .whiteBlackContainer {
 	
-	-fx-text-fill: black;
-	-fx-background-color: white;
-	-fx-background-radius: 20;
+
 	
 }

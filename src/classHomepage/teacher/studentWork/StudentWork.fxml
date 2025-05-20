@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="50.0" style="-fx-background-color: #0A305E;" stylesheets="@StudentWork.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHomepage.teacher.studentWork.studentWorkController">
    <children>
       <GridPane>
@@ -40,12 +39,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-               <image>
-                  <Image url="@rsc/notification.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+            <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#userBtnFn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
                   <Image url="@rsc/user.png" />
                </image>
@@ -98,9 +92,9 @@
                               <Image url="@rsc/quiz.png" />
                            </image>
                         </ImageView>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0">
                            <children>
-                              <Label text="Questions" textFill="WHITE">
+                              <Label text="Question Total Score" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

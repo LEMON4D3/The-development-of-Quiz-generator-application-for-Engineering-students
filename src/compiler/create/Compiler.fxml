@@ -21,13 +21,13 @@
       <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
    </padding>
    <children>
-      <Button fx:id="backBtn" mnemonicParsing="false" style="-fx-background-color: #5A95BA;" text="Back" />
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnFn" style="-fx-background-color: #5A95BA;" text="Back" />
       <TextArea fx:id="questionTA" prefHeight="200.0" prefWidth="200.0" promptText="Question Area">
          <font>
             <Font size="14.0" />
          </font>
       </TextArea>
-      <TabPane prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="containerTab" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="printTab" text="Print">
                <content>

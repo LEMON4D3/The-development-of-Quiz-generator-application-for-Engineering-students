@@ -38,11 +38,6 @@
                   <Image url="@../rsc/user.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@../rsc/notification.png" />
-               </image>
-            </ImageView>
             <Label fx:id="quizTitleT" alignment="CENTER" prefHeight="43.0" prefWidth="225.0" style="-fx-background-color: #145F8E; -fx-border-color: #FFD700; -fx-border-width: 5; -fx-background-radius: 25; -fx-border-radius: 20;" text="Quiz Title" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="32.0" />

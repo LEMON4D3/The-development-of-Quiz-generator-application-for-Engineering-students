@@ -124,7 +124,7 @@
                      <children>
                         <VBox fx:id="noClassT" alignment="CENTER" prefHeight="200.0" spacing="25.0">
                            <children>
-                              <Label text="You have no class poor you :(">
+                              <Label text="You have no class">
                                  <font>
                                     <Font size="28.0" />
                                  </font>
@@ -158,7 +158,7 @@
                      <children>
                         <VBox fx:id="noQuizT" alignment="CENTER" prefHeight="200.0" spacing="25.0">
                            <children>
-                              <Label text="Repetition is the key bro">
+                              <Label text="You have no deck created">
                                  <font>
                                     <Font size="28.0" />
                                  </font>

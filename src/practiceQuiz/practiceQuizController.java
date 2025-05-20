@@ -61,7 +61,7 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 		try {
 
 			Connection studentQuizConnection = Util.getStudentQuizConnectionDB();
-			String prepareUpdateQuiz = "update `" + user.currentQuiz + "` set `quiz question` = ?, `quiz answer` = ?, `quiz option` = ?, `quiz hint` = ?, `category` = ?, `point` = ?, `time` = ? where id = '" + container.id + "'";
+			String prepareUpdateQuiz = "update `" + user.currentQuiz + "` set `quiz question` = ?, `quiz answer` = ?, `quiz option` = ?, `quiz hint` = ?, `category` = ?, `point` = ? where id = '" + container.id + "'";
 			PreparedStatement preparedUpdateQuiz = studentQuizConnection.prepareStatement(prepareUpdateQuiz);
 
 			preparedUpdateQuiz.setString(1, container.quizQuestion);
@@ -71,7 +71,6 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 			preparedUpdateQuiz.setString(5, container.quizCategory);
 			int pointFinal = Integer.parseInt(container.point.split(" ")[0]);
 			preparedUpdateQuiz.setInt(6, pointFinal);
-			preparedUpdateQuiz.setString(7, container.time);
 			preparedUpdateQuiz.executeUpdate();
 			preparedUpdateQuiz.close();
 			studentQuizConnection.close();
@@ -106,7 +105,7 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 
 			Connection studentQuizConnection = Util.getStudentQuizConnectionDB();
 
-			String prepareInsertQuiz = "insert into `" + user.currentQuiz + "` (`quiz question`, `quiz answer`, `quiz option`, `quiz hint`, `category`, `point`, `time`) values (?, ?, ?, ?, ?, ?, ?)";
+			String prepareInsertQuiz = "insert into `" + user.currentQuiz + "` (`quiz question`, `quiz answer`, `quiz option`, `quiz hint`, `category`, `point`) values (?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = studentQuizConnection.prepareStatement(prepareInsertQuiz);
 
 			preparedStatement.setString(1, addContainer.quizQuestion);
@@ -117,7 +116,6 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 
 			int pointFinal = Integer.parseInt(addContainer.point.split(" ")[0]);
 			preparedStatement.setInt(6, pointFinal);
-			preparedStatement.setString(7, addContainer.time);
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			studentQuizConnection.close();
@@ -135,6 +133,7 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 		quizContainer.getChildren().clear();
 		cardContainerList.clear();
 
+		System.out.print("User Current Quiz: " + user.currentQuiz);
 		List<Map<String, Object>> quizList = Util.getStudentQuizListDB(false);
 		if(quizList == null)  return;
 
@@ -292,7 +291,12 @@ public class practiceQuizController extends quizCreateControllerExtend.classCont
 					pointList.add(i + " points");
 
 				ComboBox pointCombo = new ComboBox(pointList);
-				pointCombo.setOnAction(f -> { container.point = pointCombo.getValue().toString(); });
+				pointCombo.setOnAction(f -> {
+
+					container.point = pointCombo.getValue().toString();
+					setContainerList(container, containerIndex);
+
+				});
 				pointCombo.setValue(container.point);
 				pointCombo.getStyleClass().add("whiteBlackContainer");
 				pointCombo.setPrefWidth(100);

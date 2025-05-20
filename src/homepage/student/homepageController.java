@@ -89,17 +89,17 @@ public class homepageController implements Initializable{
 		
 		String userDirString = "application/user/student/" + user.currentUser + "/classes/";
 		File userDirFile = new File(userDirString);
-		if(!userDirFile.exists() && !userDirFile.isDirectory())
-			return;
+		if(userDirFile.exists() && userDirFile.isDirectory())
+			refreshClassList();
 		
-		refreshClassList();
+
 		
 		String deckDirString = "application/user/student/" + user.currentUser + "/quiz/";
 		File deckDirFile = new File(deckDirString);
-		if(!deckDirFile.exists() && !deckDirFile.isDirectory())
-			return;
+		if(deckDirFile.exists() && deckDirFile.isDirectory())
+			refreshDeckList();
 		
-		refreshDeckList();
+
 		
 	}
 	
@@ -154,6 +154,12 @@ public class homepageController implements Initializable{
 			Statement getQuizStatement = userQuizConnection.createStatement();
 			
 			quizList = Util.getList(getQuizStatement, getQuizString);
+			for(Map<String, Object> i: quizList) {
+
+				System.out.println("Quiz name: " + i.get("quiz name"));
+
+			}
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -174,8 +180,12 @@ public class homepageController implements Initializable{
 		}
 
 		userDeckHBox.setAlignment(Pos.CENTER_LEFT);
-		for(Map<String, Object> i: quizList)
+		for(Map<String, Object> i: quizList) {
+
+
 			userDeckHBox.getChildren().add(new quizContainer((String) i.get("quiz name")));
+
+		}
 			
 		
 	}
@@ -478,7 +488,7 @@ public class homepageController implements Initializable{
 			upper.setPrefHeight(133);
 			upper.setAlignment(Pos.TOP_RIGHT);
 
-			Image img = new Image("file:src/homepage/rsc/delete.png");
+			Image img = new Image(getClass().getResource("/homepage/rsc/delete.png").toExternalForm());
 			ImageView imgView = new ImageView(img);
 			imgView.setFitHeight(25);
 			imgView.setFitWidth(25);

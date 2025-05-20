@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import static java.util.Arrays.stream;
+
 public class classRecordController implements Initializable {
 
     @FXML
@@ -66,7 +68,7 @@ public class classRecordController implements Initializable {
 
                 List<Map<String, Object>> quizList = Util.getList(getQuizStatement, getQuizString);
                 for(Map<String, Object> quiz : quizList) {
-                    if((Integer) quiz.get("isQuiz") == 1) {
+                    if((Integer) quiz.get("isQuiz") != 0) {
                         columnNameList.add((String) quiz.get("announcement"));
                     }
                 }
@@ -83,7 +85,7 @@ public class classRecordController implements Initializable {
                 for(String quizName : columnNameList) {
 
                     final int scoreIndex = index;
-                    TableColumn<tableViewStruct, Integer> quizColumn = new TableColumn<>(quizName);
+                    TableColumn<tableViewStruct, String> quizColumn = new TableColumn<>(quizName);
                     quizColumn.setCellValueFactory(cellData -> {
 
                         return new SimpleObjectProperty<>(cellData.getValue().getScoreByIndex(scoreIndex));
@@ -96,9 +98,9 @@ public class classRecordController implements Initializable {
                     index++;
                 }
 
-                TableColumn<tableViewStruct, Float> averageColumn = new TableColumn<>("Average");
+                TableColumn<tableViewStruct, String> averageColumn = new TableColumn<>("Average");
                 averageColumn.setCellValueFactory(cellData -> {
-                    return new SimpleObjectProperty<>(cellData.getValue().getAverageValue());
+                    return new SimpleObjectProperty<>(cellData.getValue().getAverageValue() + "%");
                 });
                 tableViewContainer.getColumns().add(averageColumn);
 
@@ -125,31 +127,58 @@ public class classRecordController implements Initializable {
                 for (Map<String, Object> student : studentList) {
 
                     String studentName = student.get("student name").toString();
-                    List<Integer> scores = new ArrayList<>();
+                    List<String> scores = new ArrayList<>();
+                    List<String> codeExerciseList = new ArrayList<>();
+                    List<Integer> defaultScore = new ArrayList<>();
 
                     for (List<Map<String, Object>> quizList : studentQuizList) {
                         boolean found = false;
 
+
+
                         for (Map<String, Object> quiz : quizList) {
+
                             if (quiz.get("username").toString().equals(studentName)) {
 
-                                String[] scoreString = quiz.get("quiz point").toString().replace("[", "").replace("]", "").split(",");
-                                List<Integer> scoreList = new ArrayList<>();
-                                for (String score : scoreString) {
-                                    scoreList.add(Integer.parseInt(score.trim()));
-                                }
+                                if(quiz.size() > 1) {
 
-                                scores.addAll(scoreList);
-                                found = true;
-                                break;
+                                    String[] scoreString = quiz.get("quiz point").toString().replace("[", "").replace("]", "").split(",");
+                                    List<String> scoreList = new ArrayList<>();
+                                    for (String score : scoreString) {
+                                        scoreList.add(score.trim());
+                                    }
+
+                                    scores.addAll(scoreList);
+                                    found = true;
+
+                                    defaultScore.add((Integer) quiz.get("total point"));
+
+                                    /*System.out.println("Quiz Point: " + quiz.get("quiz point"));
+                                    if(List.of(quiz.get("quiz point").toString().substring(1, quiz.get("total point").toString().length() - 1).split(",")).stream().map(String::trim).map(Integer::parseInt).toList() == null) {
+                                        defaultScore.add(0);
+                                    } else {
+
+                                        List<Integer> temp = List.of(quiz.get("quiz point").toString().substring(1, quiz.get("total point").toString().length() - 1).split(",")).stream().map(String::trim).map(Integer::parseInt).toList();
+                                        for(Integer tempScore : temp)
+                                            defaultScore.add(tempScore);
+                                    }*/
+
+                                    System.out.println("Default Score: " + defaultScore);
+                                    break;
+                                } else {
+                                    codeExerciseList.add("Passed");
+                                    found = true;
+                                }
                             }
+
                         }
+
                         if (!found) {
-                            scores.add(0); // Default score if not found
+                            scores.add("Quiz/Code Exercise Not Attempted"); // Default score if not found
                         }
                     }
 
-                    tableViewStruct row = new tableViewStruct(studentName, scores);
+                    tableViewStruct row = new tableViewStruct(studentName, scores, defaultScore, codeExerciseList);
                     tableViewList.add(row);
                 }
 
@@ -164,19 +193,31 @@ public class classRecordController implements Initializable {
     class tableViewStruct {
 
         private String studentName;
-        private List<Integer> score;
+        private List<String> score;
+        private List<String> codeExerciseList;
 
         float averageValue = 0;
 
-        tableViewStruct(String studentName, List<Integer> score) {
+        tableViewStruct(String studentName, List<String> score, List<Integer> defaultScore, List<String> codeExerciseList) {
 
+            this.codeExerciseList = codeExerciseList;
             this.studentName = studentName;
             this.score = score;
 
-            for(int Score : score)
-                averageValue += Score;
+            float defaultScoreFinal = 0;
+            for(int Score : defaultScore)
+                defaultScoreFinal += Score;
 
-            averageValue /= score.size();
+            try {
+                for(String Score : score) {
+                    averageValue += Integer.parseInt(Score);
+                }
+
+                System.out.println(averageValue + " + " + defaultScoreFinal + " =" + ((averageValue / defaultScoreFinal) * 100));
+
+            } catch (Exception exception) { exception.printStackTrace(); }
+
+            averageValue = (averageValue / defaultScoreFinal) * 100;
         }
 
         tableViewStruct(String studentName) {
@@ -185,17 +226,33 @@ public class classRecordController implements Initializable {
 
         public String getStudentName() { return studentName; }
 
-        public List<Integer> getScore() { return score; }
+        public List<String> getScore() { return score; }
 
-        public Integer getScoreByIndex(int index) {
+        public String getScoreByIndex(int index) {
 
-            Integer independentScore = (index < score.size()) ? score.get(index) : 0;
+            String independentScore = "";
+
+            if(index < score.size()) {
+                independentScore = score.get(index);
+            } else {
+
+                try {
+                    independentScore = codeExerciseList.get(codeExerciseList.size() - index);
+                } catch (Exception e) {
+                    independentScore = "Quiz/Code Exercise Not Attempted";
+                }
+            }
+
             System.out.println("Independent Score: " + independentScore);
             return independentScore;
 
         }
 
         public float getAverageValue() {  return averageValue; }
+
+        public void getCodeExerciseList() {
+
+        }
 
     }
 

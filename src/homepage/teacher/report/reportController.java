@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
@@ -51,6 +52,8 @@ public class reportController implements Initializable {
     public void backBtnFn(ActionEvent event) {
         new util.controller().changeScene(event, "/homepage/teacher/Homepage.fxml");
     }
+
+    public void userBtnFn(MouseEvent event) { new Util().userPopUp(event); }
 
     class initComboBox{
 

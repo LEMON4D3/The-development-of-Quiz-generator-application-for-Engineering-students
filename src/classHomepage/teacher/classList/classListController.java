@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,6 +14,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.Util;
 import util.controller;
@@ -34,9 +36,6 @@ public class classListController implements Initializable {
 
     @FXML
     Button classCodeT, exitBtn;
-
-    @FXML
-    Label copyT;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,7 +60,32 @@ public class classListController implements Initializable {
         content.putString(classCodeT.getText());
         clipboard.setContent(content);
 
-        copyT.setText("Class code copied to clipboard");
+        Stage mainStage = new controller().getStage(event);
+
+        Stage miniStage = new Stage();
+        miniStage.setTitle("Class Code");
+
+        miniStage.initOwner(mainStage);
+        miniStage.initModality(Modality.APPLICATION_MODAL);
+
+        VBox miniPane = new VBox();
+        miniPane.setAlignment(Pos.CENTER);
+        miniPane.setPrefWidth(350);
+        miniPane.setPrefHeight(350);
+
+        Label copyT = new Label("Class code copied to clipboard");
+        copyT.setStyle("-fx-font-size: 20px; -fx-text-fill: black; -fx-font-weight: bold;");
+        copyT.setAlignment(Pos.CENTER);
+
+        Button okBtn = new Button("OK");
+        okBtn.setStyle("-fx-background-color: #4C4C4C; -fx-text-fill: white; -fx-font-size: 20px;");
+        okBtn.setOnAction(e -> {
+            miniStage.close();
+        });
+
+        miniPane.getChildren().addAll(copyT, okBtn);
+        miniStage.setScene(new Scene(miniPane));
+        miniStage.showAndWait();
 
     }
 
@@ -80,17 +104,26 @@ public class classListController implements Initializable {
         void setEmptyContainer() {
             try {
 
+                classCodeT.setText(getClassCode());
+
+            } catch (Exception e) { e.printStackTrace(); }
+        }
+
+        String getClassCode() {
+
+            try {
+
                 Connection classConnection = Util.getClassOrUserConnectionDB(Util.dataClass.Class);
 
                 String getClassCodeString = "select * from classes where `class name` = '" + user.currentClass + "'";
                 Statement classCodeStatement = classConnection.createStatement();
 
                 ResultSet classCodeRS = classCodeStatement.executeQuery(getClassCodeString);
-                String classCodeFinal = classCodeRS.getObject("class code").toString();
-
-                classCodeT.setText(classCodeFinal);
+                return classCodeRS.getObject("class code").toString();
 
             } catch (Exception e) { e.printStackTrace(); }
+
+            return "";
         }
 
         void getClassList() {
@@ -106,6 +139,9 @@ public class classListController implements Initializable {
                 if(studentList.isEmpty()) return;
                 studentContainerList.getChildren().clear();
                 studentContainerList.setAlignment(Pos.TOP_LEFT);
+
+                classCodeT.setText("Class Code: " + getClassCode());
+                studentContainerList.getChildren().add(classCodeT);
 
                 Connection userConnection = Util.getClassOrUserConnectionDB(Util.dataClass.User);
 
@@ -124,6 +160,7 @@ public class classListController implements Initializable {
                         }
                     }
                 }
+
 
 
                 for(Map<String, Object> user : studentListFinal) {

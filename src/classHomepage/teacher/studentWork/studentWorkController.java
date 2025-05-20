@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -45,6 +46,10 @@ public class studentWorkController implements Initializable {
 
     }
 
+    public void userBtnFn(MouseEvent event) {
+        new Util().userPopUp(event);
+    }
+
     @FXML
     public void backBtnFn(ActionEvent event) {
 
@@ -76,7 +81,12 @@ public class studentWorkController implements Initializable {
 
         void initTotalQuiz() {
             List<Map<String, Object>> quiz = Util.getQuizOrAnnouncementClassListDB(user.currentQuiz, false);
-            totalQuestionT.setText(quiz.size() + "");
+            int totalQuestionPoints = 0;
+            for(Map<String, Object> quizList : quiz) {
+                totalQuestionPoints += (Integer) quizList.get("point");
+            }
+
+            totalQuestionT.setText(totalQuestionPoints + "");
         }
 
         void initTotalStudent() {
@@ -146,7 +156,21 @@ public class studentWorkController implements Initializable {
                 Label studentNameT = new Label((String) student.get("username"));
                 GridPane.setHalignment(studentNameT, HPos.CENTER);
 
-                Label score = new Label((Integer) student.get("total point") + "");
+                String quizPointsS = (String) student.get("quiz point").toString().substring(1, student.get("quiz point").toString().length() - 1);
+                String[] quizPointsList = quizPointsS.split(",");
+                List<Integer> quizPoint = new ArrayList<>();
+
+                for(String quizPointT : quizPointsList) {
+                    quizPoint.add(Integer.parseInt(quizPointT));
+                }
+
+                int studentPoint = 0;
+
+                for(int i : quizPoint) {
+                    studentPoint += i;
+                }
+
+                Label score = new Label(studentPoint + "");
                 GridPane.setHalignment(score, HPos.CENTER);
 
                 studentNameT.setStyle(labelStyle);
@@ -168,6 +192,7 @@ public class studentWorkController implements Initializable {
             - username
             - average
         */
+
         List<Map<String, Object>> containerList = new ArrayList<>();
 
         List<String> columnNameList = new ArrayList<>();
@@ -211,11 +236,13 @@ public class studentWorkController implements Initializable {
 
                     String studentName = student.get("student name").toString();
                     List<Integer> scores = new ArrayList<>();
+                    float totalQuestionPoints = 0;
 
                     for (List<Map<String, Object>> quizList : studentQuizList) {
                         boolean found = false;
 
                         for (Map<String, Object> quiz : quizList) {
+
                             if (quiz.get("username").toString().equals(studentName)) {
 
                                 String[] scoreString = quiz.get("quiz point").toString().replace("[", "").replace("]", "").split(",");
@@ -226,6 +253,7 @@ public class studentWorkController implements Initializable {
 
                                 scores.addAll(scoreList);
                                 found = true;
+                                totalQuestionPoints += (Integer) quiz.get("total point");
                                 break;
                             }
                         }
@@ -236,13 +264,15 @@ public class studentWorkController implements Initializable {
 
                     Map<String, Object> tempContainer = new HashMap<>();
 
-                    float average = 0;
+                    float totalUserScore = 0;
+
                     for(int score: scores)
-                        average += score;
-                    average /= scores.size();
+                        totalUserScore += score;
+
+                    totalUserScore = (totalUserScore / totalQuestionPoints) * 100;
 
                     tempContainer.put("username", studentName);
-                    tempContainer.put("average", average);
+                    tempContainer.put("average", totalUserScore);
 
                     containerList.add(tempContainer);
 
@@ -305,7 +335,7 @@ public class studentWorkController implements Initializable {
                 Label nameT = new Label((String) container.get("username"));
                 GridPane.setHalignment(nameT, HPos.CENTER);
 
-                Label averageT = new Label((Float) container.get("average") + "");
+                Label averageT = new Label((Float) container.get("average") + "%");
                 GridPane.setHalignment(averageT, HPos.CENTER);
 
                 nameT.setStyle(labelStyle);

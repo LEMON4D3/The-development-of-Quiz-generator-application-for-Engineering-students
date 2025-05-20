@@ -33,13 +33,19 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 
 //		user.currentUser = "xien";
-//		user.isTeacher = true;
+//		user.currentQuiz = "AightBro";
 
 //		Parent root = FXMLLoader.load(getClass().getResource("/multipleChoice/create/MultipleChoice.fxml"));
 
+		//		user.currentUser = "xien";
 //		Parent root = FXMLLoader.load(getClass().getResource("/homepage/teacher/Homepage.fxml"));
-//		Parent root = FXMLLoader.load(getClass().getResource("/compiler/answer/Compiler.fxml"));
+
 //		Parent root = FXMLLoader.load(getClass().getResource("/signUp/signUp.fxml"));
+
+
+//		Parent root = FXMLLoader.load(getClass().getResource("/compiler/answer/Compiler.fxml"));
+
+//		Parent root = FXMLLoader.load(getClass().getResource("/classHomepage/teacher/Homepage.fxml"));
 		Parent root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
 
 		stage.setScene(new Scene(root));

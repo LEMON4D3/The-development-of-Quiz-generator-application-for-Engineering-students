@@ -1,0 +1,24 @@
+/*
+    This part is for the CodeArea
+*/
+
+.datatype{
+
+    -fx-fill: #FFA600;
+    -fx-font-weight: bold;
+
+}
+
+.keyword {
+    -fx-fill: #7A3E9D;
+    -fx-font-weight: bold;
+}
+
+.string {
+    -fx-fill: #2A7AB0;
+}
+
+.comment {
+    -fx-fill: #39A339;
+    -fx-font-style: italic;
+}
